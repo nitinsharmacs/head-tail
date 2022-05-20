@@ -1,5 +1,23 @@
 const assert = require('assert');
-const { head, firstNLines, nBytesFrom } = require('../src/headLib.js');
+const { headMain,
+  head,
+  firstNLines,
+  nBytesFrom } = require('../src/headLib.js');
+
+const mockReadFileSync = (expectedFileName, expectedEncoding, content) => {
+  return function (fileName, encoding) {
+    assert.strictEqual(fileName, expectedFileName);
+    assert.strictEqual(encoding, expectedEncoding);
+    return content;
+  };
+};
+
+describe('headMain', () => {
+  it('should get 1 line from the file', () => {
+    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+    assert.strictEqual(headMain(mockedReadFileSync, 'file.txt'), 'hello');
+  });
+});
 
 describe('head', () => {
   it('should get 1 line from the content', () => {

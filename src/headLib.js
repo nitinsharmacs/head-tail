@@ -16,6 +16,12 @@ const head = (content, { askedForBytes, count }) => {
   return joinLines(firstNLines(lines, count));
 };
 
-exports.head = head;
+const headMain = (fileReader, fileName) => {
+  const content = fileReader(fileName, 'utf8');
+  return head(content, { askedForBytes: false, count: 10 });
+};
+
 exports.firstNLines = firstNLines;
 exports.nBytesFrom = nBytesFrom;
+exports.head = head;
+exports.headMain = headMain;

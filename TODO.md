@@ -1,5 +1,7 @@
 **TODO:**
 
+- [ ] Implement -n option
+- [ ] Implement -c option
 - [ ] 0 bytes case should be handled. On shell, it gives error
   
 **MAYBE:**
@@ -7,7 +9,12 @@
 - [ ] Consider change contract of firstNLines and pass content as string
 - [ ] Change the test description of firstNLines, change `get` to `give`
 
+**PROBLEMS:**
+
+- [ ] `head file` gives 1 line if the file is empty
+
 **DONE:**
+- [x] Implement `head file` for single file
 - [x] Implement `head` working for getting bytes from the content
 - [x] Consider giving option as object to head()
 - [x] Add a function contracts file
