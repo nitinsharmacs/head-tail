@@ -8,7 +8,7 @@ const nBytesFrom = (content, bytes) => {
   return content.slice(0, bytes);
 };
 
-const head = (content, count) => {
+const head = (content, { askedForBytes, count }) => {
   const lines = splitLines(content);
   return joinLines(firstNLines(lines, count));
 };

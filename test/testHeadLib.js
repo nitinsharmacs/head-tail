@@ -3,16 +3,28 @@ const { head, firstNLines, nBytesFrom } = require('../src/headLib.js');
 
 describe('head', () => {
   it('should get 1 line from the content', () => {
-    assert.strictEqual(head('hello', 1), 'hello');
-    assert.strictEqual(head('world\nhello', 1), 'world');
+    const options = {
+      askedForBytes: false,
+      count: 1
+    };
+    assert.strictEqual(head('hello', options), 'hello');
+    assert.strictEqual(head('world\nhello', options), 'world');
   });
 
   it('should get 2 lines from the content', () => {
-    assert.strictEqual(head('world\nhello', 2), 'world\nhello');
+    const options = {
+      askedForBytes: false,
+      count: 2
+    };
+    assert.strictEqual(head('world\nhello', options), 'world\nhello');
   });
 
   it('should get same content if given lines exceeds content', () => {
-    assert.strictEqual(head('world', 2), 'world');
+    const options = {
+      askedForBytes: false,
+      count: 2
+    };
+    assert.strictEqual(head('world', options), 'world');
   });
 });
 

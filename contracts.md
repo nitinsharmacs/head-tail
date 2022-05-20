@@ -22,10 +22,12 @@
 ## head
 
   ```
-  head(content, count) 
+  head(content, options) 
 
   content: String
-  count: Number
-
+  options: Object
+    count: Number
+    askedForBytes: Boolean
+  
   return String
   ```

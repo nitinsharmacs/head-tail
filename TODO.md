@@ -4,11 +4,11 @@
   
 **MAYBE:**
 
-- [ ] Consider giving option as object to head()
 - [ ] Consider change contract of firstNLines and pass content as string
 - [ ] Change the test description of firstNLines, change `get` to `give`
 
 **DONE:**
+- [x] Consider giving option as object to head()
 - [x] Add a function contracts file
 - [x] Pass `lines` first and then `count` to firstNLines
 - [x] Implement nBytesFrom function
