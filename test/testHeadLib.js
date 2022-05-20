@@ -18,28 +18,28 @@ describe('head', () => {
 
 describe('firstNLines', () => {
   it('should get 1 line from the lines', () => {
-    assert.deepStrictEqual(firstNLines(1, [
+    assert.deepStrictEqual(firstNLines([
       'hello', 'world'
-    ]), ['hello']);
-    assert.deepStrictEqual(firstNLines(1, [
+    ], 1), ['hello']);
+    assert.deepStrictEqual(firstNLines([
       'world'
-    ]), ['world']);
+    ], 1), ['world']);
   });
 
   it('should get 2 lines from the lines', () => {
-    assert.deepStrictEqual(firstNLines(2, [
+    assert.deepStrictEqual(firstNLines([
       'hello', 'world'
-    ]), ['hello', 'world']);
+    ], 2), ['hello', 'world']);
   });
 
   it('should get 0 line from the lines', () => {
-    assert.deepStrictEqual(firstNLines(0, [
+    assert.deepStrictEqual(firstNLines([
       'hello', 'world'
-    ]), []);
+    ], 0), []);
   });
 
   it('should get no line if no lines provided', () => {
-    assert.deepStrictEqual(firstNLines(1, []), []);
+    assert.deepStrictEqual(firstNLines([], 1), []);
   });
 });
 

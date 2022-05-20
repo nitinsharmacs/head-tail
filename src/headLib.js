@@ -1,6 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 
-const firstNLines = (count, lines) => {
+const firstNLines = (lines, count) => {
   return lines.slice(0, count);
 };
 
@@ -10,7 +10,7 @@ const nBytesFrom = (content, bytes) => {
 
 const head = (content, count) => {
   const lines = splitLines(content);
-  return joinLines(firstNLines(count, lines));
+  return joinLines(firstNLines(lines, count));
 };
 
 exports.head = head;
