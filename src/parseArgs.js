@@ -1,32 +1,62 @@
-const isNotOption = (text) => {
-  const rule = /^-[a-z]$/;
-  return !rule.test(text);
+const isCombinedOption = (text) => /^-[a-z][0-9]+$/.test(text);
+const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
+
+const createOption = (name, value) => {
+  const option = {};
+  option[name] = +value;
+  return option;
 };
 
-const parseOptions = (args) => {
-  const options = {};
-  for (let index = 0; index < args.length - 1; index += 2) {
-    const key = args[index];
-    if (isNotOption(key)) {
-      return options;
-    }
-    const value = +args[index + 1];
-    options[key] = value;
+const separateCombinedOption = (option) => {
+  const charRegex = /^-[a-z]+/;
+  const numRegex = /\d+/;
+  const optionName = option.match(charRegex)[0];
+  const optionValue = option.match(numRegex)[0];
+  return createOption(optionName, optionValue);
+};
+
+const isNotOption = (text) => {
+  return !(isCombinedOption(text) || isNonCombinedOption(text));
+};
+
+const parseOptions = (args, options) => {
+  const text = args[0];
+  if (isNotOption(text)) {
+    return options;
   }
-  return options;
+  if (isCombinedOption(text)) {
+    return parseOptions(args.slice(1), {
+      ...options,
+      ...separateCombinedOption(text)
+    });
+  }
+  const optionValue = args[1];
+  return parseOptions(args.slice(2), {
+    ...options,
+    ...createOption(text, optionValue)
+  });
 };
 
 const parseFileNames = (args) => {
-  const fileNames = [];
-  let incr = 2;
-  for (let index = 0; index < args.length; index += incr) {
-    if (isNotOption(args[index])) {
-      fileNames.push(args[index]);
-      incr = 1;
-    }
+  if (args.length === 0) {
+    return [];
   }
-  return fileNames;
+  if (isCombinedOption(args[0])) {
+    return parseFileNames(args.slice(1));
+  }
+  if (isNonCombinedOption(args[0])) {
+    return parseFileNames(args.slice(2));
+  }
+  return args;
+};
+
+const parseArgs = (args) => {
+  return {
+    filenames: parseFileNames(args),
+    options: parseOptions(args, {})
+  };
 };
 
 exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
+exports.parseArgs = parseArgs;

@@ -6,11 +6,6 @@
 - [ ] Provide argument to `headMain`
   - [x] Options separated by their values
   - [ ] Options not separated by their values
-- [ ] Implement parseArgs
-  - [x] Parse files when options with separated values given alongwith
-  - [] Parse files when options with their valus given alongwith
-  - [x] Parse options separated with their values
-  - [ ] Parse options with their values
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [ ] Validate options
@@ -30,10 +25,15 @@
 
 **PROBLEMS:**
 
-- [x] Provide args to `head.js`
 - [ ] `head file` gives 1 line if the file is empty
 
 **DONE:**
+- [x] Implement parseArgs
+  - [x] Parse files when options with separated values given alongwith
+  - [x] Parse files when options with their valus given alongwith
+  - [x] Parse options separated with their values
+  - [x] Parse options with their values
+- [x] Provide args to `head.js`
 - [x] Implement `head file` for single file
 - [x] Implement `head` working for getting bytes from the content
 - [x] Consider giving option as object to head()
