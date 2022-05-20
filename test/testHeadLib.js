@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, firstNLines } = require('../src/headLib.js');
+const { head, firstNLines, nBytesFrom } = require('../src/headLib.js');
 
 describe('head', () => {
   it('should get 1 line from the content', () => {
@@ -40,5 +40,23 @@ describe('firstNLines', () => {
 
   it('should get no line if no lines provided', () => {
     assert.deepStrictEqual(firstNLines(1, []), []);
+  });
+});
+
+describe('nBytesFrom', () => {
+  it('should give 1 byte from the content', () => {
+    assert.strictEqual(nBytesFrom('hello', 1), 'h');
+  });
+
+  it('should give 2 bytes from the content', () => {
+    assert.strictEqual(nBytesFrom('hello', 2), 'he');
+  });
+
+  it('should give 4 bytes from the content', () => {
+    assert.strictEqual(nBytesFrom('he\nme', 4), 'he\nm');
+  });
+
+  it('should give empty from the empty content', () => {
+    assert.strictEqual(nBytesFrom('', 4), '');
   });
 });

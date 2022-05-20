@@ -1,12 +1,17 @@
 **TODO:**
 
-- [ ] Implement nBytesFrom function
+- [ ] Change the test description of firstNLines, change get to give
+- [ ] Add a function contracts file
+- [ ] Pass lines and then count to firstNLines
+- [ ] 0 bytes case should be handled. On shell, it gives error.
   
 **MAYBE:**
 
 - [ ] Consider giving option as object to head()
+- [ ] Consider change contract of firstNLines and pass content as string
 
 **DONE:**
+- [x] Implement nBytesFrom function
 - [x] Test stringUtils.js functions
   - [x] splitLines
   - [x] joinLines
