@@ -8,7 +8,7 @@
   - [ ] Options not separated by their values
 - [ ] Validate parsed arguments
   - [ ] Validate files
-  - [ ] Validate options
+  - [x] Validate options
 - [ ] Implement -n option from cli
 - [ ] Implement -c option from cli
 - [ ] 0 bytes case should be handled. On shell, it gives error

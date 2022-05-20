@@ -15,6 +15,15 @@ const separateCombinedOption = (option) => {
   return createOption(optionName, optionValue);
 };
 
+const validateOption = (option) => {
+  const validOptions = ['-n', '-c'];
+  const [optionName] = Object.keys(option);
+  if (validOptions.includes(optionName)) {
+    return option;
+  }
+  throw { name: 'INVALID_OPTION', message: 'Invalid Option ' + optionName };
+};
+
 const isNotOption = (text) => {
   return !(isCombinedOption(text) || isNonCombinedOption(text));
 };
@@ -27,13 +36,13 @@ const parseOptions = (args, options) => {
   if (isCombinedOption(text)) {
     return parseOptions(args.slice(1), {
       ...options,
-      ...separateCombinedOption(text)
+      ...validateOption(separateCombinedOption(text))
     });
   }
   const optionValue = args[1];
   return parseOptions(args.slice(2), {
     ...options,
-    ...createOption(text, optionValue)
+    ...validateOption(createOption(text, optionValue))
   });
 };
 

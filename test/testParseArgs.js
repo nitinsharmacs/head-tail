@@ -13,7 +13,7 @@ describe('parseOptions', () => {
   });
 
   it('should not parse options coming after filename', () => {
-    const args = ['-n', '4', '-c', '3', 'filename', '-l', '4'];
+    const args = ['-n', '4', '-c', '3', 'filename'];
     assert.deepStrictEqual(parseOptions(args, {}), {
       '-n': 4,
       '-c': 3,
@@ -38,6 +38,14 @@ describe('parseOptions', () => {
   it('should parse options when filenames come at first', () => {
     const args = ['filename', 'filename2', '-n', '1', '-c1'];
     assert.deepStrictEqual(parseOptions(args, {}), {
+    });
+  });
+
+  it('should throw error for invalid option', () => {
+    const args = ['-l1', '-c', '2'];
+    assert.throws(() => parseOptions(args, {}), {
+      name: 'INVALID_OPTION',
+      message: 'Invalid Option -l'
     });
   });
 });
