@@ -19,6 +19,12 @@ describe('headMain', () => {
     const args = ['-n', '1', 'file.txt'];
     assert.strictEqual(headMain(mockedReadFileSync, args), 'hello');
   });
+
+  it('should get 2 byte from the file', () => {
+    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+    const args = ['-c', '1', 'file.txt'];
+    assert.strictEqual(headMain(mockedReadFileSync, args), 'h');
+  });
 });
 
 describe('head', () => {

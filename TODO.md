@@ -4,6 +4,8 @@
   - [x] Only one option is given at a time
   - [ ] both options are given at a time
 - [ ] Provide argument to `headMain`
+  - [x] Options separated by their values
+  - [ ] Options not separated by their values
 - [ ] Implement parseArgs
   - [x] Parse files when options with separated values given alongwith
   - [] Parse files when options with their valus given alongwith
