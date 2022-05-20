@@ -1,11 +1,16 @@
 **TODO:**
 
 - [ ] Implement nBytesFrom function
-- [ ] Implement splitLines function
-- [ ] Implement joinLines function
+
+**MAYBE:**
+
+- [ ] Consider giving option as object to head()
 
 **DONE:**
 
+- [x] Move splitLines, joinLines and SEPARATOR to new lib
+- [x] Implement splitLines function
+- [x] Implement joinLines function
 - [x] Implement head function
 - [x] Implement firstNLines function
 - [x] Create directory structure
