@@ -16,4 +16,17 @@ const parseOptions = (args) => {
   return options;
 };
 
+const parseFileNames = (args) => {
+  const fileNames = [];
+  let incr = 2;
+  for (let index = 0; index < args.length; index += incr) {
+    if (isNotOption(args[index])) {
+      fileNames.push(args[index]);
+      incr = 1;
+    }
+  }
+  return fileNames;
+};
+
 exports.parseOptions = parseOptions;
+exports.parseFileNames = parseFileNames;

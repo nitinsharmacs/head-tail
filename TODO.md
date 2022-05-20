@@ -1,7 +1,8 @@
 **TODO:**
 
 - [ ] Implement parseArgs
-  - [] Parse files
+  - [x] Parse files when options with separated values given alongwith
+  - [] Parse files when options with their valus given alongwith
   - [x] Parse options separated with their values
   - [ ] Parse options with their values
 - [ ] Validate parsed arguments
