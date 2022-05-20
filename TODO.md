@@ -1,13 +1,25 @@
 **TODO:**
 
-- [ ] Implement -n option
-- [ ] Implement -c option
+- [ ] Implement parseArgs
+  - [] Parse files
+  - [x] Parse options separated with their values
+  - [ ] Parse options with their values
+- [ ] Validate parsed arguments
+  - [ ] Validate files
+  - [ ] Validate options
+- [ ] Implement -n option from cli
+- [ ] Implement -c option from cli
 - [ ] 0 bytes case should be handled. On shell, it gives error
+- [ ] Implement `head --help`
+- [ ] Update sidenote from README.md of providing both options
   
 **MAYBE:**
 
 - [ ] Consider change contract of firstNLines and pass content as string
 - [ ] Change the test description of firstNLines, change `get` to `give`
+- [ ] Remove magic number lint errors from firstNLines and nBytesFrom
+- [ ] Correct `nByesFrom` in contracts.md
+
 
 **PROBLEMS:**
 
