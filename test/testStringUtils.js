@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { splitLines } = require('../src/stringUtils');
+const { splitLines, joinLines } = require('../src/stringUtils');
 
 describe('splitLines', () => {
   it('should split content of 1 line', () => {
@@ -12,5 +12,19 @@ describe('splitLines', () => {
 
   it('should split empty content', () => {
     assert.deepStrictEqual(splitLines(''), ['']);
+  });
+});
+
+describe('joinLines', () => {
+  it('should join 1 line', () => {
+    assert.strictEqual(joinLines(['hello']), 'hello');
+  });
+
+  it('should join 2 lines', () => {
+    assert.strictEqual(joinLines(['hello', 'world']), 'hello\nworld');
+  });
+
+  it('should join no lines', () => {
+    assert.strictEqual(joinLines([]), '');
   });
 });
