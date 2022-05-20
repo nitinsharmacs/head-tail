@@ -10,8 +10,8 @@ const createOption = (name, value) => {
 const separateCombinedOption = (option) => {
   const charRegex = /^-[a-z]+/;
   const numRegex = /\d+/;
-  const optionName = option.match(charRegex)[0];
-  const optionValue = option.match(numRegex)[0];
+  const [optionName] = option.match(charRegex);
+  const [optionValue] = option.match(numRegex);
   return createOption(optionName, optionValue);
 };
 
@@ -28,19 +28,18 @@ const isNotOption = (text) => {
   return !(isCombinedOption(text) || isNonCombinedOption(text));
 };
 
-const parseOptions = (args, options) => {
-  const text = args[0];
+const parseOptions = ([text, ...restArgs], options) => {
   if (isNotOption(text)) {
     return options;
   }
   if (isCombinedOption(text)) {
-    return parseOptions(args.slice(1), {
+    return parseOptions(restArgs, {
       ...options,
       ...validateOption(separateCombinedOption(text))
     });
   }
-  const optionValue = args[1];
-  return parseOptions(args.slice(2), {
+  const [optionValue] = restArgs;
+  return parseOptions(restArgs.slice(1), {
     ...options,
     ...validateOption(createOption(text, optionValue))
   });
@@ -50,10 +49,11 @@ const parseFileNames = (args) => {
   if (args.length === 0) {
     return [];
   }
-  if (isCombinedOption(args[0])) {
+  const [text] = args;
+  if (isCombinedOption(text)) {
     return parseFileNames(args.slice(1));
   }
-  if (isNonCombinedOption(args[0])) {
+  if (isNonCombinedOption(text)) {
     return parseFileNames(args.slice(2));
   }
   return args;
