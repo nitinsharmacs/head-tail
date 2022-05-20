@@ -1,5 +1,5 @@
 **TODO:**
-
+- [ ] Make it working for multilpe files
 - [ ] Compile parsed options to domain options
   - [x] Only one option is given at a time
   - [ ] both options are given at a time
@@ -30,6 +30,7 @@
 
 **PROBLEMS:**
 
+- [x] Provide args to `head.js`
 - [ ] `head file` gives 1 line if the file is empty
 
 **DONE:**

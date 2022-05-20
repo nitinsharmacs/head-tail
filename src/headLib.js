@@ -18,6 +18,7 @@ const head = (content, { askedForBytes, count }) => {
 };
 
 const compileOptions = (options) => {
+  const defaultCount = 10;
   if (options['-c']) {
     return {
       askedForBytes: true,
@@ -26,7 +27,7 @@ const compileOptions = (options) => {
   }
   return {
     askedForBytes: false,
-    count: options['-n']
+    count: options['-n'] || defaultCount
   };
 };
 
