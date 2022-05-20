@@ -1,15 +1,15 @@
 **TODO:**
 
-- [ ] Consider change contract of firstNLines and pass content as string
-- [ ] Add a function contracts file
 - [ ] 0 bytes case should be handled. On shell, it gives error.
   
 **MAYBE:**
 
 - [ ] Consider giving option as object to head()
+- [ ] Consider change contract of firstNLines and pass content as string
 - [ ] Change the test description of firstNLines, change `get` to `give`
 
 **DONE:**
+- [x] Add a function contracts file
 - [x] Pass `lines` first and then `count` to firstNLines
 - [x] Implement nBytesFrom function
 - [x] Test stringUtils.js functions
