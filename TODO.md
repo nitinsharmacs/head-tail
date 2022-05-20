@@ -1,5 +1,9 @@
 **TODO:**
 
+- [ ] Compile parsed options to domain options
+  - [x] Only one option is given at a time
+  - [ ] both options are given at a time
+- [ ] Provide argument to `headMain`
 - [ ] Implement parseArgs
   - [x] Parse files when options with separated values given alongwith
   - [] Parse files when options with their valus given alongwith

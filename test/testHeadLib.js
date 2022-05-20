@@ -2,7 +2,8 @@ const assert = require('assert');
 const { headMain,
   head,
   firstNLines,
-  nBytesFrom } = require('../src/headLib.js');
+  nBytesFrom,
+  compileOptions } = require('../src/headLib.js');
 
 const mockReadFileSync = (expectedFileName, expectedEncoding, content) => {
   return function (fileName, encoding) {
@@ -15,7 +16,8 @@ const mockReadFileSync = (expectedFileName, expectedEncoding, content) => {
 describe('headMain', () => {
   it('should get 1 line from the file', () => {
     const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
-    assert.strictEqual(headMain(mockedReadFileSync, 'file.txt'), 'hello');
+    const args = ['-n', '1', 'file.txt'];
+    assert.strictEqual(headMain(mockedReadFileSync, args), 'hello');
   });
 });
 
@@ -112,5 +114,27 @@ describe('nBytesFrom', () => {
 
   it('should give empty from the empty content', () => {
     assert.strictEqual(nBytesFrom('', 4), '');
+  });
+});
+
+describe('compileOptions', () => {
+  it('should set options for getting line', () => {
+    const options = {
+      '-n': 2
+    };
+    assert.deepStrictEqual(compileOptions(options), {
+      askedForBytes: false,
+      count: 2
+    });
+  });
+
+  it('should set options for getting bytes', () => {
+    const options = {
+      '-c': 2
+    };
+    assert.deepStrictEqual(compileOptions(options), {
+      askedForBytes: true,
+      count: 2
+    });
   });
 });
