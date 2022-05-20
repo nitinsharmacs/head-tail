@@ -1,6 +1,6 @@
 **TODO:**
 
-- [ ] 0 bytes case should be handled. On shell, it gives error.
+- [ ] 0 bytes case should be handled. On shell, it gives error
   
 **MAYBE:**
 
@@ -8,6 +8,7 @@
 - [ ] Change the test description of firstNLines, change `get` to `give`
 
 **DONE:**
+- [x] Implement `head` working for getting bytes from the content
 - [x] Consider giving option as object to head()
 - [x] Add a function contracts file
 - [x] Pass `lines` first and then `count` to firstNLines

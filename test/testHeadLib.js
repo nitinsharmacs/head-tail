@@ -26,6 +26,30 @@ describe('head', () => {
     };
     assert.strictEqual(head('world', options), 'world');
   });
+
+  it('should give 1 byte from the content', () => {
+    const options = {
+      askedForBytes: true,
+      count: 1
+    };
+    assert.strictEqual(head('world', options), 'w');
+  });
+
+  it('should give 6 bytes from the content', () => {
+    const options = {
+      askedForBytes: true,
+      count: 6
+    };
+    assert.strictEqual(head('world\nhello', options), 'world\n');
+  });
+
+  it('should give whole content if given bytes exceeds', () => {
+    const options = {
+      askedForBytes: true,
+      count: 6
+    };
+    assert.strictEqual(head('world', options), 'world');
+  });
 });
 
 describe('firstNLines', () => {

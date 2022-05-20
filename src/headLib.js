@@ -9,6 +9,9 @@ const nBytesFrom = (content, bytes) => {
 };
 
 const head = (content, { askedForBytes, count }) => {
+  if (askedForBytes) {
+    return nBytesFrom(content, count);
+  }
   const lines = splitLines(content);
   return joinLines(firstNLines(lines, count));
 };
