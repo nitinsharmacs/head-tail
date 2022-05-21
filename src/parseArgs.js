@@ -1,19 +1,17 @@
 const { validateOption } = require('./validators.js');
 
-const isCombinedOption = (text) => /^-[a-z][0-9]+$/.test(text);
+const isCombinedOption = (text) => /^-[a-z0-9]{2,}$/.test(text);
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
 const createOption = (name, value) => {
   const option = {};
-  option[name] = +value;
+  option[name] = value;
   return option;
 };
 
 const separateCombinedOption = (option) => {
-  const charRegex = /^-[a-z]+/;
-  const numRegex = /\d+/;
-  const [optionName] = option.match(charRegex);
-  const [optionValue] = option.match(numRegex);
+  const optionNameRegex = /^(-[a-z0-9])/;
+  const [, optionName, optionValue] = option.split(optionNameRegex);
   return createOption(optionName, optionValue);
 };
 
@@ -56,12 +54,12 @@ const compileOption = (options) => {
   if (options['-c']) {
     return {
       askedForBytes: true,
-      count: options['-c']
+      count: +options['-c']
     };
   }
   return {
     askedForBytes: false,
-    count: options['-n']
+    count: +options['-n']
   };
 };
 
@@ -81,6 +79,7 @@ const parseArgs = (args) => {
   };
 };
 
+exports.separateCombinedOption = separateCombinedOption;
 exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;

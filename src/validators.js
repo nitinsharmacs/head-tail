@@ -24,17 +24,18 @@ const validateOptionValue = (option) => {
   const optionsRules = {
     '-n': {
       name: 'line',
-      minValue: 1
+      minValue: 1,
+      type: 'number'
     },
     '-c': {
       name: 'byte',
-      minValue: 1
+      minValue: 1,
     }
   };
   const key = optionKey(option);
   const optionValue = option[key];
   const rule = optionsRules[key];
-  if (rule.minValue > optionValue) {
+  if (rule.minValue > optionValue || isNaN(optionValue)) {
     throw {
       code: 'ILLEGALCOUNT',
       message: 'illegal ' + rule.name + ' count -- ' + optionValue

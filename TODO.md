@@ -7,8 +7,9 @@
   - [x] Validate options values
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
-- [x] Validate throw object should have code
 - [ ] Handled ` head -nc0 head.js`
+- [ ] Rework on parser with loop using Jayanth's method of iterator using closer
+
   
 **MAYBE:**
 
@@ -24,6 +25,9 @@
 
 **DONE:**
 
+- [x] Option validator is not working of invalid option value
+  - [x] Value should be a number
+- [x] Validate throw object should have code
 - [x] Compile parsed options to domain options
   - [x] Only one option is given at a time
 - [x] Provide argument to `headMain`

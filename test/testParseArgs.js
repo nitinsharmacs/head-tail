@@ -2,15 +2,26 @@ const assert = require('assert');
 const { parseOptions,
   parseFileNames,
   parseArgs,
-  compileOption } = require('../src/parseArgs.js');
+  compileOption,
+  separateCombinedOption } = require('../src/parseArgs.js');
+
+describe('separateCombinedOption', () => {
+  it('should separate option having numerical value', () => {
+    assert.deepStrictEqual(separateCombinedOption('-c1'), { '-c': '1' });
+  });
+
+  it('should separate option having alphanumerical value', () => {
+    assert.deepStrictEqual(separateCombinedOption('-cd1'), { '-c': 'd1' });
+  });
+});
 
 describe('parseOptions', () => {
   it('should parse options separated by their values', () => {
     assert.deepStrictEqual(parseOptions(['-n', '4', 'filename'], {}), {
-      '-n': 4,
+      '-n': '4',
     });
     assert.deepStrictEqual(parseOptions(['-c', '3', 'filename'], {}), {
-      '-c': 3,
+      '-c': '3',
     });
   });
 
@@ -20,9 +31,9 @@ describe('parseOptions', () => {
   });
 
   it('should parse combined options', () => {
-    const args = ['-c3', 'filename'];
+    const args = ['-c2', 'filename'];
     assert.deepStrictEqual(parseOptions(args, {}), {
-      '-c': 3
+      '-c': '2'
     });
   });
 
@@ -37,6 +48,14 @@ describe('parseOptions', () => {
     assert.throws(() => parseOptions(args, {}), {
       code: 'ILLEGAL_OPTION',
       message: 'illegal option -- l'
+    });
+  });
+
+  it('should throw error for invalid option value', () => {
+    const args = ['-csd'];
+    assert.throws(() => parseOptions(args, {}), {
+      code: 'ILLEGALCOUNT',
+      message: 'illegal byte count -- sd'
     });
   });
 });

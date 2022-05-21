@@ -21,7 +21,17 @@ describe('validateOption', () => {
       message: 'can\'t combine line and byte counts'
     });
   });
+
+  it('should throw error if option value is not numeric', () => {
+    const newOption = { '-c': '2f' };
+    const prevOptions = {};
+    assert.throws(() => validateOption(newOption, prevOptions), {
+      code: 'ILLEGALCOUNT',
+      message: 'illegal byte count -- 2f'
+    });
+  });
 });
+
 describe('validateOptionValue', () => {
   it('should validate legal option value', () => {
     const option = {
@@ -47,6 +57,16 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       code: 'ILLEGALCOUNT',
       message: 'illegal line count -- 0'
+    });
+  });
+
+  it('should throw error if line count is not numeric', () => {
+    const option = {
+      '-n': 'f'
+    };
+    assert.throws(() => validateOptionValue(option), {
+      code: 'ILLEGALCOUNT',
+      message: 'illegal line count -- f'
     });
   });
 });
