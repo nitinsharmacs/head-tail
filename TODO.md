@@ -1,12 +1,5 @@
 **TODO:**
 
-- [ ] Validate parsed arguments
-  - [ ] Validate files
-  - [x] Validate options
-  - [x] Validate options values
-- [ ] Implement `head --help`
-- [ ] Update sidenote from README.md of providing both options
-- [ ] Handled ` head -nc0 head.js`
 - [ ] Rework on parser with loop using Jayanth's method of iterator using closer
 - [ ] Test all the helping functions
 
@@ -24,6 +17,13 @@
 
 **DONE:**
 
+- [x] Update sidenote from README.md of providing both options
+- [x] Validate parsed arguments
+  - [x] Validate files
+  - [x] Validate options
+  - [x] Validate options values
+- [x] Handle ` head -nc0 head.js`
+- [x] Implement `head --help`
 - [x] Handle no file provided
 - [x] Make it working for multilpe files
 - [ ] ~~Implemented headFiles function~~

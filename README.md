@@ -20,4 +20,4 @@ Display `count` number of lines from the file.
 ### `-c bytes`
 Display only `bytes` from the file.
 
-> Only one of the options `-n` or `-c` will work. If provided both, succeeding option will be taken.
+> Only one of the options `-n` or `-c` will work. If provided both, will give error;
