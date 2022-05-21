@@ -1,3 +1,5 @@
+const { validateOption, validateOptionValue } = require('./validators.js');
+
 const isCombinedOption = (text) => /^-[a-z][0-9]+$/.test(text);
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
@@ -13,38 +15,6 @@ const separateCombinedOption = (option) => {
   const [optionName] = option.match(charRegex);
   const [optionValue] = option.match(numRegex);
   return createOption(optionName, optionValue);
-};
-
-const optionName = (option) => {
-  const [optionName] = option.split('-').reverse();
-  return optionName;
-};
-
-const cantBeCombined = (newOption, prevOptions) => {
-  const prevOptionsKeys = Object.keys(prevOptions);
-  const [newOptionsKey] = Object.keys(newOption);
-  const differentKey = prevOptionsKeys.find(key => key !== newOptionsKey);
-  return differentKey !== undefined;
-};
-
-const validateOption = (newOptions, prevOptions) => {
-  const validOptions = ['-n', '-c'];
-  const [optionKey] = Object.keys(newOptions);
-  if (cantBeCombined(newOptions, prevOptions)) {
-    throw {
-      name: 'CANTCOMBINE',
-      message: 'can\'t combine line and byte counts'
-    };
-  }
-
-  if (validOptions.includes(optionKey)) {
-    return newOptions;
-  }
-
-  throw {
-    name: 'ILLEGAL_OPTION',
-    message: 'illegal option -- ' + optionName(optionKey)
-  };
 };
 
 const isNotOption = (text) => {
@@ -82,33 +52,6 @@ const parseFileNames = (args) => {
   return args;
 };
 
-const optionKey = (option) => {
-  const [key] = Object.keys(option);
-  return key;
-};
-
-const validateOptionValue = (option) => {
-  const optionsRules = {
-    '-n': {
-      name: 'line',
-      minValue: 1
-    },
-    '-c': {
-      name: 'byte',
-      minValue: 1
-    }
-  };
-  const key = optionKey(option);
-  const optionValue = option[key];
-  const rule = optionsRules[key];
-  if (rule.minValue > optionValue) {
-    throw {
-      name: 'ILLEGALCOUNT',
-      message: 'illegal ' + rule.name + ' count -- ' + optionValue
-    };
-  }
-};
-
 const compileOption = (options) => {
   validateOptionValue(options);
   const defaultCount = 10;
@@ -134,6 +77,4 @@ const parseArgs = (args) => {
 exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
-exports.validateOption = validateOption;
-exports.validateOptionValue = validateOptionValue;
 exports.compileOption = compileOption;

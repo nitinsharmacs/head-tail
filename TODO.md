@@ -17,7 +17,6 @@
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
 - [ ] Add defaultValues parameter to parseArgs
-- [ ] Move validators to separate lib
   
 **MAYBE:**
 
@@ -32,6 +31,8 @@
 - [ ] `head file` gives 1 line if the file is empty
 
 **DONE:**
+
+- [x] Move validators to separate lib
 - [x] Compile options while parsing
 - [x] Test validateOption
 - [x] Implement parseArgs
