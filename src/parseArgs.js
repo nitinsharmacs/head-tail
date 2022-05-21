@@ -82,10 +82,37 @@ const parseFileNames = (args) => {
   return args;
 };
 
+const optionKey = (option) => {
+  const [key] = Object.keys(option);
+  return key;
+};
+
+const validateOptionValue = (option) => {
+  const optionsRules = {
+    '-n': {
+      name: 'line',
+      minValue: 1
+    },
+    '-c': {
+      name: 'byte',
+      minValue: 1
+    }
+  };
+  const key = optionKey(option);
+  const optionValue = option[key];
+  const rule = optionsRules[key];
+  if (rule.minValue > optionValue) {
+    throw {
+      name: 'ILLEGALCOUNT',
+      message: 'illegal ' + rule.name + ' count -- ' + optionValue
+    };
+  }
+};
+
 const parseArgs = (args) => {
   return {
     filenames: parseFileNames(args),
-    options: parseOptions(args, {})
+    options: (parseOptions(args, {}))
   };
 };
 
@@ -93,3 +120,4 @@ exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
 exports.validateOption = validateOption;
+exports.validateOptionValue = validateOptionValue;

@@ -1,4 +1,6 @@
 **TODO:**
+
+- [ ] Compile options while parsing
 - [ ] Make it working for multilpe files
 - [ ] Compile parsed options to domain options
   - [x] Only one option is given at a time
@@ -9,13 +11,14 @@
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [x] Validate options
-  - [ ] Validate options values
+  - [x] Validate options values
 - [ ] Implement -n option from cli
 - [ ] Implement -c option from cli
 - [ ] 0 bytes case should be handled. On shell, it gives error
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
 - [x] Test validateOption
+- [ ] Add defaultValues parameter to parseArgs
   
 **MAYBE:**
 

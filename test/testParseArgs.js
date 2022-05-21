@@ -1,7 +1,9 @@
 const assert = require('assert');
 const { parseOptions,
   parseFileNames,
-  parseArgs, validateOption } = require('../src/parseArgs.js');
+  parseArgs,
+  validateOption,
+  validateOptionValue } = require('../src/parseArgs.js');
 
 describe('parseOptions', () => {
   it('should parse options separated by their values', () => {
@@ -109,6 +111,35 @@ describe('validateOption', () => {
     assert.throws(() => validateOption(newOption, prevOptions), {
       name: 'CANTCOMBINE',
       message: 'can\'t combine line and byte counts'
+    });
+  });
+});
+
+describe('validateOptionValue', () => {
+  it('should validate legal option value', () => {
+    const option = {
+      '-n': 2
+    };
+    assert.doesNotThrow(() => validateOptionValue(option));
+  });
+
+  it('should throw error if illegal byte count', () => {
+    const option = {
+      '-c': 0
+    };
+    assert.throws(() => validateOptionValue(option), {
+      name: 'ILLEGALCOUNT',
+      message: 'illegal byte count -- 0'
+    });
+  });
+
+  it('should throw error if illegal line count', () => {
+    const option = {
+      '-n': 0
+    };
+    assert.throws(() => validateOptionValue(option), {
+      name: 'ILLEGALCOUNT',
+      message: 'illegal line count -- 0'
     });
   });
 });
