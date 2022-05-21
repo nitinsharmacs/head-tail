@@ -1,21 +1,18 @@
 const fs = require('fs');
-const { headMain } = require('./src/headLib');
-
-const usage = () => {
-  return 'usage: head [-n lines | -c bytes] [file ...]';
-};
+const { exit } = require('process');
+const { headMain, usage } = require('./src/headLib');
 
 const main = () => {
   try {
-    return headMain(fs.readFileSync, process.argv.slice(2));
+    console.log(headMain(fs.readFileSync, process.argv.slice(2)));
   } catch (error) {
     let message = 'head: ' + error.message;
-    if (error.code === 'ILLEGALOPTION') {
+    if (error.code === 'ILLEGOPTION') {
       message = message + '\n' + usage();
     }
-    return message;
+    console.error(message);
+    exit(1);
   }
 };
 
-console.log(main());
-// console.log('usage: head [-n lines | -c bytes] [file ...]');
+main();

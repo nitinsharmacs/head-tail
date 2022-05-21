@@ -70,6 +70,14 @@ describe('headMain', () => {
       message: 'no file provided'
     });
   });
+
+  it('should give usage for --help', () => {
+    const mockedReadFileSync = mockReadFileSync([],
+      [],
+      'utf8');
+    assert.strictEqual(headMain(mockedReadFileSync, ['--help']),
+      'usage: head [-n lines | -c bytes] [file ...]');
+  });
 });
 
 describe('head', () => {

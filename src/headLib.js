@@ -17,6 +17,10 @@ const head = (content, { askedForBytes, count }) => {
   return joinLines(firstNLines(lines, count));
 };
 
+const usage = () => {
+  return 'usage: head [-n lines | -c bytes] [file ...]';
+};
+
 const createHeader = (filename) => {
   return `==> ${filename} <==\n`;
 };
@@ -45,6 +49,10 @@ const assertNoFile = (files) => {
 };
 
 const headMain = (fileReader, args) => {
+  const [firstArg] = args;
+  if (firstArg === '--help') {
+    return usage();
+  }
   const { filenames, options } = parseArgs(args);
   assertNoFile(filenames);
   if (filenames.length === 1) {
@@ -62,3 +70,4 @@ exports.nBytesFrom = nBytesFrom;
 exports.head = head;
 exports.headMain = headMain;
 exports.assertNoFile = assertNoFile;
+exports.usage = usage;
