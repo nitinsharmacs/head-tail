@@ -1,19 +1,10 @@
 **TODO:**
 
 - [ ] Make it working for multilpe files
-- [ ] Compile parsed options to domain options
-  - [x] Only one option is given at a time
-  - [ ] both options are given at a time
-- [ ] Provide argument to `headMain`
-  - [x] Options separated by their values
-  - [ ] Options not separated by their values
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [x] Validate options
   - [x] Validate options values
-- [ ] Implement -n option from cli
-- [ ] Implement -c option from cli
-- [ ] 0 bytes case should be handled. On shell, it gives error
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
   
@@ -31,6 +22,14 @@
 
 **DONE:**
 
+- [x] Compile parsed options to domain options
+  - [x] Only one option is given at a time
+- [x] Provide argument to `headMain`
+  - [x] Options separated by their values
+  - [x] Options not separated by their values
+- [x] Implement -n option from cli
+- [x] Implement -c option from cli
+- [x] 0 bytes case should be handled. On shell, it gives error
 - [x] Set default option in parseArgs
 - [x] Move validators to separate lib
 - [x] Compile options while parsing

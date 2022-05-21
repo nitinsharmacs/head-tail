@@ -1,4 +1,4 @@
-const { validateOption, validateOptionValue } = require('./validators.js');
+const { validateOption } = require('./validators.js');
 
 const isCombinedOption = (text) => /^-[a-z][0-9]+$/.test(text);
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
@@ -53,7 +53,6 @@ const parseFileNames = (args) => {
 };
 
 const compileOption = (options) => {
-  validateOptionValue(options);
   if (options['-c']) {
     return {
       askedForBytes: true,

@@ -2,35 +2,22 @@ const optionName = (option) => {
   const [optionName] = option.split('-').reverse();
   return optionName;
 };
+
 const cantBeCombined = (newOption, prevOptions) => {
   const prevOptionsKeys = Object.keys(prevOptions);
   const [newOptionsKey] = Object.keys(newOption);
   const differentKey = prevOptionsKeys.find(key => key !== newOptionsKey);
   return differentKey !== undefined;
 };
-const validateOption = (newOptions, prevOptions) => {
-  const validOptions = ['-n', '-c'];
-  const [optionKey] = Object.keys(newOptions);
-  if (cantBeCombined(newOptions, prevOptions)) {
-    throw {
-      name: 'CANTCOMBINE',
-      message: 'can\'t combine line and byte counts'
-    };
-  }
-
-  if (validOptions.includes(optionKey)) {
-    return newOptions;
-  }
-
-  throw {
-    name: 'ILLEGAL_OPTION',
-    message: 'illegal option -- ' + optionName(optionKey)
-  };
-};
 
 const optionKey = (option) => {
   const [key] = Object.keys(option);
   return key;
+};
+
+const isNotValidOption = (option) => {
+  const validOptions = ['-n', '-c'];
+  return !validOptions.includes(optionKey(option));
 };
 
 const validateOptionValue = (option) => {
@@ -53,6 +40,26 @@ const validateOptionValue = (option) => {
       message: 'illegal ' + rule.name + ' count -- ' + optionValue
     };
   }
+};
+
+const validateOption = (newOptions, prevOptions) => {
+  if (isNotValidOption(newOptions)) {
+    throw {
+      name: 'ILLEGAL_OPTION',
+      message: 'illegal option -- ' + optionName(optionKey(newOptions))
+    };
+  }
+
+  validateOptionValue(newOptions);
+
+  if (cantBeCombined(newOptions, prevOptions)) {
+    throw {
+      name: 'CANTCOMBINE',
+      message: 'can\'t combine line and byte counts'
+    };
+  }
+
+  return newOptions;
 };
 
 exports.validateOption = validateOption;
