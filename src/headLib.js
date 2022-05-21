@@ -35,16 +35,21 @@ const headFile = (fileReader, filename, options, showHeader) => {
   }
 };
 
-const headMain = (fileReader, args) => {
-  const { filenames, options } = parseArgs(args);
-  if (filenames.length === 0) {
+const assertNoFile = (files) => {
+  if (files.length === 0) {
     throw {
       code: 'NOFILEPROVIDED',
       message: 'no file provided'
     };
   }
+};
+
+const headMain = (fileReader, args) => {
+  const { filenames, options } = parseArgs(args);
+  assertNoFile(filenames);
   if (filenames.length === 1) {
-    return headFile(fileReader, filenames[0], options, false);
+    const [filename] = filenames;
+    return headFile(fileReader, filename, options, false);
   }
   const contents = filenames.map(filename => headFile(fileReader,
     filename,
@@ -56,3 +61,4 @@ exports.firstNLines = firstNLines;
 exports.nBytesFrom = nBytesFrom;
 exports.head = head;
 exports.headMain = headMain;
+exports.assertNoFile = assertNoFile;

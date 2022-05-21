@@ -10,7 +10,7 @@ const main = () => {
     return headMain(fs.readFileSync, process.argv.slice(2));
   } catch (error) {
     let message = 'head: ' + error.message;
-    if (error.code === 'ILLEGAL_OPTION') {
+    if (error.code === 'ILLEGALOPTION') {
       message = message + '\n' + usage();
     }
     return message;

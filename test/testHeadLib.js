@@ -2,7 +2,8 @@ const assert = require('assert');
 const { headMain,
   head,
   firstNLines,
-  nBytesFrom } = require('../src/headLib.js');
+  nBytesFrom,
+  assertNoFile } = require('../src/headLib.js');
 
 const mockReadFileSync = (expectedFileNames, contents, expectedEncoding) => {
   let index = 0;
@@ -164,5 +165,18 @@ describe('nBytesFrom', () => {
 
   it('should give empty from the empty content', () => {
     assert.strictEqual(nBytesFrom('', 4), '');
+  });
+});
+
+describe('assertNoFile', () => {
+  it('should throw error if no file given', () => {
+    assert.throws(() => assertNoFile([]), {
+      code: 'NOFILEPROVIDED',
+      message: 'no file provided'
+    });
+  });
+
+  it('should not throw error if file given', () => {
+    assert.doesNotThrow(() => assertNoFile(['file']));
   });
 });
