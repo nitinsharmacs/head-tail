@@ -17,19 +17,34 @@ const head = (content, { askedForBytes, count }) => {
   return joinLines(firstNLines(lines, count));
 };
 
+const createHeader = (filename) => {
+  return `\n==> ${filename} <==\n`;
+};
+
 const noFileMessage = (filename) => {
   return filename + ': ' + 'No such file or directory';
 };
 
-const headMain = (fileReader, args) => {
-  const { filenames, options } = parseArgs(args);
-  const [filename] = filenames;
+const headFile = (fileReader, filename, options, showHeader) => {
   try {
     const content = fileReader(filename, 'utf8');
-    return head(content, options);
+    const header = showHeader ? createHeader(filename) : '';
+    return `${header}${head(content, options)}`;
   } catch (error) {
-    throw { code: 'NOENT', message: noFileMessage(filename) };
+    return 'head: ' + noFileMessage(filename);
   }
+};
+
+// TODO : multiple files here
+const headMain = (fileReader, args) => {
+  const { filenames, options } = parseArgs(args);
+  if (filenames.length === 1) {
+    return headFile(fileReader, filenames[0], options, false);
+  }
+  const contents = filenames.map(filename => headFile(fileReader,
+    filename,
+    options, true));
+  return joinLines(contents);
 };
 
 exports.firstNLines = firstNLines;

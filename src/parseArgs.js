@@ -1,7 +1,7 @@
 const { validateOption } = require('./validators.js');
 
 const isCombinedOption = (text) => /^-[a-z0-9]{2,}$/.test(text);
-const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
+const isNonCombinedOption = (text) => /^-[a-z0-9]+$/.test(text);
 
 const createOption = (name, value) => {
   const option = {};

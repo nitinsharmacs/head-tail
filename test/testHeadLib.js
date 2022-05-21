@@ -4,31 +4,59 @@ const { headMain,
   firstNLines,
   nBytesFrom } = require('../src/headLib.js');
 
-const mockReadFileSync = (expectedFileName, expectedEncoding, content) => {
+const mockReadFileSync = (expectedFileNames, contents, expectedEncoding) => {
+  let index = 0;
   return function (fileName, encoding) {
-    assert.strictEqual(fileName, expectedFileName);
+    assert.strictEqual(fileName, expectedFileNames[index]);
     assert.strictEqual(encoding, expectedEncoding);
-    return content;
+    const actualContent = contents[index];
+    index++;
+    return actualContent;
   };
 };
 
 describe('headMain', () => {
   it('should get 1 line from the file', () => {
-    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello'],
+      'utf8');
     const args = ['-n', '1', 'file.txt'];
     assert.strictEqual(headMain(mockedReadFileSync, args), 'hello');
   });
 
   it('should get 2 byte from the file', () => {
-    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello'],
+      'utf8');
     const args = ['-c', '1', 'file.txt'];
     assert.strictEqual(headMain(mockedReadFileSync, args), 'h');
   });
 
-  it('should throw error if file doesn\'t exist', () => {
-    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+  it('should give formatted error if file doesn\'t exist', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello'],
+      'utf8');
     const args = ['-c', '1', 'file.tx'];
-    assert.throws(() => headMain(mockedReadFileSync, args), 'h');
+    assert.strictEqual(headMain(mockedReadFileSync, args),
+      'head: file.tx: No such file or directory');
+  });
+
+  it('should head multiple files with all files present', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
+      ['hello', 'world'],
+      'utf8');
+    const args = ['file.txt', 'file2.txt'];
+    const stdout = '\n==> file.txt <==\nhello\n\n==> file2.txt <==\nworld';
+    assert.strictEqual(headMain(mockedReadFileSync, args), stdout);
+  });
+
+  it('should head multiple files with one absent', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
+      ['hello'],
+      'utf8');
+    const args = ['file.txt', 'absent.txt'];
+    const stdout = `\n==> file.txt <==\nhello\nhead: absent.txt: No such file or directory`;
+    assert.strictEqual(headMain(mockedReadFileSync, args), stdout);
   });
 });
 

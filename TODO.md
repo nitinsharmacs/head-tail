@@ -1,6 +1,8 @@
 **TODO:**
 
+- [ ] Implemented headFiles function
 - [ ] Make it working for multilpe files
+- [ ] Handle no file provided
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [x] Validate options
@@ -9,8 +11,8 @@
 - [ ] Update sidenote from README.md of providing both options
 - [ ] Handled ` head -nc0 head.js`
 - [ ] Rework on parser with loop using Jayanth's method of iterator using closer
+- [ ] Test all the helping functions
 
-  
 **MAYBE:**
 
 - [ ] Consider change contract of firstNLines and pass content as string
