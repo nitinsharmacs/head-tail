@@ -3,7 +3,10 @@ const { headMain,
   head,
   firstNLines,
   nBytesFrom,
-  assertNoFile } = require('../src/headLib.js');
+  assertNoFile,
+  usage,
+  createHeader,
+  noFileMessage } = require('../src/headLib.js');
 
 const mockReadFileSync = (expectedFileNames, contents, expectedEncoding) => {
   let index = 0;
@@ -186,5 +189,24 @@ describe('assertNoFile', () => {
 
   it('should not throw error if file given', () => {
     assert.doesNotThrow(() => assertNoFile(['file']));
+  });
+});
+
+describe('usage', () => {
+  it('should give head usage', () => {
+    assert.strictEqual(usage(), 'usage: head [-n lines | -c bytes] [file ...]');
+  });
+});
+
+describe('createHeader', () => {
+  it('should give header of file name', () => {
+    assert.strictEqual(createHeader('filename'), '==> filename <==\n');
+  });
+});
+
+describe('noFileMessage', () => {
+  it('should give no file message', () => {
+    assert.strictEqual(noFileMessage('file'),
+      'file: No such file or directory');
   });
 });

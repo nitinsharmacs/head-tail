@@ -71,3 +71,5 @@ exports.head = head;
 exports.headMain = headMain;
 exports.assertNoFile = assertNoFile;
 exports.usage = usage;
+exports.createHeader = createHeader;
+exports.noFileMessage = noFileMessage;
