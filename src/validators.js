@@ -36,7 +36,7 @@ const validateOptionValue = (option) => {
   const rule = optionsRules[key];
   if (rule.minValue > optionValue) {
     throw {
-      name: 'ILLEGALCOUNT',
+      code: 'ILLEGALCOUNT',
       message: 'illegal ' + rule.name + ' count -- ' + optionValue
     };
   }
@@ -45,7 +45,7 @@ const validateOptionValue = (option) => {
 const validateOption = (newOptions, prevOptions) => {
   if (isNotValidOption(newOptions)) {
     throw {
-      name: 'ILLEGAL_OPTION',
+      code: 'ILLEGAL_OPTION',
       message: 'illegal option -- ' + optionName(optionKey(newOptions))
     };
   }
@@ -54,7 +54,7 @@ const validateOption = (newOptions, prevOptions) => {
 
   if (cantBeCombined(newOptions, prevOptions)) {
     throw {
-      name: 'CANTCOMBINE',
+      code: 'CANTCOMBINE',
       message: 'can\'t combine line and byte counts'
     };
   }

@@ -4,7 +4,7 @@ const { parseOptions,
   parseArgs,
   compileOption } = require('../src/parseArgs.js');
 
-describe.only('parseOptions', () => {
+describe('parseOptions', () => {
   it('should parse options separated by their values', () => {
     assert.deepStrictEqual(parseOptions(['-n', '4', 'filename'], {}), {
       '-n': 4,
@@ -35,7 +35,7 @@ describe.only('parseOptions', () => {
   it('should throw error for invalid option', () => {
     const args = ['-l1', '-c', '2'];
     assert.throws(() => parseOptions(args, {}), {
-      name: 'ILLEGAL_OPTION',
+      code: 'ILLEGAL_OPTION',
       message: 'illegal option -- l'
     });
   });
@@ -118,7 +118,7 @@ describe('compileOption', () => {
   // it('should throw error of illegal line count', () => {
   //   const option = { '-n': 0 };
   //   assert.throws(() => compileOption(option), {
-  //     name: 'ILLEGALCOUNT',
+  //     code: 'ILLEGALCOUNT',
   //     message: 'illegal line count -- 0'
   //   });
   // });
@@ -126,7 +126,7 @@ describe('compileOption', () => {
   // it('should throw error of illegal byte count', () => {
   //   const option = { '-c': 0 };
   //   assert.throws(() => compileOption(option), {
-  //     name: 'ILLEGALCOUNT',
+  //     code: 'ILLEGALCOUNT',
   //     message: 'illegal byte count -- 0'
   //   });
   // });

@@ -24,6 +24,12 @@ describe('headMain', () => {
     const args = ['-c', '1', 'file.txt'];
     assert.strictEqual(headMain(mockedReadFileSync, args), 'h');
   });
+
+  it('should throw error if file doesn\'t exist', () => {
+    const mockedReadFileSync = mockReadFileSync('file.txt', 'utf8', 'hello');
+    const args = ['-c', '1', 'file.tx'];
+    assert.throws(() => headMain(mockedReadFileSync, args), 'h');
+  });
 });
 
 describe('head', () => {

@@ -8,7 +8,7 @@ describe('validateOption', () => {
     const newOption = { '-j': 1 };
     const prevOptions = {};
     assert.throws(() => validateOption(newOption, prevOptions), {
-      name: 'ILLEGAL_OPTION',
+      code: 'ILLEGAL_OPTION',
       message: 'illegal option -- j'
     });
   });
@@ -17,7 +17,7 @@ describe('validateOption', () => {
     const newOption = { '-c': 1 };
     const prevOptions = { '-n': 2 };
     assert.throws(() => validateOption(newOption, prevOptions), {
-      name: 'CANTCOMBINE',
+      code: 'CANTCOMBINE',
       message: 'can\'t combine line and byte counts'
     });
   });
@@ -35,7 +35,7 @@ describe('validateOptionValue', () => {
       '-c': 0
     };
     assert.throws(() => validateOptionValue(option), {
-      name: 'ILLEGALCOUNT',
+      code: 'ILLEGALCOUNT',
       message: 'illegal byte count -- 0'
     });
   });
@@ -45,7 +45,7 @@ describe('validateOptionValue', () => {
       '-n': 0
     };
     assert.throws(() => validateOptionValue(option), {
-      name: 'ILLEGALCOUNT',
+      code: 'ILLEGALCOUNT',
       message: 'illegal line count -- 0'
     });
   });

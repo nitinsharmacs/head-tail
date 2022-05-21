@@ -20,8 +20,12 @@ const head = (content, { askedForBytes, count }) => {
 const headMain = (fileReader, args) => {
   const { filenames, options } = parseArgs(args);
   const [filename] = filenames;
-  const content = fileReader(filename, 'utf8');
-  return head(content, options);
+  try {
+    const content = fileReader(filename, 'utf8');
+    return head(content, options);
+  } catch (error) {
+    throw { ...error };
+  }
 };
 
 exports.firstNLines = firstNLines;

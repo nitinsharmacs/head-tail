@@ -7,6 +7,7 @@
   - [x] Validate options values
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
+- [x] Validate throw object should have code
   
 **MAYBE:**
 
