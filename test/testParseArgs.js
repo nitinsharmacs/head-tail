@@ -69,7 +69,8 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args), {
       filenames: ['filename', 'filename2'],
       options: {
-        '-n': 1
+        askedForBytes: false,
+        count: 1
       }
     });
   });
@@ -79,7 +80,8 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args), {
       filenames: ['filename', 'filename2'],
       options: {
-        '-n': 1
+        askedForBytes: false,
+        count: 1
       }
     });
   });
@@ -89,6 +91,8 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args), {
       filenames: ['filename', 'filename2', '-n', '1', '-c1'],
       options: {
+        askedForBytes: false,
+        count: 10
       }
     });
   });

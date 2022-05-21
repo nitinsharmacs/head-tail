@@ -54,7 +54,6 @@ const parseFileNames = (args) => {
 
 const compileOption = (options) => {
   validateOptionValue(options);
-  const defaultCount = 10;
   if (options['-c']) {
     return {
       askedForBytes: true,
@@ -63,14 +62,23 @@ const compileOption = (options) => {
   }
   return {
     askedForBytes: false,
-    count: options['-n'] || defaultCount
+    count: options['-n']
   };
 };
 
+const isEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
+};
+
 const parseArgs = (args) => {
+  const defaults = {
+    askedForBytes: false,
+    count: 10
+  };
+  const options = parseOptions(args, {});
   return {
     filenames: parseFileNames(args),
-    options: parseOptions(args, {})
+    options: isEmpty(options) ? defaults : compileOption(options)
   };
 };
 

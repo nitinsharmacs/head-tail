@@ -16,7 +16,6 @@
 - [ ] 0 bytes case should be handled. On shell, it gives error
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
-- [ ] Add defaultValues parameter to parseArgs
   
 **MAYBE:**
 
@@ -32,6 +31,7 @@
 
 **DONE:**
 
+- [x] Set default option in parseArgs
 - [x] Move validators to separate lib
 - [x] Compile options while parsing
 - [x] Test validateOption
