@@ -109,10 +109,25 @@ const validateOptionValue = (option) => {
   }
 };
 
+const compileOption = (options) => {
+  validateOptionValue(options);
+  const defaultCount = 10;
+  if (options['-c']) {
+    return {
+      askedForBytes: true,
+      count: options['-c']
+    };
+  }
+  return {
+    askedForBytes: false,
+    count: options['-n'] || defaultCount
+  };
+};
+
 const parseArgs = (args) => {
   return {
     filenames: parseFileNames(args),
-    options: (parseOptions(args, {}))
+    options: parseOptions(args, {})
   };
 };
 
@@ -121,3 +136,4 @@ exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
 exports.validateOption = validateOption;
 exports.validateOptionValue = validateOptionValue;
+exports.compileOption = compileOption;

@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Compile options while parsing
 - [ ] Make it working for multilpe files
 - [ ] Compile parsed options to domain options
   - [x] Only one option is given at a time
@@ -17,8 +16,8 @@
 - [ ] 0 bytes case should be handled. On shell, it gives error
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
-- [x] Test validateOption
 - [ ] Add defaultValues parameter to parseArgs
+- [ ] Move validators to separate lib
   
 **MAYBE:**
 
@@ -33,6 +32,8 @@
 - [ ] `head file` gives 1 line if the file is empty
 
 **DONE:**
+- [x] Compile options while parsing
+- [x] Test validateOption
 - [x] Implement parseArgs
   - [x] Parse files when options with separated values given alongwith
   - [x] Parse files when options with their valus given alongwith

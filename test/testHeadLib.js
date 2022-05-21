@@ -2,8 +2,7 @@ const assert = require('assert');
 const { headMain,
   head,
   firstNLines,
-  nBytesFrom,
-  compileOptions } = require('../src/headLib.js');
+  nBytesFrom } = require('../src/headLib.js');
 
 const mockReadFileSync = (expectedFileName, expectedEncoding, content) => {
   return function (fileName, encoding) {
@@ -120,27 +119,5 @@ describe('nBytesFrom', () => {
 
   it('should give empty from the empty content', () => {
     assert.strictEqual(nBytesFrom('', 4), '');
-  });
-});
-
-describe('compileOptions', () => {
-  it('should set options for getting line', () => {
-    const options = {
-      '-n': 2
-    };
-    assert.deepStrictEqual(compileOptions(options), {
-      askedForBytes: false,
-      count: 2
-    });
-  });
-
-  it('should set options for getting bytes', () => {
-    const options = {
-      '-c': 2
-    };
-    assert.deepStrictEqual(compileOptions(options), {
-      askedForBytes: true,
-      count: 2
-    });
   });
 });

@@ -3,7 +3,8 @@ const { parseOptions,
   parseFileNames,
   parseArgs,
   validateOption,
-  validateOptionValue } = require('../src/parseArgs.js');
+  validateOptionValue,
+  compileOption } = require('../src/parseArgs.js');
 
 describe('parseOptions', () => {
   it('should parse options separated by their values', () => {
@@ -140,6 +141,40 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       name: 'ILLEGALCOUNT',
       message: 'illegal line count -- 0'
+    });
+  });
+});
+
+describe('compileOption', () => {
+  it('should compile line count option', () => {
+    const option = { '-n': 1 };
+    assert.deepStrictEqual(compileOption(option), {
+      askedForBytes: false,
+      count: 1
+    });
+  });
+
+  it('should compile byte count option', () => {
+    const option = { '-c': 2 };
+    assert.deepStrictEqual(compileOption(option), {
+      askedForBytes: true,
+      count: 2
+    });
+  });
+
+  it('should throw error of illegal line count', () => {
+    const option = { '-n': 0 };
+    assert.throws(() => compileOption(option), {
+      name: 'ILLEGALCOUNT',
+      message: 'illegal line count -- 0'
+    });
+  });
+
+  it('should throw error of illegal byte count', () => {
+    const option = { '-c': 0 };
+    assert.throws(() => compileOption(option), {
+      name: 'ILLEGALCOUNT',
+      message: 'illegal byte count -- 0'
     });
   });
 });
