@@ -3,7 +3,7 @@ const { headMain,
   head,
   firstNLines,
   nBytesFrom,
-  assertNoFile,
+  assertFile,
   usage,
   createHeader,
   noFileMessage } = require('../src/headLib.js');
@@ -179,16 +179,16 @@ describe('nBytesFrom', () => {
   });
 });
 
-describe('assertNoFile', () => {
+describe('assertFile', () => {
   it('should throw error if no file given', () => {
-    assert.throws(() => assertNoFile([]), {
+    assert.throws(() => assertFile([]), {
       code: 'NOFILEPROVIDED',
       message: 'no file provided'
     });
   });
 
   it('should not throw error if file given', () => {
-    assert.doesNotThrow(() => assertNoFile(['file']));
+    assert.doesNotThrow(() => assertFile(['file']));
   });
 });
 

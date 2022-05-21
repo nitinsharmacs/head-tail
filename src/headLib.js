@@ -39,7 +39,7 @@ const headFile = (fileReader, filename, options, showHeader) => {
   }
 };
 
-const assertNoFile = (files) => {
+const assertFile = (files) => {
   if (files.length === 0) {
     throw {
       code: 'NOFILEPROVIDED',
@@ -54,7 +54,7 @@ const headMain = (fileReader, args) => {
     return usage();
   }
   const { filenames, options } = parseArgs(args);
-  assertNoFile(filenames);
+  assertFile(filenames);
   if (filenames.length === 1) {
     const [filename] = filenames;
     return headFile(fileReader, filename, options, false);
@@ -69,7 +69,7 @@ exports.firstNLines = firstNLines;
 exports.nBytesFrom = nBytesFrom;
 exports.head = head;
 exports.headMain = headMain;
-exports.assertNoFile = assertNoFile;
+exports.assertFile = assertFile;
 exports.usage = usage;
 exports.createHeader = createHeader;
 exports.noFileMessage = noFileMessage;
