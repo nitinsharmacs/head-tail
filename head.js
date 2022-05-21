@@ -2,7 +2,11 @@ const fs = require('fs');
 const { headMain } = require('./src/headLib');
 
 const main = () => {
-  return headMain(fs.readFileSync, process.argv.slice(2));
+  try {
+    return headMain(fs.readFileSync, process.argv.slice(2));
+  } catch (error) {
+    return 'head: ' + error.message;
+  }
 };
 
 console.log(main());

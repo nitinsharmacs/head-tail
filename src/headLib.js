@@ -17,6 +17,10 @@ const head = (content, { askedForBytes, count }) => {
   return joinLines(firstNLines(lines, count));
 };
 
+const noFileMessage = (filename) => {
+  return filename + ': ' + 'No such file or directory';
+};
+
 const headMain = (fileReader, args) => {
   const { filenames, options } = parseArgs(args);
   const [filename] = filenames;
@@ -24,7 +28,7 @@ const headMain = (fileReader, args) => {
     const content = fileReader(filename, 'utf8');
     return head(content, options);
   } catch (error) {
-    throw { ...error };
+    throw { code: 'NOENT', message: noFileMessage(filename) };
   }
 };
 

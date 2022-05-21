@@ -8,6 +8,7 @@
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
 - [x] Validate throw object should have code
+- [ ] Handled ` head -nc0 head.js`
   
 **MAYBE:**
 
