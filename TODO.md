@@ -3,7 +3,6 @@
 - [ ] Rework on parser with loop using Jayanth's method of iterator using closer
 - [ ] Test all the helping functions
 - [ ] Handle if no argument is provided to option
-- [ ] showHeader can be a function
 
 **MAYBE:**
 
@@ -19,6 +18,7 @@
 
 **DONE:**
 
+- [x] showHeader can be a function
 - [x] Change assertNoFile to assertFile
 - [x] Update sidenote from README.md of providing both options
 - [x] Validate parsed arguments

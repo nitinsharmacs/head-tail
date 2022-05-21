@@ -29,11 +29,10 @@ const noFileMessage = (filename) => {
   return filename + ': ' + 'No such file or directory';
 };
 
-const headFile = (fileReader, filename, options, showHeader) => {
+const headFile = (fileReader, filename, options, header) => {
   try {
     const content = fileReader(filename, 'utf8');
-    const header = showHeader ? createHeader(filename) : '';
-    return `${header}${head(content, options)}`;
+    return `${header(filename)}${head(content, options)}`;
   } catch (error) {
     return 'head: ' + noFileMessage(filename);
   }
@@ -57,11 +56,11 @@ const headMain = (fileReader, args) => {
   assertFile(filenames);
   if (filenames.length === 1) {
     const [filename] = filenames;
-    return headFile(fileReader, filename, options, false);
+    return headFile(fileReader, filename, options, () => '');
   }
   const contents = filenames.map(filename => headFile(fileReader,
     filename,
-    options, true));
+    options, createHeader));
   return joinLines(contents);
 };
 
