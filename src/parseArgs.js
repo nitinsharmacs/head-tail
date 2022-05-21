@@ -1,7 +1,7 @@
 const { validateOption } = require('./validators.js');
 
 const isCombinedOption = (text) => /^-[a-z0-9]{2,}$/.test(text);
-const isNonCombinedOption = (text) => /^-[a-z0-9]+$/.test(text);
+const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
 const createOption = (name, value) => {
   const option = {};
@@ -84,3 +84,7 @@ exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
 exports.compileOption = compileOption;
+exports.isCombinedOption = isCombinedOption;
+exports.isNonCombinedOption = isNonCombinedOption;
+exports.createOption = createOption;
+exports.isNotOption = isNotOption;

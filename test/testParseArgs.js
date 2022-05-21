@@ -3,7 +3,31 @@ const { parseOptions,
   parseFileNames,
   parseArgs,
   compileOption,
-  separateCombinedOption } = require('../src/parseArgs.js');
+  separateCombinedOption,
+  isCombinedOption,
+  isNonCombinedOption,
+  createOption,
+  isNotOption } = require('../src/parseArgs.js');
+
+describe('isCombinedOption', () => {
+  it('should check if option is of combined type', () => {
+    assert.ok(isCombinedOption('-n1'));
+  });
+
+  it('should check if option is not of combined type', () => {
+    assert.strictEqual(isCombinedOption('-n'), false);
+  });
+});
+
+describe('isNonCombinedOption', () => {
+  it('should check if option is of non-combined type', () => {
+    assert.ok(isNonCombinedOption('-n'));
+  });
+
+  it('should check if option is not of non-combined type', () => {
+    assert.strictEqual(isNonCombinedOption('-n1'), false);
+  });
+});
 
 describe('separateCombinedOption', () => {
   it('should separate option having numerical value', () => {
@@ -12,6 +36,22 @@ describe('separateCombinedOption', () => {
 
   it('should separate option having alphanumerical value', () => {
     assert.deepStrictEqual(separateCombinedOption('-cd1'), { '-c': 'd1' });
+  });
+});
+
+describe('createOption', () => {
+  it('should create option of given name and value', () => {
+    assert.deepStrictEqual(createOption('-n', '1'), { '-n': '1' });
+  });
+});
+
+describe('isNotOption', () => {
+  it('should check if text is not option', () => {
+    assert.ok(isNotOption('filename'));
+  });
+
+  it('should check if text is not option if it is option', () => {
+    assert.strictEqual(isNotOption('-n'), false);
   });
 });
 
@@ -133,20 +173,4 @@ describe('compileOption', () => {
       count: 2
     });
   });
-
-  // it('should throw error of illegal line count', () => {
-  //   const option = { '-n': 0 };
-  //   assert.throws(() => compileOption(option), {
-  //     code: 'ILLEGALCOUNT',
-  //     message: 'illegal line count -- 0'
-  //   });
-  // });
-
-  // it('should throw error of illegal byte count', () => {
-  //   const option = { '-c': 0 };
-  //   assert.throws(() => compileOption(option), {
-  //     code: 'ILLEGALCOUNT',
-  //     message: 'illegal byte count -- 0'
-  //   });
-  // });
 });
