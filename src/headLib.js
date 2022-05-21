@@ -1,5 +1,5 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
-const { parseOptions, parseFileNames } = require('./parseArgs.js');
+const { parseArgs } = require('./parseArgs.js');
 
 const firstNLines = (lines, count) => {
   return lines.slice(0, count);
@@ -32,9 +32,9 @@ const compileOptions = (options) => {
 };
 
 const headMain = (fileReader, args) => {
-  const [fileName] = parseFileNames(args);
-  const options = parseOptions(args);
-  const content = fileReader(fileName, 'utf8');
+  const { filenames, options } = parseArgs(args);
+  const [filename] = filenames;
+  const content = fileReader(filename, 'utf8');
   return head(content, compileOptions(options));
 };
 

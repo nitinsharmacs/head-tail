@@ -15,13 +15,36 @@ const separateCombinedOption = (option) => {
   return createOption(optionName, optionValue);
 };
 
-const validateOption = (option) => {
+const optionName = (option) => {
+  const [optionName] = option.split('-').reverse();
+  return optionName;
+};
+
+const cantBeCombined = (newOption, prevOptions) => {
+  const prevOptionsKeys = Object.keys(prevOptions);
+  const [newOptionsKey] = Object.keys(newOption);
+  const differentKey = prevOptionsKeys.find(key => key !== newOptionsKey);
+  return differentKey !== undefined;
+};
+
+const validateOption = (newOptions, prevOptions) => {
   const validOptions = ['-n', '-c'];
-  const [optionName] = Object.keys(option);
-  if (validOptions.includes(optionName)) {
-    return option;
+  const [optionKey] = Object.keys(newOptions);
+  if (cantBeCombined(newOptions, prevOptions)) {
+    throw {
+      name: 'CANTCOMBINE',
+      message: 'can\'t combine line and byte counts'
+    };
   }
-  throw { name: 'INVALID_OPTION', message: 'Invalid Option ' + optionName };
+
+  if (validOptions.includes(optionKey)) {
+    return newOptions;
+  }
+
+  throw {
+    name: 'ILLEGAL_OPTION',
+    message: 'illegal option -- ' + optionName(optionKey)
+  };
 };
 
 const isNotOption = (text) => {
@@ -35,13 +58,13 @@ const parseOptions = ([text, ...restArgs], options) => {
   if (isCombinedOption(text)) {
     return parseOptions(restArgs, {
       ...options,
-      ...validateOption(separateCombinedOption(text))
+      ...validateOption(separateCombinedOption(text), options)
     });
   }
   const [optionValue] = restArgs;
   return parseOptions(restArgs.slice(1), {
     ...options,
-    ...validateOption(createOption(text, optionValue))
+    ...validateOption(createOption(text, optionValue), options)
   });
 };
 
@@ -69,3 +92,4 @@ const parseArgs = (args) => {
 exports.parseOptions = parseOptions;
 exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
+exports.validateOption = validateOption;

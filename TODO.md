@@ -9,11 +9,13 @@
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [x] Validate options
+  - [ ] Validate options values
 - [ ] Implement -n option from cli
 - [ ] Implement -c option from cli
 - [ ] 0 bytes case should be handled. On shell, it gives error
 - [ ] Implement `head --help`
 - [ ] Update sidenote from README.md of providing both options
+- [x] Test validateOption
   
 **MAYBE:**
 
