@@ -18,7 +18,7 @@ const head = (content, { askedForBytes, count }) => {
 };
 
 const createHeader = (filename) => {
-  return `\n==> ${filename} <==\n`;
+  return `==> ${filename} <==\n`;
 };
 
 const noFileMessage = (filename) => {
@@ -35,9 +35,14 @@ const headFile = (fileReader, filename, options, showHeader) => {
   }
 };
 
-// TODO : multiple files here
 const headMain = (fileReader, args) => {
   const { filenames, options } = parseArgs(args);
+  if (filenames.length === 0) {
+    throw {
+      code: 'NOFILEPROVIDED',
+      message: 'no file provided'
+    };
+  }
   if (filenames.length === 1) {
     return headFile(fileReader, filenames[0], options, false);
   }

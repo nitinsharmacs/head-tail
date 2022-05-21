@@ -46,7 +46,7 @@ describe('headMain', () => {
       ['hello', 'world'],
       'utf8');
     const args = ['file.txt', 'file2.txt'];
-    const stdout = '\n==> file.txt <==\nhello\n\n==> file2.txt <==\nworld';
+    const stdout = '==> file.txt <==\nhello\n==> file2.txt <==\nworld';
     assert.strictEqual(headMain(mockedReadFileSync, args), stdout);
   });
 
@@ -55,8 +55,19 @@ describe('headMain', () => {
       ['hello'],
       'utf8');
     const args = ['file.txt', 'absent.txt'];
-    const stdout = `\n==> file.txt <==\nhello\nhead: absent.txt: No such file or directory`;
+    const stdout = '==> file.txt <==\nhello\nhead: absent.txt: No such file or directory';
     assert.strictEqual(headMain(mockedReadFileSync, args), stdout);
+  });
+
+  it('should throw error if no file provided', () => {
+    const mockedReadFileSync = mockReadFileSync([],
+      [],
+      'utf8');
+    const args = [];
+    assert.throws(() => headMain(mockedReadFileSync, args), {
+      code: 'NOFILEPROVIDED',
+      message: 'no file provided'
+    });
   });
 });
 

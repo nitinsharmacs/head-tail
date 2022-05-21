@@ -1,8 +1,5 @@
 **TODO:**
 
-- [ ] Implemented headFiles function
-- [ ] Make it working for multilpe files
-- [ ] Handle no file provided
 - [ ] Validate parsed arguments
   - [ ] Validate files
   - [x] Validate options
@@ -27,6 +24,9 @@
 
 **DONE:**
 
+- [x] Handle no file provided
+- [x] Make it working for multilpe files
+- [ ] ~~Implemented headFiles function~~
 - [x] Option validator is not working of invalid option value
   - [x] Value should be a number
 - [x] Validate throw object should have code
