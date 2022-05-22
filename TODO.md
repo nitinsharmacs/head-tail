@@ -1,10 +1,8 @@
 **TODO:**
 
-- [ ] Test all the helping functions
-- [ ] Handle if no argument is provided to option
-- [ ] Handle `head.js` with no args
 - [ ] Handle `head.js -1`
 - [ ] Investigate on the output of origial `head` and `head.js`
+- [ ] Add underscore in every error code
 
 **MAYBE:**
 
@@ -20,6 +18,10 @@
 
 **DONE:**
 
+- [x] stdout message generator
+- [x] Handle if no argument is provided to option
+- [x] Handle `head.js` with no args
+- [x] Test all the helping functions
 - [x] Rework on parser with loop using iterator
 - [x] showHeader can be a function
 - [x] Change assertNoFile to assertFile

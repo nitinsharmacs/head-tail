@@ -1,5 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { parseArgs } = require('./parseArgs.js');
+const { usage } = require('./studoutHandler.js');
 
 const firstNLines = (lines, count) => {
   return lines.slice(0, count);
@@ -15,10 +16,6 @@ const head = (content, { askedForBytes, count }) => {
   }
   const lines = splitLines(content);
   return joinLines(firstNLines(lines, count));
-};
-
-const usage = () => {
-  return 'usage: head [-n lines | -c bytes] [file ...]';
 };
 
 const createHeader = (filename) => {
@@ -42,7 +39,7 @@ const assertFile = (files) => {
   if (files.length === 0) {
     throw {
       code: 'NOFILEPROVIDED',
-      message: 'no file provided'
+      message: usage()
     };
   }
 };

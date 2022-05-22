@@ -99,6 +99,7 @@ const parseArgs = (args) => {
 };
 
 exports.separateCombinedOption = separateCombinedOption;
+exports.parseOption = parseOption;
 exports.parseOptions = parseOptions;
 exports.parseArgs = parseArgs;
 exports.compileOption = compileOption;

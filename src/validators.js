@@ -38,7 +38,8 @@ const validateOptionValue = (option) => {
   if (rule.minValue > optionValue || isNaN(optionValue)) {
     throw {
       code: 'ILLEGALCOUNT',
-      message: 'illegal ' + rule.name + ' count -- ' + optionValue
+      message: 'illegal ' + rule.name + ' count -- ' + optionValue,
+      prefixWithHead: true
     };
   }
 };
@@ -47,7 +48,9 @@ const validateOption = (newOptions, prevOptions) => {
   if (isNotValidOption(newOptions)) {
     throw {
       code: 'ILLEGAL_OPTION',
-      message: 'illegal option -- ' + optionName(optionKey(newOptions))
+      message: 'illegal option -- ' + optionName(optionKey(newOptions)),
+      showUsage: true,
+      prefixWithHead: true
     };
   }
 
@@ -56,7 +59,8 @@ const validateOption = (newOptions, prevOptions) => {
   if (cantBeCombined(newOptions, prevOptions)) {
     throw {
       code: 'CANTCOMBINE',
-      message: 'can\'t combine line and byte counts'
+      message: 'can\'t combine line and byte counts',
+      prefixWithHead: true
     };
   }
 

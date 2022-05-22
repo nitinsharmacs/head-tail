@@ -1,16 +1,13 @@
 const fs = require('fs');
 const { exit } = require('process');
-const { headMain, usage } = require('./src/headLib');
+const { headMain } = require('./src/headLib');
+const { createStdoutMessage } = require('./src/studoutHandler.js');
 
 const main = () => {
   try {
     console.log(headMain(fs.readFileSync, process.argv.slice(2)));
   } catch (error) {
-    let message = 'head: ' + error.message;
-    if (error.code === 'ILLEGOPTION') {
-      message = message + '\n' + usage();
-    }
-    console.error(message);
+    console.error(createStdoutMessage(error));
     exit(1);
   }
 };
