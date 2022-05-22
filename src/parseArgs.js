@@ -15,8 +15,19 @@ const separateCombinedOption = (option) => {
   return createOption(optionName, optionValue);
 };
 
+const numericOptionValue = (option) => {
+  const [, value] = option.split('-');
+  return value;
+};
+
+const isNumericOption = (text) => {
+  return /^-[0-9]+$/.test(text);
+};
+
 const isNotOption = (text) => {
-  return !(isCombinedOption(text) || isNonCombinedOption(text));
+  return !(isCombinedOption(text) ||
+    isNonCombinedOption(text) ||
+    numericOptionValue(text));
 };
 
 const createArgsIterator = (args) => {
@@ -47,6 +58,10 @@ const parseOption = (argsIterator) => {
   if (isCombinedOption(text)) {
     argsIterator.nextArg();
     return separateCombinedOption(text);
+  }
+  if (isNumericOption(text)) {
+    argsIterator.nextArg();
+    return createOption('-n', numericOptionValue(text));
   }
   const option = createOption(text, argsIterator.nextArg());
   argsIterator.nextArg();

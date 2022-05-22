@@ -121,6 +121,13 @@ describe('parseOptions', () => {
       message: 'illegal byte count -- sd'
     });
   });
+
+  it('should parse numeric option', () => {
+    const argsIterator = createArgsIterator(['-1']);
+    assert.deepStrictEqual(parseOptions(argsIterator), {
+      '-n': '1'
+    });
+  });
 });
 
 describe('parseArgs', () => {

@@ -1,8 +1,6 @@
 **TODO:**
 
-- [ ] Handle `head.js -1`
 - [ ] Investigate on the output of origial `head` and `head.js`
-- [ ] Add underscore in every error code
 
 **MAYBE:**
 
@@ -18,6 +16,8 @@
 
 **DONE:**
 
+- [x] Handle `head.js -1`
+- [x] Add underscore in every error code
 - [x] stdout message generator
 - [x] Handle if no argument is provided to option
 - [x] Handle `head.js` with no args
