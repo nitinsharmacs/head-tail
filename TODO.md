@@ -1,8 +1,10 @@
 **TODO:**
 
-- [ ] Rework on parser with loop using Jayanth's method of iterator using closer
 - [ ] Test all the helping functions
 - [ ] Handle if no argument is provided to option
+- [ ] Handle `head.js` with no args
+- [ ] Handle `head.js -1`
+- [ ] Investigate on the output of origial `head` and `head.js`
 
 **MAYBE:**
 
@@ -18,6 +20,7 @@
 
 **DONE:**
 
+- [x] Rework on parser with loop using iterator
 - [x] showHeader can be a function
 - [x] Change assertNoFile to assertFile
 - [x] Update sidenote from README.md of providing both options

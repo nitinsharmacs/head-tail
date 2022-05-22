@@ -19,35 +19,53 @@ const isNotOption = (text) => {
   return !(isCombinedOption(text) || isNonCombinedOption(text));
 };
 
-const parseOptions = ([text, ...restArgs], options) => {
-  if (isNotOption(text)) {
-    return options;
-  }
-  if (isCombinedOption(text)) {
-    return parseOptions(restArgs, {
-      ...options,
-      ...validateOption(separateCombinedOption(text), options)
-    });
-  }
-  const [optionValue] = restArgs;
-  return parseOptions(restArgs.slice(1), {
-    ...options,
-    ...validateOption(createOption(text, optionValue), options)
-  });
+const createArgsIterator = (args) => {
+  let index = 0;
+  const nextArg = function () {
+    index++;
+    return args[index];
+  };
+  const currentArg = function () {
+    return args[index];
+  };
+  const hasMoreArgs = function () {
+    return args.length > index;
+  };
+  const restArgs = function () {
+    return args.slice(index);
+  };
+  return {
+    nextArg,
+    currentArg,
+    hasMoreArgs,
+    restArgs
+  };
 };
 
-const parseFileNames = (args) => {
-  if (args.length === 0) {
-    return [];
-  }
-  const [text] = args;
+const parseOption = (argsIterator) => {
+  const text = argsIterator.currentArg();
   if (isCombinedOption(text)) {
-    return parseFileNames(args.slice(1));
+    argsIterator.nextArg();
+    return separateCombinedOption(text);
   }
-  if (isNonCombinedOption(text)) {
-    return parseFileNames(args.slice(2));
+  const option = createOption(text, argsIterator.nextArg());
+  argsIterator.nextArg();
+  return option;
+};
+
+const parseOptions = (argsIterator) => {
+  let options = {};
+  while (argsIterator.hasMoreArgs()) {
+    const text = argsIterator.currentArg();
+    if (isNotOption(text)) {
+      return options;
+    }
+    options = {
+      ...options,
+      ...validateOption(parseOption(argsIterator), options)
+    };
   }
-  return args;
+  return options;
 };
 
 const compileOption = (options) => {
@@ -72,19 +90,20 @@ const parseArgs = (args) => {
     askedForBytes: false,
     count: 10
   };
-  const options = parseOptions(args, {});
+  const argsIterator = createArgsIterator(args);
+  const options = parseOptions(argsIterator);
   return {
-    filenames: parseFileNames(args),
+    filenames: argsIterator.restArgs(),
     options: isEmpty(options) ? defaults : compileOption(options)
   };
 };
 
 exports.separateCombinedOption = separateCombinedOption;
 exports.parseOptions = parseOptions;
-exports.parseFileNames = parseFileNames;
 exports.parseArgs = parseArgs;
 exports.compileOption = compileOption;
 exports.isCombinedOption = isCombinedOption;
 exports.isNonCombinedOption = isNonCombinedOption;
 exports.createOption = createOption;
 exports.isNotOption = isNotOption;
+exports.createArgsIterator = createArgsIterator;
