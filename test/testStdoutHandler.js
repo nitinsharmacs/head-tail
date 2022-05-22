@@ -4,7 +4,7 @@ const { createStdoutMessage } = require('../src/studoutHandler.js');
 describe('createStdoutMessage', () => {
   it('should prefix with head', () => {
     const error = {
-      code: 'ILLEGALCOUNT',
+      code: 'ILLEGAL_COUNT',
       message: 'illegal line count -- 0',
       prefixWithHead: true,
       showUsage: false

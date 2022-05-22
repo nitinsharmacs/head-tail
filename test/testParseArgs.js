@@ -117,7 +117,7 @@ describe('parseOptions', () => {
   it('should throw error for invalid option value', () => {
     const argsIterator = createArgsIterator(['-csd']);
     assert.throws(() => parseOptions(argsIterator), {
-      code: 'ILLEGALCOUNT',
+      code: 'ILLEGAL_COUNT',
       message: 'illegal byte count -- sd'
     });
   });

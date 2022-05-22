@@ -37,7 +37,7 @@ const validateOptionValue = (option) => {
   const rule = optionsRules[key];
   if (rule.minValue > optionValue || isNaN(optionValue)) {
     throw {
-      code: 'ILLEGALCOUNT',
+      code: 'ILLEGAL_COUNT',
       message: 'illegal ' + rule.name + ' count -- ' + optionValue,
       prefixWithHead: true
     };
@@ -58,7 +58,7 @@ const validateOption = (newOptions, prevOptions) => {
 
   if (cantBeCombined(newOptions, prevOptions)) {
     throw {
-      code: 'CANTCOMBINE',
+      code: 'CANT_COMBINE',
       message: 'can\'t combine line and byte counts',
       prefixWithHead: true
     };

@@ -38,7 +38,7 @@ const headFile = (fileReader, filename, options, header) => {
 const assertFile = (files) => {
   if (files.length === 0) {
     throw {
-      code: 'NOFILEPROVIDED',
+      code: 'NO_FILE_PROVIDED',
       message: usage()
     };
   }

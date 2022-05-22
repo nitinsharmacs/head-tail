@@ -69,7 +69,7 @@ describe('headMain', () => {
       'utf8');
     const args = [];
     assert.throws(() => headMain(mockedReadFileSync, args), {
-      code: 'NOFILEPROVIDED',
+      code: 'NO_FILE_PROVIDED',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
   });
@@ -182,7 +182,7 @@ describe('nBytesFrom', () => {
 describe('assertFile', () => {
   it('should throw error if no file given', () => {
     assert.throws(() => assertFile([]), {
-      code: 'NOFILEPROVIDED',
+      code: 'NO_FILE_PROVIDED',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });
   });
