@@ -1,19 +1,23 @@
 **TODO:**
 
-**MAYBE:**
+- [ ] Implement `lastNLines` function
+- [ ] Implement `lastNBytes` function
 
-- [ ] Consider change contract of firstNLines and pass content as string
-- [ ] Change the test description of firstNLines, change `get` to `give`
-- [ ] Remove magic number lint errors from firstNLines and nBytesFrom
-- [ ] Correct `nByesFrom` in contracts.md
+
+**MAYBE:**
 
 
 **PROBLEMS:**
 
-- [ ] `head file` gives 1 line if the file is empty
 
 **DONE:**
 
+- [x] Establish the contract for `tail`
+- [x] ~~Consider change contract of firstNLines and pass content as string~~
+- [x] ~~Change the test description of firstNLines, change `get` to `give`~~
+- [x] ~~Remove magic number lint errors from firstNLines and nBytesFrom~~
+- [x] ~~Correct `nByesFrom` in contracts.md~~
+- [x] ~~`head file` gives 1 line if the file is empty~~
 - [x] Separate `headLib.js` tests to new test files
   - [x] headMain
   - [x] headFiles
