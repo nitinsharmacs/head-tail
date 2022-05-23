@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { lastNLines,
   lastNBytes,
-  tile } = require('../../src/tail/tailLib.js');
+  tail } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
   it('should give last 1 line', () => {
@@ -45,17 +45,17 @@ describe('lastNBytes', () => {
   });
 });
 
-describe('tile', () => {
+describe('tail', () => {
   it('should give last 1 line', () => {
     const content = 'line1\nline2'
-    assert.strictEqual(tile(content, {
+    assert.strictEqual(tail(content, {
       askedForBytes: false, count: 1
     }), 'line2');
   });
 
   it('should give last 1 byte', () => {
     const content = 'line1\nline2'
-    assert.strictEqual(tile(content, {
+    assert.strictEqual(tail(content, {
       askedForBytes: true, count: 1
     }), '2');
   });

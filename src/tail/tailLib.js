@@ -9,7 +9,7 @@ const lastNBytes = (content, count) => {
     content : content.slice(content.length - count);
 };
 
-const tile = (content, { askedForBytes, count }) => {
+const tail = (content, { askedForBytes, count }) => {
   if (askedForBytes) {
     return lastNBytes(content, count);
   }
@@ -24,4 +24,4 @@ const tile = (content, { askedForBytes, count }) => {
 // }
 exports.lastNLines = lastNLines;
 exports.lastNBytes = lastNBytes;
-exports.tile = tile;
+exports.tail = tail;
