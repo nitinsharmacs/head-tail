@@ -35,6 +35,25 @@ const headFile = (fileReader, filename, options, header) => {
   }
 };
 
+const headFiles = (fileReader, filenames, options, console) => {
+  let header = () => '';
+  let exitCode = 0;
+  if (filenames.length > 1) {
+    header = createHeader;
+  }
+  filenames.forEach(filename => {
+    try {
+      const content = fileReader(filename, 'utf8');
+      const headedFile = `${header(filename)}${head(content, options)}`;
+      console.logger(headedFile);
+    } catch (error) {
+      exitCode = 1;
+      console.errorLogger('head: ' + noFileMessage(filename));
+    }
+  });
+  return exitCode;
+};
+
 const assertFile = (files) => {
   if (files.length === 0) {
     throw {
@@ -44,27 +63,23 @@ const assertFile = (files) => {
   }
 };
 
-const headMain = (fileReader, args) => {
+const headMain = (fileReader, args, console) => {
+  const exitCode = 0;
   const [firstArg] = args;
   if (firstArg === '--help') {
-    return usage();
+    console.logger(usage());
+    return exitCode;
   }
   const { filenames, options } = parseArgs(args);
   assertFile(filenames);
-  if (filenames.length === 1) {
-    const [filename] = filenames;
-    return headFile(fileReader, filename, options, () => '');
-  }
-  const contents = filenames.map(filename => headFile(fileReader,
-    filename,
-    options, createHeader));
-  return joinLines(contents);
+  return headFiles(fileReader, filenames, options, console);
 };
 
 exports.firstNLines = firstNLines;
 exports.nBytesFrom = nBytesFrom;
 exports.head = head;
 exports.headMain = headMain;
+exports.headFiles = headFiles;
 exports.assertFile = assertFile;
 exports.usage = usage;
 exports.createHeader = createHeader;
