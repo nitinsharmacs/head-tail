@@ -1,6 +1,6 @@
 const assert = require('assert');
-const { headFiles } = require('../src/headLib.js');
-const { mockReadFileSync, mockLogger } = require('../src/mockers.js');
+const { headFiles } = require('../../src/head/headLib.js');
+const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
 
 describe('headFiles', () => {
   it('should head file without heading', () => {

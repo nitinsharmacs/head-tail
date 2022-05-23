@@ -5,7 +5,7 @@ const { head,
   assertFile,
   usage,
   createHeader,
-  noFileMessage } = require('../src/headLib.js');
+  noFileMessage } = require('../../src/head/headLib.js');
 
 describe('head', () => {
   it('should get 1 line from the content', () => {

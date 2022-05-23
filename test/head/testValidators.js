@@ -1,7 +1,7 @@
 const assert = require('assert');
 const {
   validateOption, validateOptionValue
-} = require('../src/validators.js');
+} = require('../../src/head/validators.js');
 
 describe('validateOption', () => {
   it('should validate invalid option', () => {

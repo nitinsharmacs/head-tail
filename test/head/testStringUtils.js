@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { splitLines, joinLines } = require('../src/stringUtils');
+const { splitLines, joinLines } = require('../../src/head/stringUtils');
 
 describe('splitLines', () => {
   it('should split content of 1 line', () => {

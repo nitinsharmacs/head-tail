@@ -8,7 +8,7 @@ const { parseOption,
   isNonCombinedOption,
   createOption,
   isNotOption,
-  createArgsIterator } = require('../src/parseArgs.js');
+  createArgsIterator } = require('../../src/head/parseArgs.js');
 
 describe('isCombinedOption', () => {
   it('should check if option is of combined type', () => {
