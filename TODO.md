@@ -6,6 +6,7 @@
 
 **MAYBE:**
 
+- [ ] Move common libraries outside of head
 
 **PROBLEMS:**
 
