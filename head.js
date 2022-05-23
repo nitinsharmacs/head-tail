@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { exit } = require('process');
-const { headMain } = require('./src/headLib.js');
-const { createStdoutMessage } = require('./src/stdoutHandler.js');
+const { headMain } = require('./src/head/headLib.js');
+const { createStdoutMessage } = require('./src/head/stdoutHandler.js');
 
 const main = () => {
   try {
