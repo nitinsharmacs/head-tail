@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { createStdoutMessage } = require('../src/studoutHandler.js');
+const { createStdoutMessage } = require('../src/stdoutHandler.js');
 
 describe('createStdoutMessage', () => {
   it('should prefix with head', () => {

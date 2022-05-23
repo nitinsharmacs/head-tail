@@ -1,6 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { parseArgs } = require('./parseArgs.js');
-const { usage } = require('./studoutHandler.js');
+const { usage } = require('./stdoutHandler.js');
 
 const firstNLines = (lines, count) => {
   return lines.slice(0, count);
