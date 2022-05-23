@@ -1,5 +1,6 @@
 **TODO:**
 
+- [ ] Rename file name `stuoutHandler.js` to `stdoutHandler.js`
 - [ ] Investigate on the output of origial `head` and `head.js`
 
 **MAYBE:**
@@ -16,6 +17,7 @@
 
 **DONE:**
 
+- [x] Handle `Option requires an argument`
 - [x] Handle `head.js -1`
 - [x] Add underscore in every error code
 - [x] stdout message generator

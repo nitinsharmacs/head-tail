@@ -1,6 +1,7 @@
+// optionName(option: String)
 const optionName = (option) => {
-  const [optionName] = option.split('-').reverse();
-  return optionName;
+  const [name] = option.split('-').reverse();
+  return name;
 };
 
 const cantBeCombined = (newOption, prevOptions) => {
@@ -20,6 +21,19 @@ const isNotValidOption = (option) => {
   return !validOptions.includes(optionKey(option));
 };
 
+const assertOptionRequireArg = (option) => {
+  const key = optionKey(option);
+  const optionValue = option[key];
+  if (optionValue === undefined) {
+    throw {
+      code: 'OPTION_REQUIRES_ARG',
+      message: `option requires an argument -- ${optionName(key)}`,
+      showUsage: true,
+      prefixWithHead: true
+    };
+  }
+};
+
 const validateOptionValue = (option) => {
   const optionsRules = {
     '-n': {
@@ -35,6 +49,7 @@ const validateOptionValue = (option) => {
   const key = optionKey(option);
   const optionValue = option[key];
   const rule = optionsRules[key];
+  assertOptionRequireArg(option);
   if (rule.minValue > optionValue || isNaN(optionValue)) {
     throw {
       code: 'ILLEGAL_COUNT',

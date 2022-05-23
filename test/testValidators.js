@@ -76,4 +76,15 @@ describe('validateOptionValue', () => {
       prefixWithHead: true
     });
   });
+
+  it('should throw error if no argument is given to the option', () => {
+    const option = {
+      '-n': undefined
+    };
+    assert.throws(() => validateOptionValue(option), {
+      code: 'OPTION_REQUIRES_ARG',
+      message: 'option requires an argument -- n',
+      prefixWithHead: true
+    });
+  });
 });
