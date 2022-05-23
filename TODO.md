@@ -1,6 +1,5 @@
 **TODO:**
 
-
 **MAYBE:**
 
 - [ ] Consider change contract of firstNLines and pass content as string
@@ -15,6 +14,9 @@
 
 **DONE:**
 
+- [x] Separate `headLib.js` tests to new test files
+  - [x] headMain
+  - [x] headFiles
 - [x] Investigate on the output of origial `head` and `head.js`
 - [x] Rename file name `stuoutHandler.js` to `stdoutHandler.js`
 - [x] Handle `Option requires an argument`
