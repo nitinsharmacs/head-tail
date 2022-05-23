@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { exit } = require('process');
-const { headMain } = require('./src/headLib');
+const { headMain } = require('./src/headLib.js');
 const { createStdoutMessage } = require('./src/stdoutHandler.js');
 
 const main = () => {
@@ -18,5 +18,5 @@ const main = () => {
     exit(1);
   }
 };
-// comment
+
 main();

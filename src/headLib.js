@@ -26,26 +26,24 @@ const noFileMessage = (filename) => {
   return filename + ': ' + 'No such file or directory';
 };
 
-const headFile = (fileReader, filename, options, header) => {
-  try {
-    const content = fileReader(filename, 'utf8');
-    return `${header(filename)}${head(content, options)}`;
-  } catch (error) {
-    return 'head: ' + noFileMessage(filename);
-  }
+const addHeader = (header, heading, text) => {
+  return `${header(heading)}${text}`;
 };
 
 const headFiles = (fileReader, filenames, options, console) => {
   let header = () => '';
   let exitCode = 0;
+  let separator = '';
   if (filenames.length > 1) {
     header = createHeader;
   }
   filenames.forEach(filename => {
     try {
       const content = fileReader(filename, 'utf8');
-      const headedFile = `${header(filename)}${head(content, options)}`;
+      const withHeading = addHeader(header, filename, head(content, options));
+      const headedFile = `${separator}${withHeading}`;
       console.logger(headedFile);
+      separator = '\n';
     } catch (error) {
       exitCode = 1;
       console.errorLogger('head: ' + noFileMessage(filename));

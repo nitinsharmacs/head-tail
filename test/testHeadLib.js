@@ -50,7 +50,7 @@ describe('headFiles', () => {
     const files = ['file.txt', 'file2.txt'];
     const options = { askedForBytes: true, count: 1 };
     const logger = mockLogger(['==> file.txt <==\nh',
-      '==> file2.txt <==\nw']);
+      '\n==> file2.txt <==\nw']);
     const errorLogger = mockLogger([]);
     assert.strictEqual(headFiles(mockedReadFileSync,
       files,
@@ -140,7 +140,7 @@ describe('headMain', () => {
     const args = ['file.txt', 'file2.txt'];
     const logger = mockLogger([
       '==> file.txt <==\nhello',
-      '==> file2.txt <==\nworld']);
+      '\n==> file2.txt <==\nworld']);
     const errorLogger = mockLogger([]);
     assert.strictEqual(
       headMain(mockedReadFileSync,
