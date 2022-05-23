@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Implement `linesStartingAt`
 - [ ] Implement `bytesStartingAt`
 - [ ] Implement tail operator selector, `tailOperator`
 
@@ -13,6 +12,7 @@
 
 **DONE:**
 
+- [x] Implement `linesStartingAt`
 - [x] Implement `tail` function
 - [x] Implement `lastNBytes` function
 - [x] Implement `lastNLines` function
