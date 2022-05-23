@@ -55,13 +55,13 @@ const createArgsIterator = (args) => {
 
 const parseOption = (argsIterator) => {
   const text = argsIterator.currentArg();
-  if (isCombinedOption(text)) {
-    argsIterator.nextArg();
-    return separateCombinedOption(text);
-  }
   if (isNumericOption(text)) {
     argsIterator.nextArg();
     return createOption('-n', numericOptionValue(text));
+  }
+  if (isCombinedOption(text)) {
+    argsIterator.nextArg();
+    return separateCombinedOption(text);
   }
   const option = createOption(text, argsIterator.nextArg());
   argsIterator.nextArg();
