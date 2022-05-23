@@ -1,7 +1,7 @@
 **TODO:**
 
-- [ ] Implement `lastNLines` function
 - [ ] Implement `lastNBytes` function
+- [ ] Implement `tail` function
 
 
 **MAYBE:**
@@ -13,6 +13,7 @@
 
 **DONE:**
 
+- [x] Implement `lastNLines` function
 - [x] Establish the contract for `tail`
 - [x] ~~Consider change contract of firstNLines and pass content as string~~
 - [x] ~~Change the test description of firstNLines, change `get` to `give`~~

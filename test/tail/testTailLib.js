@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { lastNLines } = require('../../src/tail/tailLib.js');
+const { lastNLines, lastNBytes } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
   it('should give last 1 line', () => {
@@ -22,5 +22,23 @@ describe('lastNLines', () => {
     assert.deepStrictEqual(lastNLines(
       ['line1', 'line2'], 0), []
     );
+  });
+});
+
+describe('lastNBytes', () => {
+  it('should give last 1 byte', () => {
+    assert.strictEqual(lastNBytes('hello', 1), 'o');
+  });
+
+  it('should give last 2 bytes', () => {
+    assert.strictEqual(lastNBytes('hello', 2), 'lo');
+  });
+
+  it('should give last 0 byte', () => {
+    assert.strictEqual(lastNBytes('hello', 0), '');
+  });
+
+  it('should give whole content if bytes counts exceed', () => {
+    assert.strictEqual(lastNBytes('hello', 6), 'hello');
   });
 });
