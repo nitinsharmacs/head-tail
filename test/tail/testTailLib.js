@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { lastNLines,
   lastNBytes,
+  linesStartingAt,
   tail } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
@@ -58,5 +59,25 @@ describe('tail', () => {
     assert.strictEqual(tail(content, {
       askedForBytes: true, count: 1
     }), '2');
+  });
+});
+
+describe('linesStartingAt', () => {
+  it('should give lines from line 1', () => {
+    const lines = ['line1', 'line2'];
+    const expected = ['line1', 'line2'];
+    assert.deepStrictEqual(linesStartingAt(lines, 1), expected);
+  });
+
+  it('should give lines from line 2', () => {
+    const lines = ['line1', 'line2'];
+    const expected = ['line2'];
+    assert.deepStrictEqual(linesStartingAt(lines, 2), expected);
+  });
+
+  it('should give all lines if count is 0', () => {
+    const lines = ['line1', 'line2'];
+    const expected = ['line1', 'line2'];
+    assert.deepStrictEqual(linesStartingAt(lines, 0), expected);
   });
 });

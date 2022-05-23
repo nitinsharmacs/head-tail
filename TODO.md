@@ -2,7 +2,7 @@
 
 - [ ] Implement `linesStartingAt`
 - [ ] Implement `bytesStartingAt`
-
+- [ ] Implement tail operator selector, `tailOperator`
 
 **MAYBE:**
 
