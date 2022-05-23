@@ -1,7 +1,7 @@
 **TODO:**
 
-- [ ] Implement `lastNBytes` function
-- [ ] Implement `tail` function
+- [ ] Implement `linesStartingAt`
+- [ ] Implement `bytesStartingAt`
 
 
 **MAYBE:**
@@ -13,6 +13,8 @@
 
 **DONE:**
 
+- [x] Implement `tail` function
+- [x] Implement `lastNBytes` function
 - [x] Implement `lastNLines` function
 - [x] Establish the contract for `tail`
 - [x] ~~Consider change contract of firstNLines and pass content as string~~
