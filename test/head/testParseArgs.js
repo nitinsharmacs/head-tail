@@ -69,10 +69,32 @@ describe('parseOption', () => {
     });
   });
 
+  it('should parse non-combined option with signed option value', () => {
+    let argsIterator = createArgsIterator(['-n', '+4']);
+    assert.deepStrictEqual(parseOption(argsIterator), {
+      '-n': '+4',
+    });
+    argsIterator = createArgsIterator(['-n', '-4']);
+    assert.deepStrictEqual(parseOption(argsIterator), {
+      '-n': '-4',
+    });
+  });
+
   it('should parse combined option', () => {
     const argsIterator = createArgsIterator(['-n4']);
     assert.deepStrictEqual(parseOption(argsIterator), {
       '-n': '4',
+    });
+  });
+
+  it('should parse combined option with signed option value', () => {
+    let argsIterator = createArgsIterator(['-n+4']);
+    assert.deepStrictEqual(parseOption(argsIterator), {
+      '-n': '+4',
+    });
+    argsIterator = createArgsIterator(['-n-4']);
+    assert.deepStrictEqual(parseOption(argsIterator), {
+      '-n': '-4',
     });
   });
 });
