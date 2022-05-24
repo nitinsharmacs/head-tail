@@ -15,6 +15,9 @@ const { parseOption,
 describe('isCombinedOption', () => {
   it('should check if option is of combined type', () => {
     assert.ok(isCombinedOption('-n1'));
+    assert.ok(isCombinedOption('-n-1'));
+    assert.ok(isCombinedOption('-n+1'));
+    assert.ok(isCombinedOption('-ncsd'));
   });
 
   it('should check if option is not of combined type', () => {

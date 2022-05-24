@@ -1,4 +1,8 @@
-const isCombinedOption = (text) => /^-[a-z0-9]{2,}$/.test(text);
+const isCombinedOption = (text) => {
+  const rule = /^-[a-z0-9]{2,}|-[a-z]+[-+][0-9]+$/;
+  return rule.test(text);
+};
+
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
 const createOption = (name, value) => {

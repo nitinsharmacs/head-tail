@@ -15,6 +15,7 @@
 
 **DONE:**
 
+- [x] Make parser to handle option value with signs
 - [x] Pass validator to the parseArgs
 - [x] Make it working for -n with option value without sign (eg, 1, 2, etc)
 - [x] Make it working for -c with option value without sign (eg, 1, 2, etc)
