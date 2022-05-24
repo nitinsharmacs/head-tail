@@ -1,10 +1,9 @@
 **TODO:**
 
-- [ ] Implement tail operator selector, `tailOperator`
-- [ ] Change the contract of `linesStartingAt` and `lastNLines`
 
 **MAYBE:**
 
+- [ ] Change the contract of `linesStartingAt` and `lastNLines`
 - [ ] Move common libraries outside of head
 - [ ] Change passing multiple array to mockers to passing array of objects
 
@@ -13,6 +12,7 @@
 
 **DONE:**
 
+- [x] ~~Implement tail operator selector, `tailOperator`~~
 - [x] Implement `bytesFrom`
 - [x] Implement `linesFrom`
 - [x] Implement `bytesStartingAt`

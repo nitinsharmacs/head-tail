@@ -34,19 +34,13 @@ const bytesFrom = (content, { count, relativeToBeginning }) => {
   return lastNBytes(content, count);
 };
 
-const tail = (content, { askedForBytes, count }) => {
-  if (askedForBytes) {
-    return lastNBytes(content, count);
+const tail = (content, options) => {
+  if (options.askedForBytes) {
+    return bytesFrom(content, options);
   }
-  const lines = splitLines(content);
-  return joinLines(lastNBytes(lines, count));
+  return linesFrom(content, options);
 };
 
-// {
-//   askedForBytes,
-//   relativeToBeginning,
-//   count
-// }
 exports.lastNLines = lastNLines;
 exports.linesStartingAt = linesStartingAt;
 exports.lastNBytes = lastNBytes;

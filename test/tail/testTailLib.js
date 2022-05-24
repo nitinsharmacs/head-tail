@@ -49,22 +49,6 @@ describe('lastNBytes', () => {
   });
 });
 
-describe('tail', () => {
-  it('should give last 1 line', () => {
-    const content = 'line1\nline2';
-    assert.strictEqual(tail(content, {
-      askedForBytes: false, count: 1
-    }), 'line2');
-  });
-
-  it('should give last 1 byte', () => {
-    const content = 'line1\nline2';
-    assert.strictEqual(tail(content, {
-      askedForBytes: true, count: 1
-    }), '2');
-  });
-});
-
 describe('linesStartingAt', () => {
   it('should give lines from line 1', () => {
     const lines = ['line1', 'line2'];
@@ -157,5 +141,34 @@ describe('bytesFrom', () => {
       relativeToBeginning: true
     };
     assert.strictEqual(bytesFrom(content, options), expected);
+  });
+});
+
+describe('tail', () => {
+  it('should give last 1 line', () => {
+    const content = 'line1\nline2';
+    const expected = 'line2';
+    const options = {
+      askedForBytes: false, relativeToBeginning: false, count: 1
+    };
+    assert.strictEqual(tail(content, options), expected);
+  });
+
+  it('should give last 1 byte', () => {
+    const content = 'line1\nline2';
+    const expected = '2';
+    const options = {
+      askedForBytes: true, relativeToBeginning: false, count: 1
+    };
+    assert.strictEqual(tail(content, options), expected);
+  });
+
+  it('should give lines from line 1', () => {
+    const content = 'line1\nline2';
+    const expected = 'line1\nline2';
+    const options = {
+      askedForBytes: false, relativeToBeginning: true, count: 1
+    };
+    assert.strictEqual(tail(content, options), expected);
   });
 });
