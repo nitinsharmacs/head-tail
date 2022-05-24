@@ -17,6 +17,20 @@ describe('tailMain', () => {
     );
   });
 
+  it('should get lines from 1 line [Non combined option]', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello\nworld'],
+      'utf8');
+    const args = ['-n', '+1', 'file.txt'];
+    const logger = mockLogger(['hello\nworld']);
+    const errorLogger = mockLogger([]);
+    assert.strictEqual(
+      tailMain(mockedReadFileSync,
+        args,
+        { logger, errorLogger }), 0
+    );
+  });
+
   it('should get last 1 byte [Non combined option]', () => {
     const mockedReadFileSync = mockReadFileSync(['file.txt'],
       ['hello'],

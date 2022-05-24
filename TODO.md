@@ -1,6 +1,5 @@
 **TODO:**
 
-- [ ] Make tail validator
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`
@@ -18,6 +17,8 @@
 
 **DONE:**
 
+- [x] Implement `tailArgsParser`
+- [x] Make tail validator
 - [x] Implement tail options compiler
 - [x] parseArgs should only return parsed arguments. It should not compile them
 - [x] Put parseArgs.js to src
