@@ -2,6 +2,7 @@
 
 - [ ] Implement tailMain
 - [ ] Make mocker resetable
+- [ ] Handle `head.js -n1 -c1 -v1 file`
 
 **MAYBE:**
 
@@ -15,6 +16,9 @@
 
 **DONE:**
 
+- [x] parseArgs should only return parsed arguments. It should not compile them
+- [x] Put parseArgs.js to src
+- [x] Create headParseArgs
 - [x] Make parser to handle option value with signs
 - [x] Pass validator to the parseArgs
 - [x] Make it working for -n with option value without sign (eg, 1, 2, etc)

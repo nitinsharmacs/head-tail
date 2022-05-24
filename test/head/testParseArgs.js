@@ -4,13 +4,12 @@ const { validateOption } = require('../../src/head/validators.js');
 const { parseOption,
   parseOptions,
   parseArgs,
-  compileOption,
   separateCombinedOption,
   isCombinedOption,
   isNonCombinedOption,
   createOption,
   isNotOption,
-  createArgsIterator } = require('../../src/head/parseArgs.js');
+  createArgsIterator } = require('../../src/parseArgs.js');
 
 describe('isCombinedOption', () => {
   it('should check if option is of combined type', () => {
@@ -163,8 +162,7 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2'],
       options: {
-        askedForBytes: false,
-        count: 1
+        '-n': '1'
       }
     });
   });
@@ -174,8 +172,7 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2'],
       options: {
-        askedForBytes: false,
-        count: 1
+        '-n': '1'
       }
     });
   });
@@ -185,27 +182,8 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2', '-n', '1', '-c1'],
       options: {
-        askedForBytes: false,
-        count: 10
+
       }
-    });
-  });
-});
-
-describe('compileOption', () => {
-  it('should compile line count option', () => {
-    const option = { '-n': 1 };
-    assert.deepStrictEqual(compileOption(option), {
-      askedForBytes: false,
-      count: 1
-    });
-  });
-
-  it('should compile byte count option', () => {
-    const option = { '-c': 2 };
-    assert.deepStrictEqual(compileOption(option), {
-      askedForBytes: true,
-      count: 2
     });
   });
 });

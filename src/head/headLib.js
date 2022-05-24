@@ -1,5 +1,5 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
-const { parseArgs } = require('./parseArgs.js');
+const { headArgsParser } = require('./headArgsParser.js');
 const { usage } = require('./stdoutHandler.js');
 const { validateOption } = require('./validators.js');
 
@@ -69,7 +69,7 @@ const headMain = (fileReader, args, console) => {
     console.logger(usage());
     return exitCode;
   }
-  const { filenames, options } = parseArgs(args, validateOption);
+  const { filenames, options } = headArgsParser(args, validateOption);
   assertFile(filenames);
   return headFiles(fileReader, filenames, options, console);
 };
