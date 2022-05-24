@@ -27,6 +27,13 @@ const linesFrom = (content, { count, relativeToBeginning }) => {
   return joinLines(lastNLines(lines, count));
 };
 
+const bytesFrom = (content, { count, relativeToBeginning }) => {
+  if (relativeToBeginning) {
+    return bytesStartingAt(content, count);
+  }
+  return lastNBytes(content, count);
+};
+
 const tail = (content, { askedForBytes, count }) => {
   if (askedForBytes) {
     return lastNBytes(content, count);
@@ -45,4 +52,5 @@ exports.linesStartingAt = linesStartingAt;
 exports.lastNBytes = lastNBytes;
 exports.bytesStartingAt = bytesStartingAt;
 exports.linesFrom = linesFrom;
+exports.bytesFrom = bytesFrom;
 exports.tail = tail;

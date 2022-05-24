@@ -4,6 +4,7 @@ const { lastNLines,
   linesStartingAt,
   bytesStartingAt,
   linesFrom,
+  bytesFrom,
   tail } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
@@ -134,5 +135,27 @@ describe('linesFrom', () => {
       relativeToBeginning: true
     };
     assert.strictEqual(linesFrom(content, options), expected);
+  });
+});
+
+describe('bytesFrom', () => {
+  it('should give last 1 byte', () => {
+    const content = 'line1\nline2';
+    const expected = '2';
+    const options = {
+      count: 1,
+      relativeToBeginning: false
+    };
+    assert.strictEqual(bytesFrom(content, options), expected);
+  });
+
+  it('should give bytes from byte 1', () => {
+    const content = 'line1\nline2';
+    const expected = 'line1\nline2';
+    const options = {
+      count: 1,
+      relativeToBeginning: true
+    };
+    assert.strictEqual(bytesFrom(content, options), expected);
   });
 });
