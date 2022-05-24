@@ -17,6 +17,7 @@
 
 **DONE:**
 
+- [x] Implement stderr messages for tail
 - [x] Enable cli arguments to tail
 - [x] Implement `tailArgsParser`
 - [x] Make tail validator

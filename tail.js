@@ -1,10 +1,11 @@
 const fs = require('fs');
 const { exit } = require('process');
 const { tailMain } = require('./src/tail/tailMain.js');
+const { createStderrMessage } = require('./src/tail/stderrHandler.js');
 
 const main = () => {
+  const { log: logger, error: errorLogger } = console;
   try {
-    const { log: logger, error: errorLogger } = console;
     exit(
       tailMain(
         fs.readFileSync,
@@ -13,7 +14,7 @@ const main = () => {
       )
     );
   } catch (error) {
-    console.error('tail:', error.message);
+    errorLogger(createStderrMessage(error));
     exit(1);
   }
 };
