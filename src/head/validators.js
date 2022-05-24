@@ -50,7 +50,7 @@ const validateOptionValue = (option) => {
   const optionValue = option[key];
   const rule = optionsRules[key];
   assertOptionRequireArg(option);
-  if (rule.minValue > optionValue || isNaN(optionValue)) {
+  if (isNaN(+optionValue) || rule.minValue > +optionValue) {
     throw {
       code: 'ILLEGAL_COUNT',
       message: 'illegal ' + rule.name + ' count -- ' + optionValue,
