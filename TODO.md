@@ -1,11 +1,13 @@
 **TODO:**
 
+- [ ] Make tail validator
+- [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
-- [ ] Make mocker resetable
 - [ ] Handle `head.js -n1 -c1 -v1 file`
 
 **MAYBE:**
 
+- [ ] Make mocker resetable
 - [ ] Change the contract of `linesStartingAt` and `lastNLines`
 - [ ] Move common libraries outside of head
 - [ ] Change passing multiple array to mockers to passing array of objects
@@ -16,6 +18,7 @@
 
 **DONE:**
 
+- [x] Implement tail options compiler
 - [x] parseArgs should only return parsed arguments. It should not compile them
 - [x] Put parseArgs.js to src
 - [x] Create headParseArgs
