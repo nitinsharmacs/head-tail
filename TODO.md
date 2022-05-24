@@ -1,5 +1,6 @@
 **TODO:**
 
+- [ ] Implement `bytesFrom`
 - [ ] Implement tail operator selector, `tailOperator`
 - [ ] Change the contract of `linesStartingAt` and `lastNLines`
 
@@ -13,6 +14,7 @@
 
 **DONE:**
 
+- [x] Implement `linesFrom`
 - [x] Implement `bytesStartingAt`
 - [x] Implement `linesStartingAt`
 - [x] Implement `tail` function

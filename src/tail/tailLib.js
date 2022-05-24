@@ -19,6 +19,14 @@ const bytesStartingAt = (content, count) => {
   return content.slice(startAt);
 };
 
+const linesFrom = (content, { count, relativeToBeginning }) => {
+  const lines = splitLines(content);
+  if (relativeToBeginning) {
+    return joinLines(linesStartingAt(lines, count));
+  }
+  return joinLines(lastNLines(lines, count));
+};
+
 const tail = (content, { askedForBytes, count }) => {
   if (askedForBytes) {
     return lastNBytes(content, count);
@@ -36,4 +44,5 @@ exports.lastNLines = lastNLines;
 exports.linesStartingAt = linesStartingAt;
 exports.lastNBytes = lastNBytes;
 exports.bytesStartingAt = bytesStartingAt;
+exports.linesFrom = linesFrom;
 exports.tail = tail;
