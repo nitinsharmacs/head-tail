@@ -1,5 +1,6 @@
 **TODO:**
 
+- [ ] Implement `--help`
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`

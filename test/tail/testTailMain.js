@@ -100,4 +100,13 @@ describe('tailMain', () => {
         { logger, errorLogger }), 0
     );
   });
+
+  it('should give usage for --help', () => {
+    const mockedReadFileSync = mockReadFileSync([],
+      [],
+      'utf8');
+    const logger = mockLogger(['usage: tail [-c # | -n #] [file ...]']);
+    const errorLogger = mockLogger([]);
+    tailMain(mockedReadFileSync, ['--help'], { logger, errorLogger });
+  });
 });
