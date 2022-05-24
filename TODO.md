@@ -17,6 +17,7 @@
 
 **DONE:**
 
+- [x] Enable cli arguments to tail
 - [x] Implement `tailArgsParser`
 - [x] Make tail validator
 - [x] Implement tail options compiler

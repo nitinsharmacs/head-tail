@@ -22,6 +22,15 @@ describe('compileOptions', () => {
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
+    options = {
+      '-n': '0'
+    };
+    compiled = {
+      askedForBytes: false,
+      relativeToBeginning: false,
+      count: 0
+    };
+    assert.deepStrictEqual(compileOptions(options), compiled);
   });
 
   it('should compile byte count from last', () => {

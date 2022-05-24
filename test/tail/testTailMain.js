@@ -72,4 +72,32 @@ describe('tailMain', () => {
         { logger, errorLogger }), 0
     );
   });
+
+  it('should give nothing for 0 lines count', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello'],
+      'utf8');
+    const args = ['-n0', 'file.txt'];
+    const logger = mockLogger(['']);
+    const errorLogger = mockLogger([]);
+    assert.strictEqual(
+      tailMain(mockedReadFileSync,
+        args,
+        { logger, errorLogger }), 0
+    );
+  });
+
+  it('should give nothing for 0 bytes count', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+      ['hello'],
+      'utf8');
+    const args = ['-c0', 'file.txt'];
+    const logger = mockLogger(['']);
+    const errorLogger = mockLogger([]);
+    assert.strictEqual(
+      tailMain(mockedReadFileSync,
+        args,
+        { logger, errorLogger }), 0
+    );
+  });
 });

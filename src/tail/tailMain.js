@@ -7,6 +7,7 @@ const tailMain = (fileReader, args, console) => {
   let exitCode = 0;
   try {
     const content = fileReader(filenames[0], 'utf8');
+    // console.logger(content);
     console.logger(tail(content, options));
   } catch (error) {
     exitCode = 1;
