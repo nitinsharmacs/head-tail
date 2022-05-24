@@ -5,13 +5,18 @@ const lastNLines = (lines, count) => {
 };
 
 const linesStartingAt = (lines, count) => {
-  const startAt = count - 1;
-  return count === 0 ? lines : lines.slice(startAt);
+  const startAt = count === 0 ? count : count - 1;
+  return lines.slice(startAt);
 };
 
 const lastNBytes = (content, count) => {
   return count > content.length ?
     content : content.slice(content.length - count);
+};
+
+const bytesStartingAt = (content, count) => {
+  const startAt = count === 0 ? count : count - 1;
+  return content.slice(startAt);
 };
 
 const tail = (content, { askedForBytes, count }) => {
@@ -30,4 +35,5 @@ const tail = (content, { askedForBytes, count }) => {
 exports.lastNLines = lastNLines;
 exports.linesStartingAt = linesStartingAt;
 exports.lastNBytes = lastNBytes;
+exports.bytesStartingAt = bytesStartingAt;
 exports.tail = tail;

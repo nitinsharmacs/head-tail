@@ -2,6 +2,7 @@ const assert = require('assert');
 const { lastNLines,
   lastNBytes,
   linesStartingAt,
+  bytesStartingAt,
   tail } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
@@ -79,5 +80,37 @@ describe('linesStartingAt', () => {
     const lines = ['line1', 'line2'];
     const expected = ['line1', 'line2'];
     assert.deepStrictEqual(linesStartingAt(lines, 0), expected);
+  });
+
+  it('should give nothing if count exceeds', () => {
+    const lines = ['line1', 'line2'];
+    const expected = [];
+    assert.deepStrictEqual(linesStartingAt(lines, 3), expected);
+  });
+});
+
+describe('bytesStartingAt', () => {
+  it('should give bytes from position 1', () => {
+    const content = 'hello';
+    const expected = 'hello';
+    assert.deepStrictEqual(bytesStartingAt(content, 1), expected);
+  });
+
+  it('should give bytes from position 2', () => {
+    const content = 'hello';
+    const expected = 'ello';
+    assert.deepStrictEqual(bytesStartingAt(content, 2), expected);
+  });
+
+  it('should give all bytes if count is 0', () => {
+    const content = 'hello';
+    const expected = 'hello';
+    assert.deepStrictEqual(bytesStartingAt(content, 0), expected);
+  });
+
+  it('should give nothing if position exceeds the content size', () => {
+    const content = 'hello';
+    const expected = '';
+    assert.deepStrictEqual(bytesStartingAt(content, 8), expected);
   });
 });

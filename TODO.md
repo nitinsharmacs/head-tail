@@ -1,17 +1,19 @@
 **TODO:**
 
-- [ ] Implement `bytesStartingAt`
 - [ ] Implement tail operator selector, `tailOperator`
+- [ ] Change the contract of `linesStartingAt` and `lastNLines`
 
 **MAYBE:**
 
 - [ ] Move common libraries outside of head
+- [ ] Change passing multiple array to mockers to passing array of objects
 
 **PROBLEMS:**
 
 
 **DONE:**
 
+- [x] Implement `bytesStartingAt`
 - [x] Implement `linesStartingAt`
 - [x] Implement `tail` function
 - [x] Implement `lastNBytes` function
