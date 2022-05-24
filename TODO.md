@@ -1,17 +1,21 @@
 **TODO:**
 
-
+- [ ] Implement tailMain
+- [ ] Make mocker resetable
 **MAYBE:**
 
 - [ ] Change the contract of `linesStartingAt` and `lastNLines`
 - [ ] Move common libraries outside of head
 - [ ] Change passing multiple array to mockers to passing array of objects
+- [ ] Move `mockers.js` to test from src
 
 **PROBLEMS:**
 
 
 **DONE:**
 
+- [x] Make it working for -n with option value without sign (eg, 1, 2, etc)
+- [x] Make it working for -c with option value without sign (eg, 1, 2, etc)
 - [x] ~~Implement tail operator selector, `tailOperator`~~
 - [x] Implement `bytesFrom`
 - [x] Implement `linesFrom`

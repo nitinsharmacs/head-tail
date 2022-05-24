@@ -171,4 +171,13 @@ describe('tail', () => {
     };
     assert.strictEqual(tail(content, options), expected);
   });
+
+  it('should give bytes from byte 2', () => {
+    const content = 'line1\nline2';
+    const expected = 'ine1\nline2';
+    const options = {
+      askedForBytes: true, relativeToBeginning: true, count: 2
+    };
+    assert.strictEqual(tail(content, options), expected);
+  });
 });
