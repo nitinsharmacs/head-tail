@@ -2,7 +2,7 @@
 
 - [ ] Implement tailMain
 - [ ] Make mocker resetable
-- [ ] Pass validator to the parseArgs
+
 **MAYBE:**
 
 - [ ] Change the contract of `linesStartingAt` and `lastNLines`
@@ -15,6 +15,7 @@
 
 **DONE:**
 
+- [x] Pass validator to the parseArgs
 - [x] Make it working for -n with option value without sign (eg, 1, 2, etc)
 - [x] Make it working for -c with option value without sign (eg, 1, 2, etc)
 - [x] ~~Implement tail operator selector, `tailOperator`~~
