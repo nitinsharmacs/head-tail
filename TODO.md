@@ -1,6 +1,7 @@
 **TODO:**
 
-- [ ] Implement `--help`
+- [ ] Handle `tail.js +2 `
+- [ ] Handle `tail.js -n1 -n2`
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`
@@ -18,6 +19,7 @@
 
 **DONE:**
 
+- [x] Implement `--help`
 - [x] Make it working for multiple files
 - [x] Implement stderr messages for tail
 - [x] Enable cli arguments to tail

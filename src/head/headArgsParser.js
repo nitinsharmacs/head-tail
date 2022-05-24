@@ -1,5 +1,5 @@
 const { validateOption } = require('./validators.js');
-const { parseArgs } = require('../parseArgs.js');
+const { parseArgs } = require('./parseArgs.js');
 
 const compileOption = (options) => {
   if (options['-c']) {

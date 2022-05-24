@@ -1,5 +1,5 @@
 const { validateOption } = require('./validators.js');
-const { parseArgs } = require('../parseArgs.js');
+const { parseArgs } = require('./parseArgs.js');
 
 const hasKey = (obj, key) => {
   const keys = Object.keys(obj);
