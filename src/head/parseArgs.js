@@ -1,5 +1,3 @@
-const { validateOption } = require('./validators.js');
-
 const isCombinedOption = (text) => /^-[a-z0-9]{2,}$/.test(text);
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
@@ -68,7 +66,7 @@ const parseOption = (argsIterator) => {
   return option;
 };
 
-const parseOptions = (argsIterator) => {
+const parseOptions = (argsIterator, validator) => {
   let options = {};
   while (argsIterator.hasMoreArgs()) {
     const text = argsIterator.currentArg();
@@ -77,7 +75,7 @@ const parseOptions = (argsIterator) => {
     }
     options = {
       ...options,
-      ...validateOption(parseOption(argsIterator), options)
+      ...validator(parseOption(argsIterator), options)
     };
   }
   return options;
@@ -100,13 +98,13 @@ const isEmpty = (obj) => {
   return Object.keys(obj).length === 0;
 };
 
-const parseArgs = (args) => {
+const parseArgs = (args, validator) => {
   const defaults = {
     askedForBytes: false,
     count: 10
   };
   const argsIterator = createArgsIterator(args);
-  const options = parseOptions(argsIterator);
+  const options = parseOptions(argsIterator, validator);
   return {
     filenames: argsIterator.restArgs(),
     options: isEmpty(options) ? defaults : compileOption(options)

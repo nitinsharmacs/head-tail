@@ -1,4 +1,6 @@
 const assert = require('assert');
+const { validateOption } = require('../../src/head/validators.js');
+
 const { parseOption,
   parseOptions,
   parseArgs,
@@ -75,23 +77,23 @@ describe('parseOption', () => {
 describe('parseOptions', () => {
   it('should parse options separated by their values', () => {
     let argsIterator = createArgsIterator(['-n', '4', 'filename']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {
       '-n': '4',
     });
     argsIterator = createArgsIterator(['-c', '3', 'filename']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {
       '-c': '3',
     });
   });
 
   it('should not parse options coming after filename', () => {
     const argsIterator = createArgsIterator(['filename', '-c', '3']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {});
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {});
   });
 
   it('should parse combined options', () => {
     const argsIterator = createArgsIterator(['-c2', 'filename']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {
       '-c': '2'
     });
   });
@@ -102,13 +104,13 @@ describe('parseOptions', () => {
       '-n',
       '1',
       '-c1']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {
     });
   });
 
   it('should throw error for invalid option', () => {
     const argsIterator = createArgsIterator(['-l1', '-c', '2']);
-    assert.throws(() => parseOptions(argsIterator), {
+    assert.throws(() => parseOptions(argsIterator, validateOption), {
       code: 'ILLEGAL_OPTION',
       message: 'illegal option -- l'
     });
@@ -116,7 +118,7 @@ describe('parseOptions', () => {
 
   it('should throw error for invalid option value', () => {
     const argsIterator = createArgsIterator(['-csd']);
-    assert.throws(() => parseOptions(argsIterator), {
+    assert.throws(() => parseOptions(argsIterator, validateOption), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal byte count -- sd'
     });
@@ -124,7 +126,7 @@ describe('parseOptions', () => {
 
   it('should parse numeric option', () => {
     const argsIterator = createArgsIterator(['-1']);
-    assert.deepStrictEqual(parseOptions(argsIterator), {
+    assert.deepStrictEqual(parseOptions(argsIterator, validateOption), {
       '-n': '1'
     });
   });
@@ -133,7 +135,7 @@ describe('parseOptions', () => {
 describe('parseArgs', () => {
   it('should parse combined options and filenames', () => {
     const args = ['-n1', 'filename', 'filename2'];
-    assert.deepStrictEqual(parseArgs(args), {
+    assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2'],
       options: {
         askedForBytes: false,
@@ -144,7 +146,7 @@ describe('parseArgs', () => {
 
   it('should parse separated options and filenames', () => {
     const args = ['-n', '1', 'filename', 'filename2'];
-    assert.deepStrictEqual(parseArgs(args), {
+    assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2'],
       options: {
         askedForBytes: false,
@@ -155,7 +157,7 @@ describe('parseArgs', () => {
 
   it('should parse when filenames comes at first', () => {
     const args = ['filename', 'filename2', '-n', '1', '-c1'];
-    assert.deepStrictEqual(parseArgs(args), {
+    assert.deepStrictEqual(parseArgs(args, validateOption), {
       filenames: ['filename', 'filename2', '-n', '1', '-c1'],
       options: {
         askedForBytes: false,

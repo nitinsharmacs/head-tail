@@ -1,4 +1,5 @@
 const assert = require('assert');
+
 const { head,
   firstNLines,
   nBytesFrom,

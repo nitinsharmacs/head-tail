@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { validateOption } = require('../../src/head/validators.js');
 const { headMain } = require('../../src/head/headLib.js');
 const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
 
@@ -13,7 +14,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -27,7 +28,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -42,7 +43,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 1
+        { logger, errorLogger }, validateOption), 1
     );
   });
 
@@ -59,7 +60,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -75,7 +76,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 1
+        { logger, errorLogger }, validateOption), 1
     );
   });
 
@@ -88,7 +89,7 @@ describe('headMain', () => {
     const errorLogger = mockLogger([]);
     assert.throws(() => headMain(mockedReadFileSync,
       args,
-      { logger, errorLogger }), {
+      { logger, errorLogger }, validateOption), {
       code: 'NO_FILE_PROVIDED',
       message: 'usage: head [-n lines | -c bytes] [file ...]'
     });

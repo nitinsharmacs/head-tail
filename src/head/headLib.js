@@ -61,14 +61,14 @@ const assertFile = (files) => {
   }
 };
 
-const headMain = (fileReader, args, console) => {
+const headMain = (fileReader, args, console, validator) => {
   const exitCode = 0;
   const [firstArg] = args;
   if (firstArg === '--help') {
     console.logger(usage());
     return exitCode;
   }
-  const { filenames, options } = parseArgs(args);
+  const { filenames, options } = parseArgs(args, validator);
   assertFile(filenames);
   return headFiles(fileReader, filenames, options, console);
 };

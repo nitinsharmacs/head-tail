@@ -2,6 +2,7 @@
 
 - [ ] Implement tailMain
 - [ ] Make mocker resetable
+- [ ] Pass validator to the parseArgs
 **MAYBE:**
 
 - [ ] Change the contract of `linesStartingAt` and `lastNLines`
