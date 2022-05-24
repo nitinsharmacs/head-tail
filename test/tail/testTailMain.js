@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { validateOption } = require('../../src/head/validators.js');
 const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
 const { tailMain } = require('../../src/tail/tailMain.js');
 
@@ -13,7 +14,7 @@ describe('tailMain', () => {
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -27,7 +28,7 @@ describe('tailMain', () => {
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -41,7 +42,7 @@ describe('tailMain', () => {
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 
@@ -55,7 +56,7 @@ describe('tailMain', () => {
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
-        { logger, errorLogger }), 0
+        { logger, errorLogger }, validateOption), 0
     );
   });
 });

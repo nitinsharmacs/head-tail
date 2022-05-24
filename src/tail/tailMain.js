@@ -1,8 +1,8 @@
 const { tail } = require('./tailLib.js');
 const { parseArgs } = require('../head/parseArgs.js');
 
-const tailMain = (fileReader, args, console) => {
-  const { filenames, options } = parseArgs(args);
+const tailMain = (fileReader, args, console, validator) => {
+  const { filenames, options } = parseArgs(args, validator);
   let exitCode = 0;
   try {
     const content = fileReader(filenames[0], 'utf8');
