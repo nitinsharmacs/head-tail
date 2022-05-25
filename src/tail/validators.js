@@ -11,6 +11,11 @@ const cantBeCombined = (newOption, prevOptions) => {
   return differentKey !== undefined;
 };
 
+const hasKey = (obj, key) => {
+  const keys = Object.keys(obj);
+  return keys.includes(key);
+};
+
 const optionKey = (option) => {
   const [key] = Object.keys(option);
   return key;
@@ -30,6 +35,18 @@ const assertOptionRequireArg = (option) => {
       message: `option requires an argument -- ${optionName(key)}`,
       showUsage: true,
       prefix: true
+    };
+  }
+};
+
+const assertOptionRepition = (newOption, prevOptions) => {
+  const newOptionName = optionKey(newOption);
+  if (hasKey(prevOptions, newOptionName)) {
+    throw {
+      code: 'REPEATING_OPTION',
+      message: '',
+      prefix: false,
+      showUsage: true
     };
   }
 };
@@ -56,7 +73,7 @@ const validateOption = (newOptions, prevOptions) => {
       prefix: true
     };
   }
-
+  assertOptionRepition(newOptions, prevOptions);
   validateOptionValue(newOptions);
 
   if (cantBeCombined(newOptions, prevOptions)) {

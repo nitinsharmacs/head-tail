@@ -35,6 +35,17 @@ describe('validateOption', () => {
       prefix: true
     });
   });
+
+  it('should throw error for repeating options', () => {
+    const newOption = { '-n': '2' };
+    const prevOptions = { '-n': '1' };
+    assert.throws(() => validateOption(newOption, prevOptions), {
+      code: 'REPEATING_OPTION',
+      message: '',
+      prefix: false,
+      showUsage: true
+    });
+  });
 });
 
 describe('validateOptionValue', () => {

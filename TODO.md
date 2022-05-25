@@ -1,10 +1,9 @@
 **TODO:**
 
-- [ ] Handle `tail.js +2 `
-- [ ] Handle `tail.js -n1 -n2`
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`
+- [ ] Work on idea of Chained parser
 
 **MAYBE:**
 
@@ -19,6 +18,9 @@
 
 **DONE:**
 
+- [x] Handle `tail.js -n1 -n2`
+  - [x] Add validation for repeating args
+- [x] Handle `tail.js +2 `
 - [x] Tests for error throw in tailArgs and headArgs
 - [x] Tests for createParser  
   - [x] Tests for optionParsers
