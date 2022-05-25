@@ -10,43 +10,62 @@ const isRelativeToBeginning = (optionValue) => {
   return optionValue.startsWith('+');
 };
 
+const compileCOption = (compiledOptions, options) => {
+  const optionValue = options['-c'];
+  return {
+    ...compiledOptions,
+    askedForBytes: true,
+    relativeToBeginning: isRelativeToBeginning(optionValue),
+    supressHeadings: hasKey(options, '-q'),
+    count: Math.abs(+options['-c'])
+  };
+};
+
+const compileNOption = (compiledOptions, options) => {
+  const optionValue = options['-n'];
+  return {
+    ...compiledOptions,
+    askedForBytes: false,
+    relativeToBeginning: isRelativeToBeginning(optionValue),
+    supressHeadings: hasKey(options, '-q'),
+    count: Math.abs(+options['-n'])
+  };
+};
+
+const compileQOption = (compiledOptions) => {
+  return {
+    ...compiledOptions,
+    supressHeadings: true
+  };
+};
+
 const compileOptions = (options) => {
-  const defaults = {
+  let compiledOptions = {
     askedForBytes: false,
     relativeToBeginning: false,
     supressHeadings: false,
     count: 10
   };
-
-  if (hasKey(options, '-c')) {
-    const optionValue = options['-c'];
-    return {
-      askedForBytes: true,
-      relativeToBeginning: isRelativeToBeginning(optionValue),
-      supressHeadings: hasKey(options, '-q'),
-      count: Math.abs(+options['-c'])
-    };
+  const availableOptions = [
+    {
+      name: '-c',
+      compiler: compileCOption
+    },
+    {
+      name: '-n',
+      compiler: compileNOption
+    },
+    {
+      name: '-q',
+      compiler: compileQOption
+    },
+  ];
+  for (const option of availableOptions) {
+    if (hasKey(options, option.name)) {
+      compiledOptions = option.compiler(compiledOptions, options);
+    }
   }
-  if (hasKey(options, '-n')) {
-    const optionValue = options['-n'];
-    return {
-      askedForBytes: false,
-      relativeToBeginning: isRelativeToBeginning(optionValue),
-      supressHeadings: hasKey(options, '-q'),
-      count: Math.abs(+options['-n'])
-    };
-  }
-  if (hasKey(options, '-q')) {
-    return {
-      ...defaults,
-      supressHeadings: true
-    };
-  }
-  return defaults;
-};
-
-const isEmpty = (obj) => {
-  return Object.keys(obj).length === 0;
+  return compiledOptions;
 };
 
 const tailArgsParser = (args) => {

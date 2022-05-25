@@ -1,7 +1,5 @@
 **TODO:**
 
-- [ ] Implement -q option
-- [ ] Improve compile function
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`
@@ -22,6 +20,8 @@
 
 **DONE:**
 
+- [x] Improve compile function
+- [x] Implement -q option
 - [x] Handle `tail.js -n1 -n2`
   - [x] Add validation for repeating args
 - [x] Handle `tail.js +2 `
