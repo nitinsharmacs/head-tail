@@ -41,6 +41,10 @@ const isStandAloneOption = (text) => {
 const parserConfig = {
   optionParsers: [
     {
+      parser: parsers.standAloneOption,
+      predicate: isStandAloneOption
+    },
+    {
       parser: parsers.combinedOption,
       predicate: isCombinedOption,
       separator: separateCombinedOption
@@ -54,10 +58,6 @@ const parserConfig = {
       predicate: isNumericOption,
       separator: numericOptionValue,
       optionName: '-n'
-    },
-    {
-      parser: parsers.standAloneOption,
-      predicate: isStandAloneOption
     }
   ],
   notOption: {

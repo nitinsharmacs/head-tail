@@ -1,9 +1,13 @@
 **TODO:**
 
+- [ ] Implement -q option
+- [ ] Improve compile function
 - [ ] Move `testParseArgs.js` to test/
 - [ ] Implement tailMain
 - [ ] Handle `head.js -n1 -c1 -v1 file`
 - [ ] Work on idea of Chained parser
+- [ ] Put common variables to same file
+  - [ ] list of stand alone options and valid optoins
 
 **MAYBE:**
 

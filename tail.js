@@ -14,6 +14,7 @@ const main = () => {
       )
     );
   } catch (error) {
+    console.log(error);
     errorLogger(createStderrMessage(error));
     exit(1);
   }

@@ -4,11 +4,20 @@ const optionName = (option) => {
   return name;
 };
 
+const intersection = function (list1, list2) {
+  return list1.reduce(function (intersects, element) {
+    if (list2.indexOf(element) < 0) {
+      return intersects;
+    }
+    intersects.push(element);
+    return intersects;
+  }, []);
+};
+
 const cantBeCombined = (newOption, prevOptions) => {
-  const prevOptionsKeys = Object.keys(prevOptions);
-  const [newOptionsKey] = Object.keys(newOption);
-  const differentKey = prevOptionsKeys.find(key => key !== newOptionsKey);
-  return differentKey !== undefined;
+  const optionsCantBeCombined = ['-n', '-c'];
+  const newOptionsNames = Object.keys({ ...newOption, ...prevOptions });
+  return intersection(optionsCantBeCombined, newOptionsNames).length === 2;
 };
 
 const hasKey = (obj, key) => {
@@ -22,7 +31,7 @@ const optionKey = (option) => {
 };
 
 const isNotValidOption = (option) => {
-  const validOptions = ['-n', '-c'];
+  const validOptions = ['-n', '-c', '-q', '-r'];
   return !validOptions.includes(optionKey(option));
 };
 
@@ -53,6 +62,9 @@ const assertOptionRepition = (newOption, prevOptions) => {
 
 const validateOptionValue = (option) => {
   const key = optionKey(option);
+  if (['-q', '-r'].includes(key)) {
+    return;
+  }
   const optionValue = option[key];
   assertOptionRequireArg(option);
   if (isNaN(+optionValue)) {

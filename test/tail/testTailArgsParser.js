@@ -10,6 +10,7 @@ describe('compileOptions', () => {
     let compiled = {
       askedForBytes: false,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -19,6 +20,7 @@ describe('compileOptions', () => {
     compiled = {
       askedForBytes: false,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -28,6 +30,7 @@ describe('compileOptions', () => {
     compiled = {
       askedForBytes: false,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 0
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -40,6 +43,7 @@ describe('compileOptions', () => {
     let compiled = {
       askedForBytes: true,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -49,6 +53,7 @@ describe('compileOptions', () => {
     compiled = {
       askedForBytes: true,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -61,6 +66,7 @@ describe('compileOptions', () => {
     const compiled = {
       askedForBytes: false,
       relativeToBeginning: true,
+      supressHeadings: false,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -73,6 +79,21 @@ describe('compileOptions', () => {
     const compiled = {
       askedForBytes: true,
       relativeToBeginning: true,
+      supressHeadings: false,
+      count: 1
+    };
+    assert.deepStrictEqual(compileOptions(options), compiled);
+  });
+
+  it('should compile stand alone option -q', () => {
+    const options = {
+      '-q': 'true',
+      '-c': '1'
+    };
+    const compiled = {
+      askedForBytes: true,
+      relativeToBeginning: false,
+      supressHeadings: true,
       count: 1
     };
     assert.deepStrictEqual(compileOptions(options), compiled);
@@ -87,6 +108,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -96,6 +118,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -105,6 +128,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: true,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -117,6 +141,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -126,6 +151,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: true,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -138,6 +164,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -147,6 +174,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 1
       }
     });
@@ -156,7 +184,21 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: true,
+        supressHeadings: false,
         count: 1
+      }
+    });
+  });
+
+  it('should parse args with stand alone option -q', () => {
+    const args = ['-q', 'file'];
+    assert.deepStrictEqual(tailArgsParser(args), {
+      filenames: ['file'],
+      options: {
+        askedForBytes: false,
+        relativeToBeginning: false,
+        supressHeadings: true,
+        count: 10
       }
     });
   });
@@ -168,6 +210,7 @@ describe('tailArgsParser', () => {
       options: {
         askedForBytes: false,
         relativeToBeginning: false,
+        supressHeadings: false,
         count: 10
       }
     });

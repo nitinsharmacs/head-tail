@@ -16,11 +16,11 @@ const addHeader = (header, heading, text) => {
 };
 
 const tailFiles = (fileReader, filenames, options, console) => {
-  let header = () => '';
+  let header = createHeader;
   let exitCode = 0;
   let separator = '';
-  if (filenames.length > 1) {
-    header = createHeader;
+  if (filenames.length <= 1 || options.supressHeadings) {
+    header = () => '';
   }
   filenames.forEach(filename => {
     try {

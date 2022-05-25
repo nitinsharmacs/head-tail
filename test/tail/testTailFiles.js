@@ -11,6 +11,7 @@ describe('tailFiles', () => {
     const options = {
       askedForBytes: false,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     const logger = mockLogger(['hello']);
@@ -29,6 +30,7 @@ describe('tailFiles', () => {
     const options = {
       askedForBytes: true,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     const logger = mockLogger(['==> file.txt <==\no',
@@ -48,6 +50,7 @@ describe('tailFiles', () => {
     const options = {
       askedForBytes: false,
       relativeToBeginning: false,
+      supressHeadings: false,
       count: 1
     };
     const logger = mockLogger(['==> file.txt <==\nhello']);
@@ -64,7 +67,7 @@ describe('tailFiles', () => {
       ['hello', 'world'],
       'utf8');
     const files = ['filee.txt'];
-    const options = { askedForBytes: true, count: 1 };
+    const options = { askedForBytes: true, count: 1, supressHeadings: false };
     const logger = mockLogger([]);
     const errorLogger = mockLogger(
       ['tail: filee.txt: No such file or directory']);
@@ -72,5 +75,20 @@ describe('tailFiles', () => {
       files,
       options,
       { logger, errorLogger }), 1);
+  });
+
+  it('should tail files with supressing headings', () => {
+    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
+      ['hello', 'world'],
+      'utf8');
+    const files = ['file.txt', 'file2.txt'];
+    const options = { askedForBytes: true, count: 1, supressHeadings: true };
+    const logger = mockLogger(['o',
+      '\nd']);
+    const errorLogger = mockLogger([]);
+    assert.strictEqual(tailFiles(mockedReadFileSync,
+      files,
+      options,
+      { logger, errorLogger }), 0);
   });
 });

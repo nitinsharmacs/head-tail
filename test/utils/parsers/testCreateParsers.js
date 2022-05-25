@@ -151,6 +151,13 @@ describe('parseOptions [tail]', () => {
       parseOptions(argsIterator, tailConfig), parsedOption);
   });
 
+  it('should parse stand alone option', () => {
+    const argsIterator = createArgsIterator(['-q']);
+    const parsedOption = { '-q': 'true' };
+    assert.deepStrictEqual(
+      parseOptions(argsIterator, tailConfig), parsedOption);
+  });
+
   it('should throw error for invalid option value [combined]', () => {
     const argsIterator = createArgsIterator(['-na']);
     assert.throws(

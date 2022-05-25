@@ -11,20 +11,38 @@ const isRelativeToBeginning = (optionValue) => {
 };
 
 const compileOptions = (options) => {
+  const defaults = {
+    askedForBytes: false,
+    relativeToBeginning: false,
+    supressHeadings: false,
+    count: 10
+  };
+
   if (hasKey(options, '-c')) {
     const optionValue = options['-c'];
     return {
       askedForBytes: true,
       relativeToBeginning: isRelativeToBeginning(optionValue),
+      supressHeadings: hasKey(options, '-q'),
       count: Math.abs(+options['-c'])
     };
   }
-  const optionValue = options['-n'];
-  return {
-    askedForBytes: false,
-    relativeToBeginning: isRelativeToBeginning(optionValue),
-    count: Math.abs(+options['-n'])
-  };
+  if (hasKey(options, '-n')) {
+    const optionValue = options['-n'];
+    return {
+      askedForBytes: false,
+      relativeToBeginning: isRelativeToBeginning(optionValue),
+      supressHeadings: hasKey(options, '-q'),
+      count: Math.abs(+options['-n'])
+    };
+  }
+  if (hasKey(options, '-q')) {
+    return {
+      ...defaults,
+      supressHeadings: true
+    };
+  }
+  return defaults;
 };
 
 const isEmpty = (obj) => {
@@ -32,16 +50,11 @@ const isEmpty = (obj) => {
 };
 
 const tailArgsParser = (args) => {
-  const defaults = {
-    askedForBytes: false,
-    relativeToBeginning: false,
-    count: 10
-  };
   const parser = createParser(parserConfig);
   const { filenames, options } = parser(args);
   return {
     filenames,
-    options: isEmpty(options) ? defaults : compileOptions(options)
+    options: compileOptions(options)
   };
 };
 
