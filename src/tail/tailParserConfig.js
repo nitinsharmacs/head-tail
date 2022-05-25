@@ -2,7 +2,7 @@ const { validateOption } = require('./validators.js');
 const { parsers } = require('../utils/parsers/optionParsers.js');
 
 const isCombinedOption = (text) => {
-  const rule = /^-[a-z0-9]{2,}|-[a-z]+[-+][0-9]+$/;
+  const rule = /^-[a-z][0-9a-z]+|-[a-z]+[-+][0-9a-z]+$/;
   return rule.test(text);
 };
 
