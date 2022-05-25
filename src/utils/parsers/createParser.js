@@ -60,5 +60,8 @@ const createParser = (config) => {
   return parseArgs.bind({ config });
 };
 
-exports.createParser = createParser;
 exports.createArgsIterator = createArgsIterator;
+exports.parseOption = parseOption;
+exports.parseOptions = parseOptions;
+exports.parseArgs = parseArgs;
+exports.createParser = createParser;

@@ -1,5 +1,6 @@
 **TODO:**
 
+- [ ] Tests for error throw in tailArgs and headArgs
 - [ ] Handle `tail.js +2 `
 - [ ] Handle `tail.js -n1 -n2`
 - [ ] Move `testParseArgs.js` to test/
@@ -19,6 +20,12 @@
 
 **DONE:**
 
+- [x] Tests for createParser  
+  - [x] Tests for optionParsers
+- [x] Make createParser working for head
+- [x] Make createParser working for tail
+- [x] Config for createParser
+  - [x] How to send operations to createParser in config ?
 - [x] Implement `--help`
 - [x] Make it working for multiple files
 - [x] Implement stderr messages for tail
