@@ -1,4 +1,4 @@
-const usage = () => 'tail [-r] [-q] [-c # | -n #] [file ...]';
+const usage = () => 'usage: tail [-r] [-q] [-c # | -n #] [file ...]';
 
 const prefix = (text) => `tail: ${text}`;
 
