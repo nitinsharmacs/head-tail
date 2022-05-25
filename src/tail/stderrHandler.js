@@ -1,6 +1,10 @@
-const usage = () => 'usage: tail [-c # | -n #] [file ...]';
+const usage = () => 'tail [-r] [-q] [-c # | -n #] [file ...]';
 
 const prefix = (text) => `tail: ${text}`;
+
+const newLine = (message) => {
+  return message === '' ? '' : '\n'
+};
 
 const createStderrMessage = (error) => {
   let message = error.message;
@@ -8,7 +12,7 @@ const createStderrMessage = (error) => {
     message = prefix(message);
   }
   if (error.showUsage) {
-    message += usage();
+    message += newLine(message) + usage();
   }
   return message;
 };

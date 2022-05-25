@@ -14,12 +14,9 @@ const main = () => {
       )
     );
   } catch (error) {
-    console.log(error);
     errorLogger(createStderrMessage(error));
     exit(1);
   }
 };
 
 main();
-
-// console.log('usage: tail [-c # | -n #] [file ...]');
