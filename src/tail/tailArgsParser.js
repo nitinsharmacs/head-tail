@@ -16,7 +16,6 @@ const compileCOption = (compiledOptions, options) => {
     ...compiledOptions,
     askedForBytes: true,
     relativeToBeginning: isRelativeToBeginning(optionValue),
-    supressHeadings: hasKey(options, '-q'),
     count: Math.abs(+options['-c'])
   };
 };
@@ -27,7 +26,6 @@ const compileNOption = (compiledOptions, options) => {
     ...compiledOptions,
     askedForBytes: false,
     relativeToBeginning: isRelativeToBeginning(optionValue),
-    supressHeadings: hasKey(options, '-q'),
     count: Math.abs(+options['-n'])
   };
 };
