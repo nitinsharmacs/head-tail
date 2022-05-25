@@ -35,6 +35,25 @@ describe('headArgsParser', () => {
       }
     });
   });
+
+  it('should throw error for invalid option value', () => {
+    const args = ['-n-1', 'filename'];
+    assert.throws(() => headArgsParser(args), {
+      code: 'ILLEGAL_COUNT',
+      message: 'illegal line count -- -1',
+      prefixWithHead: true
+    });
+  });
+
+  it('should throw error for illegal option', () => {
+    const args = ['-g', '1', 'filename'];
+    assert.throws(() => headArgsParser(args), {
+      code: 'ILLEGAL_OPTION',
+      message: 'illegal option -- g',
+      showUsage: true,
+      prefixWithHead: true
+    });
+  });
 });
 
 describe('compileOption', () => {

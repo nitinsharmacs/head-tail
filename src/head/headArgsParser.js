@@ -1,5 +1,5 @@
-const { validateOption } = require('./validators.js');
-const { parseArgs } = require('./parseArgs.js');
+const { createParser } = require('../utils/parsers/createParser.js');
+const { parserConfig } = require('./headParserConfig.js');
 
 const compileOption = (options) => {
   if (options['-c']) {
@@ -23,7 +23,8 @@ const headArgsParser = (args) => {
     askedForBytes: false,
     count: 10
   };
-  const { filenames, options } = parseArgs(args, validateOption);
+  const parser = createParser(parserConfig);
+  const { filenames, options } = parser(args);
   return {
     filenames,
     options: isEmpty(options) ? defaults : compileOption(options)

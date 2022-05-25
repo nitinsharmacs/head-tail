@@ -1,5 +1,5 @@
-const { validateOption } = require('./validators.js');
-const { parseArgs } = require('./parseArgs.js');
+const { parserConfig } = require('./tailParserConfig.js');
+const { createParser } = require('../utils/parsers/createParser.js');
 
 const hasKey = (obj, key) => {
   const keys = Object.keys(obj);
@@ -37,7 +37,8 @@ const tailArgsParser = (args) => {
     relativeToBeginning: false,
     count: 10
   };
-  const { filenames, options } = parseArgs(args, validateOption);
+  const parser = createParser(parserConfig);
+  const { filenames, options } = parser(args);
   return {
     filenames,
     options: isEmpty(options) ? defaults : compileOptions(options)
