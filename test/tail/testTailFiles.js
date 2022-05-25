@@ -34,7 +34,7 @@ describe('tailFiles', () => {
       count: 1
     };
     const logger = mockLogger(['==> file.txt <==\no',
-      '\n==> file2.txt <==\nd']);
+      '==> file2.txt <==\nd']);
     const errorLogger = mockLogger([]);
     assert.strictEqual(tailFiles(mockedReadFileSync,
       files,
@@ -84,7 +84,7 @@ describe('tailFiles', () => {
     const files = ['file.txt', 'file2.txt'];
     const options = { askedForBytes: true, count: 1, supressHeadings: true };
     const logger = mockLogger(['o',
-      '\nd']);
+      'd']);
     const errorLogger = mockLogger([]);
     assert.strictEqual(tailFiles(mockedReadFileSync,
       files,

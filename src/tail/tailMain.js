@@ -18,17 +18,14 @@ const addHeader = (header, heading, text) => {
 const tailFiles = (fileReader, filenames, options, console) => {
   let header = createHeader;
   let exitCode = 0;
-  let separator = '';
   if (filenames.length <= 1 || options.supressHeadings) {
     header = () => '';
   }
   filenames.forEach(filename => {
     try {
       const content = fileReader(filename, 'utf8');
-      const withHeading = addHeader(header, filename, tail(content, options));
-      const tailedFile = `${separator}${withHeading}`;
+      const tailedFile = addHeader(header, filename, tail(content, options));
       console.logger(tailedFile);
-      separator = '\n';
     } catch (error) {
       exitCode = 1;
       console.errorLogger('tail: ' + noFileMessage(filename));
