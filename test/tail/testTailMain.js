@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
+const { mockReadFileSync, mockLogger } = require('../../src/utils/mockers.js');
 const { tailMain } = require('../../src/tail/tailMain.js');
 
 describe('tailMain', () => {

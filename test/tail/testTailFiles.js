@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { tailFiles } = require('../../src/tail/tailMain.js');
-const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
+const { mockReadFileSync, mockLogger } = require('../../src/utils/mockers.js');
 
 describe('tailFiles', () => {
   it('should tail file without heading', () => {

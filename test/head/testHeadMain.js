@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { headMain } = require('../../src/head/headLib.js');
-const { mockReadFileSync, mockLogger } = require('../../src/mockers.js');
+const { mockReadFileSync, mockLogger } = require('../../src/utils/mockers.js');
 
 describe('headMain', () => {
   it('should get 1 line from the file', () => {
