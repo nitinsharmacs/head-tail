@@ -41,7 +41,7 @@ describe('headArgsParser', () => {
     assert.throws(() => headArgsParser(args), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal line count -- -1',
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -51,7 +51,7 @@ describe('headArgsParser', () => {
       code: 'ILLEGAL_OPTION',
       message: 'illegal option -- g',
       showUsage: true,
-      prefixWithHead: true
+      prefix: true
     });
   });
 });

@@ -1,6 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { headArgsParser } = require('./headArgsParser.js');
-const { usage, fileErrorMessage } = require('./stderrHandler.js');
+const { usage, createFileErrorMessage } = require('./errorHandler.js');
 const { validateOption } = require('./validators.js');
 
 const firstNLines = (lines, count) => {
@@ -43,7 +43,7 @@ const headFiles = (fileReader, filenames, options, console) => {
       separator = '\n';
     } catch (error) {
       exitCode = 1;
-      console.errorLogger(fileErrorMessage(error));
+      console.errorLogger(createFileErrorMessage(error));
     }
   });
   return exitCode;

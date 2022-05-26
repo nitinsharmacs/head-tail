@@ -29,7 +29,7 @@ const assertOptionRequireArg = (option) => {
       code: 'OPTION_REQUIRES_ARG',
       message: `option requires an argument -- ${optionName(key)}`,
       showUsage: true,
-      prefixWithHead: true
+      prefix: true
     };
   }
 };
@@ -54,7 +54,7 @@ const validateOptionValue = (option) => {
     throw {
       code: 'ILLEGAL_COUNT',
       message: 'illegal ' + rule.name + ' count -- ' + optionValue,
-      prefixWithHead: true
+      prefix: true
     };
   }
 };
@@ -65,7 +65,7 @@ const validateOption = (newOptions, prevOptions) => {
       code: 'ILLEGAL_OPTION',
       message: 'illegal option -- ' + optionName(optionKey(newOptions)),
       showUsage: true,
-      prefixWithHead: true
+      prefix: true
     };
   }
 
@@ -75,7 +75,7 @@ const validateOption = (newOptions, prevOptions) => {
     throw {
       code: 'CANT_COMBINE',
       message: 'can\'t combine line and byte counts',
-      prefixWithHead: true
+      prefix: true
     };
   }
 

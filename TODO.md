@@ -21,6 +21,7 @@
 
 - ## DONE:
 
+  - [x] Move stderrHandler.js to `src/utils` and create `errorHandler.js`
   - [x] Create files exceptions handler
   - [x] Implement tailMain
   - [x] Improve compile function
@@ -74,6 +75,7 @@
 
 - ## DONE
 
+  - [x] Move stderrHandler.js to `src/utils` and create `errorHandler.js`
   - [x] Create files exceptions handler
   - [x] ~~Consider change contract of firstNLines and pass content as string~~
   - [x] ~~Change the test description of firstNLines, change `get` to `give`~~

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { exit } = require('process');
 const { tailMain } = require('./src/tail/tailMain.js');
-const { createStderrMessage } = require('./src/tail/stderrHandler.js');
+const { stderrMessage } = require('./src/tail/errorHandler.js');
 
 const main = () => {
   const { log: logger, error: errorLogger } = console;
@@ -14,7 +14,7 @@ const main = () => {
       )
     );
   } catch (error) {
-    errorLogger(createStderrMessage(error));
+    errorLogger(stderrMessage(error));
     exit(1);
   }
 };

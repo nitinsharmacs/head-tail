@@ -7,7 +7,7 @@ const mockReadFileSync = (expectedFilenames, contents, expectedEncoding) => {
       throw {
         code: 'ENOENT',
         path: filename
-      }
+      };
     }
     assert.strictEqual(encoding, expectedEncoding);
     const actualContent = contents[index];

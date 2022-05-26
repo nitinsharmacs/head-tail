@@ -11,7 +11,7 @@ describe('validateOption', () => {
       code: 'ILLEGAL_OPTION',
       message: 'illegal option -- j',
       showUsage: true,
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -21,7 +21,7 @@ describe('validateOption', () => {
     assert.throws(() => validateOption(newOption, prevOptions), {
       code: 'CANT_COMBINE',
       message: 'can\'t combine line and byte counts',
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -31,7 +31,7 @@ describe('validateOption', () => {
     assert.throws(() => validateOption(newOption, prevOptions), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal byte count -- 2f',
-      prefixWithHead: true
+      prefix: true
     });
   });
 });
@@ -51,7 +51,7 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal byte count -- 0',
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -62,7 +62,7 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal line count -- 0',
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -73,7 +73,7 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       code: 'ILLEGAL_COUNT',
       message: 'illegal line count -- f',
-      prefixWithHead: true
+      prefix: true
     });
   });
 
@@ -84,7 +84,7 @@ describe('validateOptionValue', () => {
     assert.throws(() => validateOptionValue(option), {
       code: 'OPTION_REQUIRES_ARG',
       message: 'option requires an argument -- n',
-      prefixWithHead: true
+      prefix: true
     });
   });
 });

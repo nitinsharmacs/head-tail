@@ -1,7 +1,7 @@
 const { tail } = require('./tailLib.js');
 const { tailArgsParser } = require('./tailArgsParser.js');
 const { validateOption } = require('./validators.js');
-const { usage, fileErrorMessage } = require('./stderrHandler.js');
+const { usage, createFileErrorMessage } = require('./errorHandler.js');
 
 const createHeader = (filename) => {
   return `==> ${filename} <==\n`;
@@ -24,7 +24,7 @@ const tailFiles = (fileReader, filenames, options, console) => {
       console.logger(tailedFile);
     } catch (error) {
       exitCode = 1;
-      console.errorLogger(fileErrorMessage(error));
+      console.errorLogger(createFileErrorMessage(error));
     }
   });
   return exitCode;

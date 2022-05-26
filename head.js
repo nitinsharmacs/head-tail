@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { exit } = require('process');
 const { headMain } = require('./src/head/headLib.js');
-const { createStdoutMessage } = require('./src/head/stdoutHandler.js');
+const { stderrMessage } = require('./src/head/errorHandler.js');
 
 const main = () => {
   try {
@@ -14,7 +14,7 @@ const main = () => {
       )
     );
   } catch (error) {
-    console.error(createStdoutMessage(error));
+    console.error(stderrMessage(error));
     exit(1);
   }
 };
