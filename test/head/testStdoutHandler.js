@@ -1,5 +1,7 @@
 const assert = require('assert');
-const { createStdoutMessage } = require('../../src/head/stdoutHandler.js');
+const {
+  createStdoutMessage,
+  fileErrorMessage } = require('../../src/head/stdoutHandler.js');
 
 describe('createStdoutMessage', () => {
   it('should prefix with head', () => {
@@ -23,5 +25,25 @@ describe('createStdoutMessage', () => {
     const outMessage =
       'head: illegal option -- f\nusage: head [-n lines | -c bytes] [file ...]';
     assert.strictEqual(createStdoutMessage(error), outMessage);
+  });
+});
+
+describe('fileErrorMessage', () => {
+  it('should give error message for non-existing file', () => {
+    const error = {
+      code: 'ENOENT',
+      path: 'file'
+    };
+    const message = 'head: file: No such file or directory';
+    assert.strictEqual(fileErrorMessage(error), message);
+  });
+
+  it('should give error message if permission denied', () => {
+    const error = {
+      code: 'EACCES',
+      path: 'file'
+    };
+    const message = 'head: file: Permission denied';
+    assert.strictEqual(fileErrorMessage(error), message);
   });
 });

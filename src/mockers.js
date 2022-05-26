@@ -1,9 +1,14 @@
 const assert = require('assert');
 
-const mockReadFileSync = (expectedFileNames, contents, expectedEncoding) => {
+const mockReadFileSync = (expectedFilenames, contents, expectedEncoding) => {
   let index = 0;
-  return function (fileName, encoding) {
-    assert.strictEqual(fileName, expectedFileNames[index]);
+  return function (filename, encoding) {
+    if (filename !== expectedFilenames[index]) {
+      throw {
+        code: 'ENOENT',
+        path: filename
+      }
+    }
     assert.strictEqual(encoding, expectedEncoding);
     const actualContent = contents[index];
     index++;

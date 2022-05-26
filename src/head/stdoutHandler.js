@@ -15,5 +15,15 @@ const createStdoutMessage = (error) => {
   return message;
 };
 
+const fileErrorMessage = ({ path: filename, code }) => {
+  const fileErrors = {
+    ENOENT: 'No such file or directory',
+    EACCES: 'Permission denied'
+  }
+  const errorMessage = `${filename}: ${fileErrors[code]}`;
+  return prefix(errorMessage);
+};
+
 exports.usage = usage;
 exports.createStdoutMessage = createStdoutMessage;
+exports.fileErrorMessage = fileErrorMessage;

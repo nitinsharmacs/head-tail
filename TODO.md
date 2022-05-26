@@ -2,11 +2,10 @@
 
 - ## TODO:
 
+  - [ ] Create files exceptions handler
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
-  - [ ] Implement tailMain
-  - [ ] Handle `head.js -n1 -c1 -v1 file`
-  - [ ] Work on idea of Chained parser
+  - [ ] Work on the idea of Chained parser
   - [ ] Put common variables to same file
     - [ ] list of stand alone options and valid optoins
 
@@ -23,6 +22,7 @@
 
 - ## DONE:
 
+  - [x] Implement tailMain
   - [x] Improve compile function
   - [x] Implement -q option
   - [x] Handle `tail.js -n1 -n2`
@@ -64,6 +64,7 @@
 
 - ## TODO
 
+  - [ ] Handle `head.js -n1 -c1 -v1 file`
 
 - ## CONSIDER
 
@@ -72,6 +73,8 @@
 
 
 - ## DONE
+
+  - [x] Create files exceptions handler
   - [x] ~~Consider change contract of firstNLines and pass content as string~~
   - [x] ~~Change the test description of firstNLines, change `get` to `give`~~
   - [x] ~~Remove magic number lint errors from firstNLines and nBytesFrom~~

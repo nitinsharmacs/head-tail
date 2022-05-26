@@ -1,6 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { headArgsParser } = require('./headArgsParser.js');
-const { usage } = require('./stdoutHandler.js');
+const { usage, fileErrorMessage } = require('./stdoutHandler.js');
 const { validateOption } = require('./validators.js');
 
 const firstNLines = (lines, count) => {
@@ -23,10 +23,6 @@ const createHeader = (filename) => {
   return `==> ${filename} <==\n`;
 };
 
-const noFileMessage = (filename) => {
-  return filename + ': ' + 'No such file or directory';
-};
-
 const addHeader = (header, heading, text) => {
   return `${header(heading)}${text}`;
 };
@@ -47,7 +43,7 @@ const headFiles = (fileReader, filenames, options, console) => {
       separator = '\n';
     } catch (error) {
       exitCode = 1;
-      console.errorLogger('head: ' + noFileMessage(filename));
+      console.errorLogger(fileErrorMessage(error));
     }
   });
   return exitCode;
@@ -82,4 +78,3 @@ exports.headFiles = headFiles;
 exports.assertFile = assertFile;
 exports.usage = usage;
 exports.createHeader = createHeader;
-exports.noFileMessage = noFileMessage;

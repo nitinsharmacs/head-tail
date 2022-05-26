@@ -5,8 +5,7 @@ const { head,
   nBytesFrom,
   assertFile,
   usage,
-  createHeader,
-  noFileMessage } = require('../../src/head/headLib.js');
+  createHeader } = require('../../src/head/headLib.js');
 
 describe('head', () => {
   it('should get 1 line from the content', () => {
@@ -126,12 +125,5 @@ describe('usage', () => {
 describe('createHeader', () => {
   it('should give header of file name', () => {
     assert.strictEqual(createHeader('filename'), '==> filename <==\n');
-  });
-});
-
-describe('noFileMessage', () => {
-  it('should give no file message', () => {
-    assert.strictEqual(noFileMessage('file'),
-      'file: No such file or directory');
   });
 });
