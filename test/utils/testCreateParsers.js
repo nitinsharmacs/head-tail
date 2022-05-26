@@ -1,16 +1,16 @@
 const assert = require('assert');
 const {
   parserConfig: headConfig
-} = require('../../../src/head/headParserConfig.js');
+} = require('../../src/head/headParserConfig.js');
 const {
   parserConfig: tailConfig
-} = require('../../../src/tail/tailParserConfig.js');
+} = require('../../src/tail/tailParserConfig.js');
 const {
   createArgsIterator,
   parseOption,
   parseOptions,
   parseArgs
-} = require('../../../src/utils/parsers/createParser.js');
+} = require('../../src/utils/createParser.js');
 
 describe('parseOption [head]', () => {
   it('should parse combined option', () => {

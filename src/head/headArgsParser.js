@@ -1,4 +1,4 @@
-const { createParser } = require('../utils/parsers/createParser.js');
+const { createParser } = require('../utils/createParser.js');
 const { parserConfig } = require('./headParserConfig.js');
 
 const compileOption = (options) => {

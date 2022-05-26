@@ -1,5 +1,5 @@
 const { parserConfig } = require('./tailParserConfig.js');
-const { createParser } = require('../utils/parsers/createParser.js');
+const { createParser } = require('../utils/createParser.js');
 
 const hasKey = (obj, key) => {
   const keys = Object.keys(obj);

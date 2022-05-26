@@ -1,22 +1,22 @@
 const assert = require('assert');
 const {
   createArgsIterator
-} = require('../../../src/utils/parsers/createParser');
+} = require('../../src/utils/createParser');
 const {
   parseCombinedOption,
   parseNonCombinedOption,
   parseNumericOption,
   parseStandAloneOption
-} = require('../../../src/utils/parsers/optionParsers.js');
+} = require('../../src/utils/optionParsers.js');
 
 const {
   separateCombinedOption,
   numericOptionValue: headNumericOptionValue
-} = require('../../../src/head/headParserConfig.js');
+} = require('../../src/head/headParserConfig.js');
 
 const {
   numericOptionValue: tailNumericOptionValue
-} = require('../../../src/tail/tailParserConfig.js');
+} = require('../../src/tail/tailParserConfig.js');
 
 describe('parseCombinedOption', () => {
   it('should parse combined option', () => {
