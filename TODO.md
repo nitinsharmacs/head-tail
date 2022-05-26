@@ -2,7 +2,6 @@
 
 - ## TODO:
 
-  - [ ] Create files exceptions handler
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
   - [ ] Work on the idea of Chained parser
@@ -22,6 +21,7 @@
 
 - ## DONE:
 
+  - [x] Create files exceptions handler
   - [x] Implement tailMain
   - [x] Improve compile function
   - [x] Implement -q option

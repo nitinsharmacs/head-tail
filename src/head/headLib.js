@@ -1,6 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { headArgsParser } = require('./headArgsParser.js');
-const { usage, fileErrorMessage } = require('./stdoutHandler.js');
+const { usage, fileErrorMessage } = require('./stderrHandler.js');
 const { validateOption } = require('./validators.js');
 
 const firstNLines = (lines, count) => {

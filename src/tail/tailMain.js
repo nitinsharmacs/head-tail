@@ -1,14 +1,10 @@
 const { tail } = require('./tailLib.js');
 const { tailArgsParser } = require('./tailArgsParser.js');
 const { validateOption } = require('./validators.js');
-const { usage } = require('./stderrHandler.js');
+const { usage, fileErrorMessage } = require('./stderrHandler.js');
 
 const createHeader = (filename) => {
   return `==> ${filename} <==\n`;
-};
-
-const noFileMessage = (filename) => {
-  return filename + ': ' + 'No such file or directory';
 };
 
 const addHeader = (header, heading, text) => {
@@ -28,7 +24,7 @@ const tailFiles = (fileReader, filenames, options, console) => {
       console.logger(tailedFile);
     } catch (error) {
       exitCode = 1;
-      console.errorLogger('tail: ' + noFileMessage(filename));
+      console.errorLogger(fileErrorMessage(error));
     }
   });
   return exitCode;

@@ -1,7 +1,7 @@
 const assert = require('assert');
 const {
   createStdoutMessage,
-  fileErrorMessage } = require('../../src/head/stdoutHandler.js');
+  fileErrorMessage } = require('../../src/head/stderrHandler.js');
 
 describe('createStdoutMessage', () => {
   it('should prefix with head', () => {
