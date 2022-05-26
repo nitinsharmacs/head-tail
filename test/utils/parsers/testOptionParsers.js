@@ -2,7 +2,13 @@ const assert = require('assert');
 const {
   createArgsIterator
 } = require('../../../src/utils/parsers/createParser');
-const { parsers } = require('../../../src/utils/parsers/optionParsers.js');
+const {
+  parseCombinedOption,
+  parseNonCombinedOption,
+  parseNumericOption,
+  parseStandAloneOption
+} = require('../../../src/utils/parsers/optionParsers.js');
+
 const {
   separateCombinedOption,
   numericOptionValue: headNumericOptionValue
@@ -20,7 +26,7 @@ describe('parseCombinedOption', () => {
       '-n': '1'
     };
     assert.deepStrictEqual(
-      parsers.combinedOption.call(ctx, argsIterator),
+      parseCombinedOption.call(ctx, argsIterator),
       parsedOption
     );
     argsIterator = createArgsIterator(['-n-1']);
@@ -28,7 +34,7 @@ describe('parseCombinedOption', () => {
       '-n': '-1'
     };
     assert.deepStrictEqual(
-      parsers.combinedOption.call(ctx, argsIterator),
+      parseCombinedOption.call(ctx, argsIterator),
       parsedOption
     );
     argsIterator = createArgsIterator(['-n+1']);
@@ -36,7 +42,7 @@ describe('parseCombinedOption', () => {
       '-n': '+1'
     };
     assert.deepStrictEqual(
-      parsers.combinedOption.call(ctx, argsIterator),
+      parseCombinedOption.call(ctx, argsIterator),
       parsedOption
     );
   });
@@ -49,7 +55,7 @@ describe('parseNonCombinedOption', () => {
       '-n': '1'
     };
     assert.deepStrictEqual(
-      parsers.nonCombinedOption(argsIterator),
+      parseNonCombinedOption(argsIterator),
       parsedOption
     );
     argsIterator = createArgsIterator(['-n', '-1']);
@@ -57,7 +63,7 @@ describe('parseNonCombinedOption', () => {
       '-n': '-1'
     };
     assert.deepStrictEqual(
-      parsers.nonCombinedOption(argsIterator),
+      parseNonCombinedOption(argsIterator),
       parsedOption
     );
     argsIterator = createArgsIterator(['-n', '+1']);
@@ -65,7 +71,7 @@ describe('parseNonCombinedOption', () => {
       '-n': '+1'
     };
     assert.deepStrictEqual(
-      parsers.nonCombinedOption(argsIterator),
+      parseNonCombinedOption(argsIterator),
       parsedOption
     );
   });
@@ -79,7 +85,7 @@ describe('parseNumericOption', () => {
       '-n': '1'
     };
     assert.deepStrictEqual(
-      parsers.numericOption.call(ctx, argsIterator),
+      parseNumericOption.call(ctx, argsIterator),
       parsedOption
     );
   });
@@ -91,7 +97,7 @@ describe('parseNumericOption', () => {
       '-n': '-1'
     };
     assert.deepStrictEqual(
-      parsers.numericOption.call(ctx, argsIterator),
+      parseNumericOption.call(ctx, argsIterator),
       parsedOption
     );
     argsIterator = createArgsIterator(['+1']);
@@ -99,7 +105,7 @@ describe('parseNumericOption', () => {
       '-n': '+1'
     };
     assert.deepStrictEqual(
-      parsers.numericOption.call(ctx, argsIterator),
+      parseNumericOption.call(ctx, argsIterator),
       parsedOption
     );
   });
@@ -112,7 +118,7 @@ describe('parseStandAlone', () => {
       '-g': 'true'
     };
     assert.deepStrictEqual(
-      parsers.standAloneOption(argsIterator),
+      parseStandAloneOption(argsIterator),
       parsedOption
     );
   });

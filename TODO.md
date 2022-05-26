@@ -2,6 +2,7 @@
 
 - ## TODO:
 
+  - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
   - [ ] Work on the idea of Chained parser

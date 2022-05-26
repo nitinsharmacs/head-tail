@@ -1,5 +1,8 @@
 const { validateOption } = require('./validators.js');
-const { parsers } = require('../utils/parsers/optionParsers.js');
+const { parseCombinedOption,
+  parseNonCombinedOption,
+  parseNumericOption,
+  parseStandAloneOption } = require('../utils/parsers/optionParsers.js');
 
 const isCombinedOption = (text) => {
   const rule = /^-[a-z][0-9a-z]+|-[a-z]+[-+][0-9a-z]+$/;
@@ -42,22 +45,22 @@ const isStandAloneOption = (text) => {
 const parserConfig = {
   optionParsers: [
     {
-      parser: parsers.combinedOption,
+      parser: parseCombinedOption,
       predicate: isCombinedOption,
       separator: separateCombinedOption
     },
     {
-      parser: parsers.nonCombinedOption,
+      parser: parseNonCombinedOption,
       predicate: isNonCombinedOption
     },
     {
-      parser: parsers.numericOption,
+      parser: parseNumericOption,
       predicate: isNumericOption,
       separator: numericOptionValue,
       optionName: '-n'
     },
     {
-      parser: parsers.standAloneOption,
+      parser: parseStandAloneOption,
       predicate: isStandAloneOption
     }
   ],

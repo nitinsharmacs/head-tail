@@ -31,11 +31,7 @@ const parseNonCombinedOption = function (argsIterator) {
   return option;
 };
 
-const parsers = {
-  'combinedOption': parseCombinedOption,
-  'nonCombinedOption': parseNonCombinedOption,
-  'numericOption': parseNumericOption,
-  'standAloneOption': parseStandAloneOption,
-};
-
-exports.parsers = parsers;
+exports.parseCombinedOption = parseCombinedOption;
+exports.parseNonCombinedOption = parseNonCombinedOption;
+exports.parseNumericOption = parseNumericOption;
+exports.parseStandAloneOption = parseStandAloneOption;
