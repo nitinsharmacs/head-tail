@@ -1,19 +1,33 @@
-// optionName(option: String)
+const objectKeys = Object.keys;
+
+// optionName(option: String), option = '-n'
 const optionName = (option) => {
   const [name] = option.split('-').reverse();
   return name;
 };
 
-const cantBeCombined = (newOption, prevOptions) => {
-  const prevOptionsKeys = Object.keys(prevOptions);
-  const [newOptionsKey] = Object.keys(newOption);
-  const differentKey = prevOptionsKeys.find(key => key !== newOptionsKey);
-  return differentKey !== undefined;
+const optionKey = (option) => {
+  const [key] = objectKeys(option);
+  return key;
 };
 
-const optionKey = (option) => {
-  const [key] = Object.keys(option);
-  return key;
+const intersection = function (list1, list2) {
+  return list1.reduce(function (intersects, element) {
+    if (list2.indexOf(element) < 0) {
+      return intersects;
+    }
+    intersects.push(element);
+    return intersects;
+  }, []);
+};
+
+const cantBeCombined = (newOption, prevOptions) => {
+  const nonCombinatives = ['-n', '-c'];
+  const newOptionsNames = objectKeys({ ...newOption, ...prevOptions });
+  return intersection(
+    nonCombinatives,
+    newOptionsNames
+  ).length === nonCombinatives.length;
 };
 
 const isNotValidOption = (option) => {
@@ -46,40 +60,43 @@ const validateOptionValue = (option) => {
       minValue: 1,
     }
   };
+  assertOptionRequireArg(option);
+
   const key = optionKey(option);
   const optionValue = option[key];
   const rule = optionsRules[key];
-  assertOptionRequireArg(option);
   if (isNaN(+optionValue) || rule.minValue > +optionValue) {
     throw {
       code: 'ILLEGAL_COUNT',
-      message: 'illegal ' + rule.name + ' count -- ' + optionValue,
+      message: `illegal ${rule.name} count -- ${optionValue}`,
       prefix: true
     };
   }
 };
 
-const validateOption = (newOptions, prevOptions) => {
-  if (isNotValidOption(newOptions)) {
+const assertValidOption = (option) => {
+  if (isNotValidOption(option)) {
     throw {
       code: 'ILLEGAL_OPTION',
-      message: 'illegal option -- ' + optionName(optionKey(newOptions)),
+      message: 'illegal option -- ' + optionName(optionKey(option)),
       showUsage: true,
       prefix: true
     };
   }
+};
 
-  validateOptionValue(newOptions);
+const validateOption = (newOption, prevOptions) => {
+  assertValidOption(newOption);
+  validateOptionValue(newOption);
 
-  if (cantBeCombined(newOptions, prevOptions)) {
+  if (cantBeCombined(newOption, prevOptions)) {
     throw {
       code: 'CANT_COMBINE',
       message: 'can\'t combine line and byte counts',
       prefix: true
     };
   }
-
-  return newOptions;
+  return newOption;
 };
 
 exports.validateOption = validateOption;
