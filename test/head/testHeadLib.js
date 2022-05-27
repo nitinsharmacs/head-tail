@@ -5,7 +5,8 @@ const { head,
   firstNBytes,
   assertFile,
   usage,
-  createHeader } = require('../../src/head/headLib.js');
+  createHeader,
+  getExitCode } = require('../../src/head/headLib.js');
 
 describe('head', () => {
   it('should get 1 line from the content', () => {
@@ -125,5 +126,22 @@ describe('usage', () => {
 describe('createHeader', () => {
   it('should give header of file name', () => {
     assert.strictEqual(createHeader('filename'), '==> filename <==\n');
+  });
+});
+
+describe('getExitCode', () => {
+  it('should give 1 exit code for error', () => {
+    const headOfFiles = [
+      { text: '==> file.txt <==\nworld' },
+      { error: { code: 'ENOENT', path: 'badFile.txt' } }
+    ];
+    assert.strictEqual(getExitCode(headOfFiles), 1);
+  });
+
+  it('should give 0 exit code for no error', () => {
+    const headOfFiles = [
+      { text: '==> file.txt <==\nworld' },
+    ];
+    assert.strictEqual(getExitCode(headOfFiles), 0);
   });
 });

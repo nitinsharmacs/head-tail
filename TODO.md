@@ -2,7 +2,9 @@
 
 - ## TODO:
 
-  - [ ] Remove responsbility of printing head/tail content from head/tailFiles
+  - [ ] Change the order of arguments for headFiles and tailFiles
+  - [ ] Remove responsbility of printing head\tailFiles
+    - [x] Remove for head
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/

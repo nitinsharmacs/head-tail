@@ -26,26 +26,37 @@ const addHeader = (header, heading, text) => {
   return `${header(heading)}${text}`;
 };
 
-const headFiles = (fileReader, filenames, options, console) => {
-  let exitCode = 0;
-  let separator = '';
+const headFile = (filename, fileReader, header, options) => {
+  try {
+    const content = fileReader(filename, 'utf8');
+    const text = addHeader(header, filename, head(content, options));
+    return { text };
+  } catch (error) {
+    return { error };
+  }
+};
+
+const headFiles = (filenames, fileReader, options) => {
   let header = () => '';
   if (filenames.length > 1) {
     header = createHeader;
   }
-  filenames.forEach(filename => {
-    try {
-      const content = fileReader(filename, 'utf8');
-      const withHeading = addHeader(header, filename, head(content, options));
-      const headedFile = `${separator}${withHeading}`;
-      console.logger(headedFile);
-      separator = '\n';
-    } catch (error) {
-      exitCode = 1;
-      console.errorLogger(createFileErrorMessage(error));
+  return filenames.map(
+    (filename) => headFile(filename, fileReader, header, options)
+  );
+};
+
+const printHeadOfFiles = (headOfFiles, console) => {
+  headOfFiles.forEach(headOfFile => {
+    if (headOfFile.error) {
+      return console.errorLogger(createFileErrorMessage(headOfFile.error));
     }
+    console.logger(headOfFile.text);
   });
-  return exitCode;
+};
+
+const getExitCode = (headOfFiles) => {
+  return headOfFiles.some(headOfFile => headOfFile.error) ? 1 : 0;
 };
 
 const assertFile = (files) => {
@@ -58,22 +69,29 @@ const assertFile = (files) => {
 };
 
 const headMain = (fileReader, args, console) => {
-  const exitCode = 0;
   const [firstArg] = args;
   if (firstArg === '--help') {
     console.logger(usage());
-    return exitCode;
+    return 0;
   }
+
   const { filenames, options } = headArgsParser(args);
   assertFile(filenames);
-  return headFiles(fileReader, filenames, options, console);
+
+  const headOfFiles = headFiles(filenames, fileReader, options);
+  printHeadOfFiles(headOfFiles, console);
+
+  return getExitCode(headOfFiles);
 };
 
 exports.firstNLines = firstNLines;
 exports.firstNBytes = firstNBytes;
-exports.head = head;
-exports.headMain = headMain;
-exports.headFiles = headFiles;
 exports.assertFile = assertFile;
 exports.usage = usage;
 exports.createHeader = createHeader;
+exports.head = head;
+exports.headFile = headFile;
+exports.headFiles = headFiles;
+exports.printHeadOfFiles = printHeadOfFiles;
+exports.getExitCode = getExitCode;
+exports.headMain = headMain;

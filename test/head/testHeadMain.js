@@ -53,7 +53,7 @@ describe('headMain', () => {
     const args = ['file.txt', 'file2.txt'];
     const logger = mockLogger([
       '==> file.txt <==\nhello',
-      '\n==> file2.txt <==\nworld'
+      '==> file2.txt <==\nworld'
     ]);
     const errorLogger = mockLogger([]);
     assert.strictEqual(
