@@ -2,6 +2,8 @@
 
 - ## TODO:
 
+  - [ ] Pass validator in head/tailParseArgs, not from main file
+  - [ ] Remove responsbility of printing head/tail content from head/tailFiles
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
@@ -80,7 +82,7 @@
   - [x] Create files exceptions handler
   - [x] ~~Consider change contract of firstNLines and pass content as string~~
   - [x] ~~Change the test description of firstNLines, change `get` to `give`~~
-  - [x] ~~Remove magic number lint errors from firstNLines and nBytesFrom~~
+  - [x] ~~Remove magic number lint errors from firstNLines and firstNBytes~~
   - [x] ~~Correct `nByesFrom` in contracts.md~~
   - [x] ~~`head file` gives 1 line if the file is empty~~
   - [x] Separate `headLib.js` tests to new test files
@@ -134,7 +136,7 @@
   - [x] Consider giving option as object to head()
   - [x] Add a function contracts file
   - [x] Pass `lines` first and then `count` to firstNLines
-  - [x] Implement nBytesFrom function
+  - [x] Implement firstNBytes function
   - [x] Test stringUtils.js functions
     - [x] splitLines
     - [x] joinLines

@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const { head,
   firstNLines,
-  nBytesFrom,
+  firstNBytes,
   assertFile,
   usage,
   createHeader } = require('../../src/head/headLib.js');
@@ -85,21 +85,21 @@ describe('firstNLines', () => {
   });
 });
 
-describe('nBytesFrom', () => {
+describe('firstNBytes', () => {
   it('should give 1 byte from the content', () => {
-    assert.strictEqual(nBytesFrom('hello', 1), 'h');
+    assert.strictEqual(firstNBytes('hello', 1), 'h');
   });
 
   it('should give 2 bytes from the content', () => {
-    assert.strictEqual(nBytesFrom('hello', 2), 'he');
+    assert.strictEqual(firstNBytes('hello', 2), 'he');
   });
 
   it('should give 4 bytes from the content', () => {
-    assert.strictEqual(nBytesFrom('he\nme', 4), 'he\nm');
+    assert.strictEqual(firstNBytes('he\nme', 4), 'he\nm');
   });
 
   it('should give empty from the empty content', () => {
-    assert.strictEqual(nBytesFrom('', 4), '');
+    assert.strictEqual(firstNBytes('', 4), '');
   });
 });
 

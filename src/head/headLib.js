@@ -7,13 +7,13 @@ const firstNLines = (lines, count) => {
   return lines.slice(0, count);
 };
 
-const nBytesFrom = (content, bytes) => {
+const firstNBytes = (content, bytes) => {
   return content.slice(0, bytes);
 };
 
 const head = (content, { askedForBytes, count }) => {
   if (askedForBytes) {
-    return nBytesFrom(content, count);
+    return firstNBytes(content, count);
   }
   const lines = splitLines(content);
   return joinLines(firstNLines(lines, count));
@@ -28,9 +28,9 @@ const addHeader = (header, heading, text) => {
 };
 
 const headFiles = (fileReader, filenames, options, console) => {
-  let header = () => '';
   let exitCode = 0;
   let separator = '';
+  let header = () => '';
   if (filenames.length > 1) {
     header = createHeader;
   }
@@ -71,7 +71,7 @@ const headMain = (fileReader, args, console) => {
 };
 
 exports.firstNLines = firstNLines;
-exports.nBytesFrom = nBytesFrom;
+exports.firstNBytes = firstNBytes;
 exports.head = head;
 exports.headMain = headMain;
 exports.headFiles = headFiles;
