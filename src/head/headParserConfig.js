@@ -4,12 +4,11 @@ const { parseCombinedOption,
   parseNumericOption,
   parseStandAloneOption } = require('../utils/optionParsers.js');
 
-const isCombinedOption = (text) => {
-  const rule = /^-[a-z][0-9a-z]+|-[a-z]+[-+][0-9a-z]+$/;
-  return rule.test(text);
-};
+const isCombinedOption = (text) => /^-[a-z][-+]?[a-z0-9]+$/.test(text);
 
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
+
+const isNumericOption = (text) => /^-[0-9]+$/.test(text)
 
 const createOption = (name, value) => {
   const option = {};
@@ -18,8 +17,8 @@ const createOption = (name, value) => {
 };
 
 const separateCombinedOption = (option) => {
-  const optionNameRegex = /^(-[a-z0-9])/;
-  const [, optionName, optionValue] = option.split(optionNameRegex);
+  const optionName = option.substring(0, 2);
+  const optionValue = option.substring(2);
   return createOption(optionName, optionValue);
 };
 
@@ -28,18 +27,14 @@ const numericOptionValue = (option) => {
   return value;
 };
 
-const isNumericOption = (text) => {
-  return /^-[0-9]+$/.test(text);
-};
-
 const isNotOption = (text) => {
   return !(isCombinedOption(text) ||
     isNonCombinedOption(text) ||
     isNumericOption(text));
 };
 
-const isStandAloneOption = (text) => {
-  return ['-r'].includes(text);
+const isStandAloneOption = () => {
+  return false;
 };
 
 const parserConfig = {

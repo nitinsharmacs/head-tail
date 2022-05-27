@@ -46,7 +46,6 @@ describe('tailFile', () => {
   });
 });
 
-
 describe('tailFiles', () => {
   it('should tail present files', () => {
     const mockedReadFileSync = mockReadFileSync(
