@@ -21,7 +21,7 @@ const createArgsIterator = (args) => {
   };
 };
 
-const parseOption = function (argsIterator, config) {
+const parseOption = (argsIterator, config) => {
   const { optionParsers } = config;
   const text = argsIterator.currentArg();
   for (const optionParser of optionParsers) {
@@ -31,7 +31,7 @@ const parseOption = function (argsIterator, config) {
   }
 };
 
-const parseOptions = function (argsIterator, config) {
+const parseOptions = (argsIterator, config) => {
   const { validator, notOption } = config;
   let options = {};
   while (argsIterator.hasMoreArgs()) {
