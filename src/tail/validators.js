@@ -58,7 +58,6 @@ const assertOptionRepetition = (newOption, prevOptions) => {
   if (hasKey(prevOptions, newOptionKey)) {
     throw {
       code: 'REPEATING_OPTION',
-      message: '',
       prefix: false,
       showUsage: true
     };
@@ -106,7 +105,6 @@ const validateOption = (newOption, prevOptions) => {
   if (cantBeCombined(newOption, prevOptions)) {
     throw {
       code: 'CANT_COMBINE',
-      message: '',
       prefix: false,
       showUsage: true
     };

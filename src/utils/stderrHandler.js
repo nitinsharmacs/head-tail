@@ -3,7 +3,7 @@ const newLine = (message) => {
 };
 
 const createStderrMessage = (error, prefix, usage) => {
-  let message = error.message;
+  let message = error.message || '';
   if (error.prefix) {
     message = prefix(message);
   }

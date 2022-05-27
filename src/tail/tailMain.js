@@ -34,7 +34,6 @@ const assertFile = (files) => {
   if (files.length === 0) {
     throw {
       code: 'NO_FILE_PROVIDED',
-      message: '',
       showUsage: true
     };
   }

@@ -20,7 +20,6 @@ describe('validateOption', () => {
     const prevOptions = { '-n': 2 };
     assert.throws(() => validateOption(newOption, prevOptions), {
       code: 'CANT_COMBINE',
-      message: '',
       prefix: false,
       showUsage: true
     });
@@ -41,7 +40,6 @@ describe('validateOption', () => {
     const prevOptions = { '-n': '1' };
     assert.throws(() => validateOption(newOption, prevOptions), {
       code: 'REPEATING_OPTION',
-      message: '',
       prefix: false,
       showUsage: true
     });
