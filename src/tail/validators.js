@@ -1,3 +1,5 @@
+const objectKeys = Object.keys;
+
 // optionName(option: String)
 const optionName = (option) => {
   const [name] = option.split('-').reverse();
@@ -15,18 +17,16 @@ const intersection = function (list1, list2) {
 };
 
 const cantBeCombined = (newOption, prevOptions) => {
-  const optionsCantBeCombined = ['-n', '-c'];
-  const newOptionsNames = Object.keys({ ...newOption, ...prevOptions });
-  return intersection(optionsCantBeCombined, newOptionsNames).length === 2;
-};
-
-const hasKey = (obj, key) => {
-  const keys = Object.keys(obj);
-  return keys.includes(key);
+  const nonCombinatives = ['-n', '-c'];
+  const newOptionsNames = objectKeys({ ...newOption, ...prevOptions });
+  return intersection(
+    nonCombinatives,
+    newOptionsNames
+  ).length === nonCombinatives.length;
 };
 
 const optionKey = (option) => {
-  const [key] = Object.keys(option);
+  const [key] = objectKeys(option);
   return key;
 };
 
@@ -48,9 +48,14 @@ const assertOptionRequireArg = (option) => {
   }
 };
 
-const assertOptionRepition = (newOption, prevOptions) => {
-  const newOptionName = optionKey(newOption);
-  if (hasKey(prevOptions, newOptionName)) {
+const hasKey = (obj, key) => {
+  const keys = objectKeys(obj);
+  return keys.includes(key);
+};
+
+const assertOptionRepetition = (newOption, prevOptions) => {
+  const newOptionKey = optionKey(newOption);
+  if (hasKey(prevOptions, newOptionKey)) {
     throw {
       code: 'REPEATING_OPTION',
       message: '',
@@ -60,11 +65,17 @@ const assertOptionRepition = (newOption, prevOptions) => {
   }
 };
 
+const isStandAloneOption = (optionKey) => {
+  return ['-q', '-r'].includes(optionKey);
+};
+
 const validateOptionValue = (option) => {
   const key = optionKey(option);
-  if (['-q', '-r'].includes(key)) {
+
+  if (isStandAloneOption(key)) {
     return;
   }
+
   const optionValue = option[key];
   assertOptionRequireArg(option);
   if (isNaN(+optionValue)) {
@@ -76,19 +87,23 @@ const validateOptionValue = (option) => {
   }
 };
 
-const validateOption = (newOptions, prevOptions) => {
-  if (isNotValidOption(newOptions)) {
+const assertValidOption = (option) => {
+  if (isNotValidOption(option)) {
     throw {
       code: 'ILLEGAL_OPTION',
-      message: 'illegal option -- ' + optionName(optionKey(newOptions)),
+      message: 'illegal option -- ' + optionName(optionKey(option)),
       showUsage: true,
       prefix: true
     };
   }
-  assertOptionRepition(newOptions, prevOptions);
-  validateOptionValue(newOptions);
+};
 
-  if (cantBeCombined(newOptions, prevOptions)) {
+const validateOption = (newOption, prevOptions) => {
+  assertValidOption(newOption);
+  assertOptionRepetition(newOption, prevOptions);
+  validateOptionValue(newOption);
+
+  if (cantBeCombined(newOption, prevOptions)) {
     throw {
       code: 'CANT_COMBINE',
       message: '',
@@ -97,7 +112,7 @@ const validateOption = (newOptions, prevOptions) => {
     };
   }
 
-  return newOptions;
+  return newOption;
 };
 
 exports.validateOption = validateOption;
