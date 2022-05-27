@@ -13,6 +13,7 @@ describe('printTailOfFiles', () => {
     const logger = mockLogger(['hello']);
     const errorLogger = mockLogger([]);
     printTailOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(logger.isCalled());
   });
 
   it('should print tail of file with error', () => {
@@ -26,6 +27,7 @@ describe('printTailOfFiles', () => {
     ]);
 
     printTailOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(logger.isCalled() && errorLogger.isCalled());
   });
 
   it('should print errors if all files missing', () => {
@@ -40,6 +42,7 @@ describe('printTailOfFiles', () => {
     ]);
 
     printTailOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(errorLogger.isCalled());
   });
 
 });
@@ -57,6 +60,7 @@ describe('tailMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should get lines from 1 line [Non combined option]', () => {
@@ -66,11 +70,13 @@ describe('tailMain', () => {
     const args = ['-n', '+1', 'file.txt'];
     const logger = mockLogger(['hello\nworld']);
     const errorLogger = mockLogger([]);
+
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should get last 1 byte [Non combined option]', () => {
@@ -80,11 +86,13 @@ describe('tailMain', () => {
     const args = ['-c', '1', 'file.txt'];
     const logger = mockLogger(['o']);
     const errorLogger = mockLogger([]);
+
     assert.strictEqual(
       tailMain(mockedReadFileSync,
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should get last 1 line [Combined option]', () => {
@@ -99,6 +107,7 @@ describe('tailMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should get last 1 byte [Combined option]', () => {
@@ -113,6 +122,7 @@ describe('tailMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should give nothing for 0 lines count', () => {
@@ -127,6 +137,7 @@ describe('tailMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should give nothing for 0 bytes count', () => {
@@ -141,6 +152,7 @@ describe('tailMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should give usage for --help', () => {
@@ -151,6 +163,7 @@ describe('tailMain', () => {
       ['usage: tail [-r] [-q] [-c # | -n #] [file ...]']);
     const errorLogger = mockLogger([]);
     tailMain(mockedReadFileSync, ['--help'], { logger, errorLogger });
+    assert.ok(logger.isCalled());
   });
 });
 

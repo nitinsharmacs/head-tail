@@ -15,6 +15,7 @@ describe('headMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should get 1 byte from the file', () => {
@@ -29,6 +30,7 @@ describe('headMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should give formatted error if file doesn\'t exist', () => {
@@ -44,6 +46,7 @@ describe('headMain', () => {
         args,
         { logger, errorLogger }), 1
     );
+    assert.ok(errorLogger.isCalled());
   });
 
   it('should head multiple files with all files present', () => {
@@ -61,6 +64,7 @@ describe('headMain', () => {
         args,
         { logger, errorLogger }), 0
     );
+    assert.ok(logger.isCalled());
   });
 
   it('should head multiple files with one absent', () => {
@@ -77,6 +81,7 @@ describe('headMain', () => {
         args,
         { logger, errorLogger }), 1
     );
+    assert.ok(logger.isCalled() && errorLogger.isCalled());
   });
 
   it('should throw error if no file provided', () => {
@@ -101,5 +106,6 @@ describe('headMain', () => {
     const logger = mockLogger(['usage: head [-n lines | -c bytes] [file ...]']);
     const errorLogger = mockLogger([]);
     headMain(mockedReadFileSync, ['--help'], { logger, errorLogger });
+    assert.ok(logger.isCalled());
   });
 });

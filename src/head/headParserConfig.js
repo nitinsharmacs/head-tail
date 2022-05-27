@@ -8,7 +8,7 @@ const isCombinedOption = (text) => /^-[a-z][-+]?[a-z0-9]+$/.test(text);
 
 const isNonCombinedOption = (text) => /^-[a-z]+$/.test(text);
 
-const isNumericOption = (text) => /^-[0-9]+$/.test(text)
+const isNumericOption = (text) => /^-[0-9]+$/.test(text);
 
 const createOption = (name, value) => {
   const option = {};

@@ -18,10 +18,15 @@ const mockReadFileSync = (expectedFilenames, contents, expectedEncoding) => {
 
 const mockLogger = (expectedTexts) => {
   let index = 0;
-  return function (actualText) {
+  const isCalled = function () {
+    return index > 0;
+  };
+  const logger = function (actualText) {
     assert.strictEqual(actualText, expectedTexts[index]);
     index++;
   };
+  logger.isCalled = isCalled;
+  return logger;
 };
 
 exports.mockReadFileSync = mockReadFileSync;

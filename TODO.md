@@ -2,7 +2,6 @@
 
 - ## TODO:
 
-  - [ ] Change the order of arguments for headFiles and tailFiles
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
@@ -13,7 +12,6 @@
 - ## CONSIDER:
 
   - [ ] Make mocker resetable
-  - [ ] Change the contract of `linesStartingAt` and `lastNLines`
   - [ ] Move common libraries outside of head
   - [ ] Change passing multiple array to mockers to passing array of objects
   - [ ] Move `mockers.js` to test from src
@@ -23,6 +21,9 @@
 
 - ## DONE:
 
+  - [x] Improve console mocker to check if they even get called
+- [x] ~~Change the contract of `linesStartingAt` and `lastNLines`~~
+  - [x] Change the order of arguments for headFiles and tailFiles
 - [x] Remove responsbility of printing tailFiles
     - [x] Remove for tail
   - [x] Pass validator in head/tailParseArgs, not from main file

@@ -102,6 +102,7 @@ describe('printHeadOfFiles', () => {
     const logger = mockLogger(['hello']);
     const errorLogger = mockLogger([]);
     printHeadOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(logger.isCalled());
   });
 
   it('should print head of file with error', () => {
@@ -115,6 +116,7 @@ describe('printHeadOfFiles', () => {
     ]);
 
     printHeadOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(logger.isCalled() && errorLogger.isCalled());
   });
 
   it('should print errors if all files missing', () => {
@@ -129,6 +131,7 @@ describe('printHeadOfFiles', () => {
     ]);
 
     printHeadOfFiles(headOfFiles, { logger, errorLogger });
+    assert.ok(errorLogger.isCalled());
   });
 
 });
