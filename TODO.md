@@ -3,8 +3,6 @@
 - ## TODO:
 
   - [ ] Change the order of arguments for headFiles and tailFiles
-  - [ ] Remove responsbility of printing head\tailFiles
-    - [x] Remove for head
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/
@@ -25,6 +23,8 @@
 
 - ## DONE:
 
+- [x] Remove responsbility of printing tailFiles
+    - [x] Remove for tail
   - [x] Pass validator in head/tailParseArgs, not from main file
   - [x] Move stderrHandler.js to `src/utils` and create `errorHandler.js`
   - [x] Create files exceptions handler
@@ -80,6 +80,8 @@
 
 - ## DONE
 
+- [x] Remove responsbility of printing headFiles
+    - [x] Remove for head
   - [x] Move stderrHandler.js to `src/utils` and create `errorHandler.js`
   - [x] Create files exceptions handler
   - [x] ~~Consider change contract of firstNLines and pass content as string~~

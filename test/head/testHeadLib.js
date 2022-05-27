@@ -129,7 +129,7 @@ describe('createHeader', () => {
   });
 });
 
-describe('getExitCode', () => {
+describe('getExitCode [head]', () => {
   it('should give 1 exit code for error', () => {
     const headOfFiles = [
       { text: '==> file.txt <==\nworld' },

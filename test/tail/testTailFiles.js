@@ -1,94 +1,165 @@
 const assert = require('assert');
-const { tailFiles } = require('../../src/tail/tailMain.js');
-const { mockReadFileSync, mockLogger } = require('../../src/utils/mockers.js');
+const { tailFile, tailFiles } = require('../../src/tail/tailMain.js');
+const { mockReadFileSync } = require('../../src/utils/mockers.js');
 
-describe('tailFiles', () => {
-  it('should tail file without heading', () => {
-    const mockedReadFileSync = mockReadFileSync(['file.txt'],
+describe('tailFile', () => {
+  it('should tail a present file', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt'],
       ['hello'],
       'utf8');
-    const files = ['file.txt'];
+    const filename = 'file.txt';
     const options = {
       askedForBytes: false,
       relativeToBeginning: false,
       supressHeadings: false,
       count: 1
     };
-    const logger = mockLogger(['hello']);
-    const errorLogger = mockLogger([]);
-    assert.strictEqual(tailFiles(mockedReadFileSync,
-      files,
-      options,
-      { logger, errorLogger }), 0);
+    const expected = { text: 'hello' };
+    const header = () => '';
+
+    assert.deepStrictEqual(
+      tailFile(filename, mockedReadFileSync, header, options),
+      expected
+    );
   });
 
-  it('should tail files', () => {
-    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
-      ['hello', 'world'],
+  it('should tail an absent file', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt'],
+      ['hello'],
       'utf8');
-    const files = ['file.txt', 'file2.txt'];
+    const filename = 'file.tx';
+    const options = {
+      askedForBytes: false,
+      relativeToBeginning: false,
+      supressHeadings: false,
+      count: 1
+    };
+    const expected = { error: { code: 'ENOENT', path: 'file.tx' } };
+    const header = () => '';
+
+    assert.deepStrictEqual(
+      tailFile(filename, mockedReadFileSync, header, options),
+      expected
+    );
+  });
+});
+
+
+describe('tailFiles', () => {
+  it('should tail present files', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt', 'file2.txt'],
+      ['world', 'hello'],
+      'utf8');
+    const filenames = ['file.txt', 'file2.txt'];
     const options = {
       askedForBytes: true,
       relativeToBeginning: false,
       supressHeadings: false,
       count: 1
     };
-    const logger = mockLogger(['==> file.txt <==\no',
-      '==> file2.txt <==\nd']);
-    const errorLogger = mockLogger([]);
-    assert.strictEqual(tailFiles(mockedReadFileSync,
-      files,
-      options,
-      { logger, errorLogger }), 0);
+    const expected = [
+      { text: '==> file.txt <==\nd' },
+      { text: '==> file2.txt <==\no' }
+    ];
+
+    assert.deepStrictEqual(
+      tailFiles(filenames, mockedReadFileSync, options),
+      expected
+    );
   });
 
-  it('should tail files when one file missing', () => {
-    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
-      ['hello', 'world'],
+  it('should tail files with some non-exisitg files', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt', 'file2.txt'],
+      ['world', 'hello'],
       'utf8');
-    const files = ['file.txt', 'filee.txt'];
+    const filenames = ['file.txt', 'badFile.txt'];
     const options = {
-      askedForBytes: false,
+      askedForBytes: true,
       relativeToBeginning: false,
       supressHeadings: false,
       count: 1
     };
-    const logger = mockLogger(['==> file.txt <==\nhello']);
-    const errorLogger = mockLogger(
-      ['tail: filee.txt: No such file or directory']);
-    assert.strictEqual(tailFiles(mockedReadFileSync,
-      files,
-      options,
-      { logger, errorLogger }), 1);
+    const expected = [
+      { text: '==> file.txt <==\nd' },
+      { error: { code: 'ENOENT', path: 'badFile.txt' } }
+    ];
+
+    assert.deepStrictEqual(
+      tailFiles(filenames, mockedReadFileSync, options),
+      expected
+    );
   });
 
-  it('should tail missing file', () => {
-    const mockedReadFileSync = mockReadFileSync(['file.txt'],
-      ['hello', 'world'],
+  it('should tail all non-exisitg files', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt', 'file2.txt'],
+      ['world', 'hello'],
       'utf8');
-    const files = ['filee.txt'];
-    const options = { askedForBytes: true, count: 1, supressHeadings: false };
-    const logger = mockLogger([]);
-    const errorLogger = mockLogger(
-      ['tail: filee.txt: No such file or directory']);
-    assert.strictEqual(tailFiles(mockedReadFileSync,
-      files,
-      options,
-      { logger, errorLogger }), 1);
+    const filenames = ['badFile1.txt', 'badFile2.txt'];
+    const options = {
+      askedForBytes: true,
+      relativeToBeginning: false,
+      supressHeadings: false,
+      count: 1
+    };
+    const expected = [
+      { error: { code: 'ENOENT', path: 'badFile1.txt' } },
+      { error: { code: 'ENOENT', path: 'badFile2.txt' } }
+    ];
+
+    assert.deepStrictEqual(
+      tailFiles(filenames, mockedReadFileSync, options),
+      expected
+    );
   });
 
-  it('should tail files with supressing headings', () => {
-    const mockedReadFileSync = mockReadFileSync(['file.txt', 'file2.txt'],
-      ['hello', 'world'],
+  it('should tail by suppressing headers', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt', 'file2.txt'],
+      ['world', 'hello'],
       'utf8');
-    const files = ['file.txt', 'file2.txt'];
-    const options = { askedForBytes: true, count: 1, supressHeadings: true };
-    const logger = mockLogger(['o',
-      'd']);
-    const errorLogger = mockLogger([]);
-    assert.strictEqual(tailFiles(mockedReadFileSync,
-      files,
-      options,
-      { logger, errorLogger }), 0);
+    const filenames = ['file.txt', 'file2.txt'];
+    const options = {
+      askedForBytes: true,
+      relativeToBeginning: false,
+      supressHeadings: true,
+      count: 1
+    };
+    const expected = [
+      { text: 'd' },
+      { text: 'o' }
+    ];
+
+    assert.deepStrictEqual(
+      tailFiles(filenames, mockedReadFileSync, options),
+      expected
+    );
+  });
+
+  it('should tail by suppressing headers with a non-existing file', () => {
+    const mockedReadFileSync = mockReadFileSync(
+      ['file.txt', 'file2.txt'],
+      ['world', 'hello'],
+      'utf8');
+    const filenames = ['file.txt', 'badFile.txt'];
+    const options = {
+      askedForBytes: true,
+      relativeToBeginning: false,
+      supressHeadings: true,
+      count: 1
+    };
+    const expected = [
+      { text: 'd' },
+      { error: { code: 'ENOENT', path: 'badFile.txt' } }
+    ];
+
+    assert.deepStrictEqual(
+      tailFiles(filenames, mockedReadFileSync, options),
+      expected
+    );
   });
 });

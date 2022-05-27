@@ -10,23 +10,37 @@ const addHeader = (header, heading, text) => {
   return `${header(heading)}${text}`;
 };
 
-const tailFiles = (fileReader, filenames, options, console) => {
+const tailFile = (filename, fileReader, header, options) => {
+  try {
+    const content = fileReader(filename, 'utf8');
+    const text = addHeader(header, filename, tail(content, options));
+    return { text };
+  } catch (error) {
+    return { error };
+  }
+};
+
+const tailFiles = (filenames, fileReader, options) => {
   let header = createHeader;
-  let exitCode = 0;
   if (filenames.length <= 1 || options.supressHeadings) {
     header = () => '';
   }
-  filenames.forEach(filename => {
-    try {
-      const content = fileReader(filename, 'utf8');
-      const tailedFile = addHeader(header, filename, tail(content, options));
-      console.logger(tailedFile);
-    } catch (error) {
-      exitCode = 1;
-      console.errorLogger(createFileErrorMessage(error));
+  return filenames.map(
+    (filename) => tailFile(filename, fileReader, header, options)
+  );
+};
+
+const printTailOfFiles = (tailOfFiles, console) => {
+  tailOfFiles.forEach(tailOfFiles => {
+    if (tailOfFiles.error) {
+      return console.errorLogger(createFileErrorMessage(tailOfFiles.error));
     }
+    console.logger(tailOfFiles.text);
   });
-  return exitCode;
+};
+
+const getExitCode = (tailOfFiles) => {
+  return tailOfFiles.some(tailOfFiles => tailOfFiles.error) ? 1 : 0;
 };
 
 const assertFile = (files) => {
@@ -47,8 +61,15 @@ const tailMain = (fileReader, args, console) => {
     return exitCode;
   }
   assertFile(filenames);
-  return tailFiles(fileReader, filenames, options, console);
+
+  const tailOfFiles = tailFiles(filenames, fileReader, options);
+  printTailOfFiles(tailOfFiles, console);
+
+  return getExitCode(tailOfFiles);
 };
 
-exports.tailMain = tailMain;
+exports.tailFile = tailFile;
 exports.tailFiles = tailFiles;
+exports.printTailOfFiles = printTailOfFiles;
+exports.getExitCode = getExitCode;
+exports.tailMain = tailMain;
