@@ -1,6 +1,5 @@
 const { tail } = require('./tailLib.js');
 const { tailArgsParser } = require('./tailArgsParser.js');
-const { validateOption } = require('./validators.js');
 const { usage, createFileErrorMessage } = require('./errorHandler.js');
 
 const createHeader = (filename) => {
@@ -40,7 +39,7 @@ const assertFile = (files) => {
 };
 
 const tailMain = (fileReader, args, console) => {
-  const { filenames, options } = tailArgsParser(args, validateOption);
+  const { filenames, options } = tailArgsParser(args);
   const exitCode = 0;
   const [firstArg] = args;
   if (firstArg === '--help') {

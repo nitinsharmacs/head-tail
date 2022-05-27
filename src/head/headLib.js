@@ -1,7 +1,6 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { headArgsParser } = require('./headArgsParser.js');
 const { usage, createFileErrorMessage } = require('./errorHandler.js');
-const { validateOption } = require('./validators.js');
 
 const firstNLines = (lines, count) => {
   return lines.slice(0, count);
@@ -65,7 +64,7 @@ const headMain = (fileReader, args, console) => {
     console.logger(usage());
     return exitCode;
   }
-  const { filenames, options } = headArgsParser(args, validateOption);
+  const { filenames, options } = headArgsParser(args);
   assertFile(filenames);
   return headFiles(fileReader, filenames, options, console);
 };

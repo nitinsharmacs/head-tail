@@ -2,7 +2,6 @@
 
 - ## TODO:
 
-  - [ ] Pass validator in head/tailParseArgs, not from main file
   - [ ] Remove responsbility of printing head/tail content from head/tailFiles
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
@@ -24,6 +23,7 @@
 
 - ## DONE:
 
+  - [x] Pass validator in head/tailParseArgs, not from main file
   - [x] Move stderrHandler.js to `src/utils` and create `errorHandler.js`
   - [x] Create files exceptions handler
   - [x] Implement tailMain
