@@ -2,6 +2,7 @@
 
 - ## TODO:
 
+  - [ ] Pass error to throw in mockReadFileSync
   - [ ] Test option parser predicates
   - [ ] Implement `-r`
   - [ ] Move `testParseArgs.js` to test/

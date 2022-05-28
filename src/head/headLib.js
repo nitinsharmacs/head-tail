@@ -1,4 +1,4 @@
-const { splitLines, joinLines } = require('./stringUtils.js');
+const { splitLines, joinLines } = require('../utils/stringUtils.js');
 const { headArgsParser } = require('./headArgsParser.js');
 const { usage, createFileErrorMessage } = require('./errorHandler.js');
 

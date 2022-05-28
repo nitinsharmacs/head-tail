@@ -1,4 +1,4 @@
-const { splitLines, joinLines } = require('../head/stringUtils.js');
+const { splitLines, joinLines } = require('../utils/stringUtils.js');
 
 const lastNLines = (lines, count) => {
   return count > lines.length ? lines : lines.slice(lines.length - count);
